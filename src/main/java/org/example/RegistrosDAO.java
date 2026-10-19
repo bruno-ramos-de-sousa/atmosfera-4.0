@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -15,7 +16,7 @@ public class RegistrosDAO {
              PreparedStatement command = connection.prepareStatement(sql)) {
             command.setInt(1, registros.id_dispositivo_fk());
             command.setString(2, registros.time_stamp());
-            command.setObject(3, registros.data_hora());
+            command.setObject(3, (LocalDateTime) registros.data_hora());
             command.setFloat(4, registros.temperatura());
             command.setFloat(5, registros.umidade());
             command.setFloat(6, registros.pressao());
@@ -41,7 +42,7 @@ public class RegistrosDAO {
                         result.getLong("id_registro"),
                         result.getInt("id_dispositivo_fk"),
                         result.getString("time_stamp"),
-                        result.getObject("data_hora"),
+                        (LocalDateTime) result.getObject("data_hora"),
                         result.getFloat("temperatura"),
                         result.getFloat("umidade"),
                         result.getFloat("pressao"),
