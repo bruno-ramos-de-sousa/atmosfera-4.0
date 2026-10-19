@@ -4,13 +4,15 @@ import com.sun.net.httpserver.HttpExchange;
 import com.sun.net.httpserver.HttpServer;
 
 import java.io.IOException;
+import java.io.InputStream;
 import java.net.InetSocketAddress;
 import java.nio.charset.StandardCharsets;
 import java.sql.Connection;
 import java.sql.SQLException;
 
 public class Main {
-    public static void main(String[] args) throws IOException {
+    public static void main(String[] args) throws IOException, SQLException {
+        testarConexao();
 
         HttpServer servidor = HttpServer.create(
                 new InetSocketAddress("0.0.0.0", 8080), 0);
@@ -21,12 +23,27 @@ public class Main {
     }
 
     private static void testarConexao() throws SQLException {
-        try (Connection igonored = Conexao.abrir()) {
+        try (Connection ignored = Conexao.abrir()) {
             System.out.println("Banco conectado com sucesso!!!");
         }
     }
 
     private static void carregarPagina(HttpExchange exchange) throws IOException {
+        if(!exchange.getRequestMethod().equals("GET")) {
+            response(exchange, 405, "Metodo não permitido", "text/plain");
+            return;
+        }
+        try (InputStream arquivo = Main.class.getResourceAsStream("/public/index.html")) {
+            if (arquivo == null) {
+                response(exchange, 404, "Pagina não econtrada", "text/plain");
+                return;
+            }
+            byte[] pagina = arquivo.readAllBytes();
+            exchange.getResponseHeaders().set("Content-Type", "text/html; charset=UTF-8");
+            exchange.sendResponseHeaders(200, pagina.length);
+            exchange.getResponseBody().write(pagina);
+            exchange.close();
+        }
     }
 
     private static void response(HttpExchange exchange, int status, String content) throws IOException {
