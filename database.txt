@@ -1,0 +1,67 @@
+DROP DATABASE IF EXISTS atmosfera_4;
+
+CREATE DATABASE IF NOT EXISTS atmosfera_4;
+USE atmosfera_4
+
+CREATE TABLE dispositivos(
+    id_dispositivo INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
+    nome_dispositivo VARCHAR(30) NOT NULL,
+    localizacao VARCHAR(50),
+    tipo_dispositivo VARCHAR(30) NOT NULL,
+    gateway_pai_fk INT,
+ 
+    FOREIGN KEY (gateway_pai_fk) REFERENCES dispositivos(id_dispositivo)
+);
+ 
+CREATE TABLE atuadores (
+    id_atuador INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
+    id_dispositivo_fk INT NOT NULL,
+    nome_atuador VARCHAR(30) NOT NULL,
+    status_atual BOOL NOT NULL DEFAULT FALSE,
+    ultimo_comando DATETIME DEFAULT NOW(),
+ 
+    FOREIGN KEY (id_dispositivo_fk) REFERENCES dispositivos(id_dispositivo)
+);
+
+CREATE TABLE registros(
+    id_registro BIGINT PRIMARY KEY NOT NULL AUTO_INCREMENT,
+    id_dispositivo_fk INT NOT NULL,
+    time_stamp VARCHAR(20) NOT NULL,
+    data_hora DATETIME NOT NULL DEFAULT NOW(),
+    temperatura FLOAT NOT NULL,
+    umidade FLOAT NOT NULL,
+    pressao FLOAT NOT NULL,
+    altitude FLOAT NOT NULL,
+    luminosidade FLOAT NOT NULL,
+    velocidade_vento FLOAT,
+    direcao_vento INT,
+    intensidade_wifi INT,
+ 
+    FOREIGN KEY (id_dispositivo_fk) REFERENCES dispositivos(id_dispositivo)
+);
+
+INSERT INTO dispositivos (
+    nome_dispositivo,
+    localizacao,
+    tipo_dispositivo,
+    gateway_pai_fk
+    )
+VALUES
+    ('Sensor Refeitório', '-23.591412, -46.645313', 'Gateway', NULL),
+    ('Sensor Quadra', '-23.591052, -46.645310', 'Endpoint', 1),
+    ('Sensor Auditório', '-23.591081885424245, -46.64485146568997', 'Gateway', NULL);
+
+INSERT INTO atuadores(
+	id_dispositivo_fk, 
+	nome_atuador,
+	status_atual
+) VALUES 
+    (1, 'led 1', TRUE),
+    (2, 'led 2', FALSE),
+    (3, 'led 3', TRUE);
+
+INSERT INTO registros (id_dispositivo_fk, time_stamp, temperatura, umidade, pressao, altitude, luminosidade, velocidade_vento, direcao_vento, intensidade_wifi)
+VALUES
+    (1, "1792152318", 26.8, 93, 921.9, 781, 72, 3.6, 178, 52),
+    (2, "1792152342", 27.2, 86, 919.9, 770, 77, 3.2, 180, NULL),
+    (3, "1792152356", 25.6, 92, 926.4, 792, 68, 3.1, 178, 61);
