@@ -3,7 +3,7 @@ package org.example;
 import java.time.LocalDateTime;
 
 public record Atuador(
-    int id,
+    int id_atuador,
     int id_dispositivo_fk,
     String nome_atuador,
     boolean status_atual,
@@ -11,14 +11,14 @@ public record Atuador(
 ) {
 
     public String toJson() {
-        return "{\"id\":" + id +
+        return "{\"id_atuador\":" + id_atuador +
                 ", \"id_dispositivo_fk\":\"" + id_dispositivo_fk + "\"" +
-                "\"nome_atuador\":\"" + escapar(nome_atuador) + "\"" +
+                "\"nome_atuador\":\"" + escape(nome_atuador) + "\"" +
                 "\"status_atual\":\"" + status_atual + "\"" +
                 "\"ultimo_comando\":\"" + ultimo_comando + "\"}";
     }
 
-    public String escapar(String texto) {
+    public String escape(String texto) {
         return texto.replace("\\", "\\\\")
                 .replace("\"", "\\\"")
                 .replace("\r", "")

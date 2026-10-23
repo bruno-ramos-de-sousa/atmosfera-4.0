@@ -2,7 +2,7 @@ package org.example;
 
 import java.time.LocalDateTime;
 
-public record Registros (
+public record Registro(
         Long id_registro,
         int id_dispositivo_fk,
         String time_stamp,
@@ -20,7 +20,7 @@ public record Registros (
     public String toJson() {
         return "{\"id_registro\":" + id_registro
                 + ", \"id_dispositivo_fk\":\"" + id_dispositivo_fk + "\""
-                + ", \"time_stamp\":\"" + escapar(time_stamp) + "\""
+                + ", \"time_stamp\":\"" + escape(time_stamp) + "\""
                 + ", \"data_hora\":\"" + data_hora + "\""
                 + ", \"temperatura\":\"" + temperatura + "\""
                 + ", \"umidade\":\"" + umidade + "\""
@@ -33,7 +33,7 @@ public record Registros (
                 "}";
     }
 
-    private String escapar(String text) {
+    private String escape(String text) {
         if (text == null) return "";
         return text.replace("\\", "\\\\")
                 .replace("\"", "\\\"")

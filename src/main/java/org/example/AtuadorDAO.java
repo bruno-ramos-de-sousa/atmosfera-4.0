@@ -1,6 +1,5 @@
 package org.example;
 
-import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -9,10 +8,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class AtuadorDAO {
-    public void cadastrarAtuador (Atuador atuador)  throws SQLException{
+    public void create (Atuador atuador)  throws SQLException{
         String sql = "INSERT INTO atuadores (id_dispositivo_fk, nome_atuador, status_atual, ultimo_comando) VALUES (?, ?, ?, ?)";
 
-        try (Connection connection = Conexao.abrir();
+        try (java.sql.Connection connection = Connection.OpenDataBase();
              PreparedStatement pstmt = connection.prepareStatement(sql)) {
             pstmt.setInt(1, atuador.id_dispositivo_fk());
             pstmt.setString(2, atuador.nome_atuador());
@@ -22,13 +21,13 @@ public class AtuadorDAO {
         }
     }
 
-    public List<Atuador> listarAtuadores() throws SQLException {
+    public List<Atuador> listAtuadores() throws SQLException {
         String sql = "SELECT id, id_dispositivo_fk, nome_atuador, status_atual, ultimo_comando FROM atuadores ORDER BY id DESC";
         List<Atuador> atuadores = new ArrayList<>();
 
-        try (Connection connection = Conexao.abrir();
-        PreparedStatement pstmt = connection.prepareStatement(sql);
-        ResultSet resultSet = pstmt.executeQuery()) {
+        try (java.sql.Connection connection = Connection.OpenDataBase();
+             PreparedStatement pstmt = connection.prepareStatement(sql);
+             ResultSet resultSet = pstmt.executeQuery()) {
 
             while (resultSet.next()) {
                 Atuador atuador = new Atuador(

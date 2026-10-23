@@ -1,6 +1,5 @@
 package org.example;
 
-import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -8,37 +7,37 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
-public class RegistrosDAO {
-    public void create(Registros registros) throws SQLException {
-        String sql = "INSERT INTO registros (id_dispositivo_fk, time_stamp, data_hora, temperatura, umidade, pressao, altitude, luminosidade, velocidade_vento, direcao_vento, intensidade_wifi) VALUES (?, ?, ?, ?)";
+public class RegistroDAO {
+    public void create(Registro registro) throws SQLException {
+        String sql = "INSERT INTO registros (id_dispositivo_fk, time_stamp, data_hora, temperatura, umidade, pressao, altitude, luminosidade, velocidade_vento, direcao_vento, intensidade_wifi) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
-        try (Connection connection = Conexao.abrir();
+        try (java.sql.Connection connection = Connection.OpenDataBase();
              PreparedStatement command = connection.prepareStatement(sql)) {
-            command.setInt(1, registros.id_dispositivo_fk());
-            command.setString(2, registros.time_stamp());
-            command.setObject(3, (LocalDateTime) registros.data_hora());
-            command.setFloat(4, registros.temperatura());
-            command.setFloat(5, registros.umidade());
-            command.setFloat(6, registros.pressao());
-            command.setFloat(7, registros.altitude());
-            command.setFloat(8, registros.luminosidade());
-            command.setFloat(9, registros.velocidade_vento());
-            command.setInt(10, registros.direcao_vento());
-            command.setInt(11, registros.intensidade_wifi());
+            command.setInt(1, registro.id_dispositivo_fk());
+            command.setString(2, registro.time_stamp());
+            command.setObject(3, (LocalDateTime) registro.data_hora());
+            command.setFloat(4, registro.temperatura());
+            command.setFloat(5, registro.umidade());
+            command.setFloat(6, registro.pressao());
+            command.setFloat(7, registro.altitude());
+            command.setFloat(8, registro.luminosidade());
+            command.setFloat(9, registro.velocidade_vento());
+            command.setInt(10, registro.direcao_vento());
+            command.setInt(11, registro.intensidade_wifi());
             command.executeUpdate();
         }
     }
 
-    public List<Registros> listarRegistros() throws SQLException {
+    public List<Registro> listRegistros() throws SQLException {
         String sql = "SELECT id_registro, id_dispositivo_fk, time_stamp, data_hora, temperatura, umidade, pressao, altitude, luminosidade, velocidade_vento, direcao_vento, intensidade_wifi FROM registros ORDER BY id_registros";
-        List<Registros> registro1 = new ArrayList<>();
+        List<Registro> listaRegistro = new ArrayList<>();
 
-        try (Connection connection = Conexao.abrir();
+        try (java.sql.Connection connection = Connection.OpenDataBase();
              PreparedStatement command = connection.prepareStatement(sql);
              ResultSet result = command.executeQuery()) {
 
             while (result.next()) {
-                Registros registros = new Registros(
+                Registro registros = new Registro(
                         result.getLong("id_registro"),
                         result.getInt("id_dispositivo_fk"),
                         result.getString("time_stamp"),
@@ -52,9 +51,9 @@ public class RegistrosDAO {
                         result.getInt("direcao_vento"),
                         result.getInt("intensidade_wifi")
                 );
-                registro1.add(registros);
+                listaRegistro.add(registros);
             }
         }
-        return registro1;
+        return listaRegistro;
     }
 }

@@ -1,6 +1,6 @@
 package org.example;
 
-public record Dispositivos(
+public record Dispositivo(
         int id_dispositivo,
         String nome_dispositivo,
         String localizacao,
@@ -9,14 +9,14 @@ public record Dispositivos(
 ) {
     public String toJson() {
         return "{\"id_dispositivo\":" + id_dispositivo
-                + ", \"nome_dispositivo\":\"" + escapar(nome_dispositivo) + "\""
-                + ", \"localizacao\":\"" + escapar(localizacao) + "\""
-                + ", \"tipo_dispositivo\":\"" + escapar(tipo_dispositivo) + "\""
+                + ", \"nome_dispositivo\":\"" + escape(nome_dispositivo) + "\""
+                + ", \"localizacao\":\"" + escape(localizacao) + "\""
+                + ", \"tipo_dispositivo\":\"" + escape(tipo_dispositivo) + "\""
                 + ", \"gateway_pai_fk\":\"" + gateway_pai_fk +
                 "}";
     }
 
-    private String escapar(String text) {
+    private String escape(String text) {
         if (text == null) return "";
         return text.replace("\\", "\\\\")
                 .replace("\"", "\\\"")
