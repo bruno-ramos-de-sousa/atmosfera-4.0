@@ -7,41 +7,40 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.net.InetSocketAddress;
 import java.nio.charset.StandardCharsets;
-import java.sql.Connection;
 import java.sql.SQLException;
 
 public class Main {
     public static void main(String[] args) throws IOException, SQLException {
-        testarConexao();
+        testConnection();
 
-        HttpServer servidor = HttpServer.create(
+        HttpServer server = HttpServer.create(
                 new InetSocketAddress("0.0.0.0", 8080), 0);
 
-        servidor.createContext("/", Main::carregarPagina);
+        server.createContext("/", Main::loadPage);
 
-        servidor.start();
+        server.start();
     }
 
-    private static void testarConexao() throws SQLException {
-        try (Connection ignored = Conexao.abrir()) {
+    private static void testConnection() throws SQLException {
+        try (java.sql.Connection ignored = Connection.OpenDataBase()) {
             System.out.println("Banco conectado com sucesso!!!");
         }
     }
 
-    private static void carregarPagina(HttpExchange exchange) throws IOException {
+    private static void loadPage(HttpExchange exchange) throws IOException {
         if(!exchange.getRequestMethod().equals("GET")) {
             response(exchange, 405, "Metodo não permitido", "text/plain");
             return;
         }
-        try (InputStream arquivo = Main.class.getResourceAsStream("/public/index.html")) {
-            if (arquivo == null) {
+        try (InputStream file = Main.class.getResourceAsStream("/public/index.html")) {
+            if (file == null) {
                 response(exchange, 404, "Pagina não econtrada", "text/plain");
                 return;
             }
-            byte[] pagina = arquivo.readAllBytes();
+            byte[] page = file.readAllBytes();
             exchange.getResponseHeaders().set("Content-Type", "text/html; charset=UTF-8");
-            exchange.sendResponseHeaders(200, pagina.length);
-            exchange.getResponseBody().write(pagina);
+            exchange.sendResponseHeaders(200, page.length);
+            exchange.getResponseBody().write(page);
             exchange.close();
         }
     }
@@ -50,7 +49,7 @@ public class Main {
         response(exchange, status, content, "application/json");
     }
 
-    private static void response (HttpExchange exchange, int status, String content, String type) throws IOException {
+    private static void response(HttpExchange exchange, int status, String content, String type) throws IOException {
         byte[] responseContent = content.getBytes(StandardCharsets.UTF_8);
         exchange.getResponseHeaders().set("Content-Type", type + "; charset=UTF-8");
         exchange.sendResponseHeaders(status, responseContent.length);

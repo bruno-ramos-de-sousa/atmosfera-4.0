@@ -1,15 +1,14 @@
 package org.example;
 
-import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
-public class Conexao {
-    private static final String URL = "jdbc:mysql:/localhost:3306/atmosfera_4";
+public class Connection {
+    private static final String URL = "jdbc:mysql://localhost:3306/atmosfera_4";
     private static final String USER = "root";
     private static final String PASSWORD = "senaisp";
 
-    public static Connection abrir() throws SQLException {
+    public static java.sql.Connection OpenDataBase() throws SQLException {
         return DriverManager.getConnection(URL, USER, PASSWORD);
     }
 }
