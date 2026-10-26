@@ -11,13 +11,75 @@
     />
     <link rel="stylesheet" href="styles/index.css" />
   </head>
+
   <body>
-    <header>
-      <button id="sandwich-btn"></button>
-      <h1>Atmosfera 4.0</h1>
+    <header class="page-header">
+      <span id="sandwich-button" aria-label="Abrir menu"> <span></span><span></span><span></span> </span>
+      <h1 id="hero-title">SENAI "Anchieta" - Atmosfera 4.0</h1>
     </header>
-    <main></main>
-    </main>
+
+    <div class="app-shell">
+      <aside id="sidebar">
+        <nav aria-label="Menu lateral">
+          <ul class="sidebar-menu">
+            <li class="sidebar-item">
+              <button type="button" class="sidebar-item-button">
+                <img src="assets/home-icon.png" alt="" />Hoje
+              </button>
+            </li>
+            <li class="sidebar-item">
+              <button type="button" class="sidebar-item-button">
+                <img src="assets/history-icon.png" alt="" />Histórico
+              </button>
+            </li>
+            <li class="sidebar-item">
+              <button type="button" class="sidebar-item-button">
+                <img src="assets/map-icon.png" alt="" />Mapa do Campus
+              </button>
+            </li>
+            <li class="sidebar-item">
+              <button type="button" class="sidebar-item-button">
+                <img src="assets/info-icon.png" alt="" />Sobre
+              </button>
+            </li>
+            <li class="sidebar-item">
+              <button type="button" class="sidebar-item-button">
+                <img src="assets/robot-icon.png" alt="" />Robô
+              </button>
+            </li>
+          </ul>
+        </nav>
+      </aside>
+
+      <main class="content-panel">
+        <div>
+          <div class="container">
+            <p></p>
+            <p></p>
+            <p></p>
+            <p></p>
+            <div></div>
+            <div></div>
+          </div>
+          <div class="container">
+            <p></p>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <canvas></canvas>
+          </div>
+          <div class="container">
+            <p></p>
+            <p></p>
+            <div></div>
+            <button></button><button></button>
+            <div></div>
+          </div>
+        </div>
+        <span></span>
+      </main>
+    </div>
   </body>
   <script src="scripts/index.js"></script>
 </html>

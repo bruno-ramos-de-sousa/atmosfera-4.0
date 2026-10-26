@@ -1,1 +1,122 @@
-/*# sourceMappingURL=index.css.map */
+@import url(variables.css);
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  font-family: var(--font-family);
+  font-weight: 100;
+}
+
+.app-shell {
+  display: flex;
+  flex: 1;
+  min-height: 0;
+}
+
+.page-header {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  z-index: 10;
+  height: 65px;
+  width: 100%;
+  padding: 10px;
+  background-color: var(--primary-blue);
+  color: var(--off-white);
+  box-shadow: 0px 0px 20px 0px rgba(0, 0, 0, 0.5);
+}
+
+#sandwich-button {
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-left: 10px;
+  width: 30px;
+  gap: 5px;
+}
+#sandwich-button span {
+  width: 100%;
+  height: 4px;
+  border-radius: 4px;
+  background-color: var(--off-white);
+}
+
+#hero-title {
+  margin: 0 auto;
+  font-size: var(--tittle-size);
+  font-weight: 600;
+}
+
+#sidebar {
+  width: min(80%, 255px);
+  background-color: var(--primary-blue);
+  flex-shrink: 0;
+  z-index: 9;
+  padding-top: 20px;
+}
+#sidebar .sidebar-menu {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 20px;
+  list-style: none;
+}
+#sidebar .sidebar-menu .sidebar-item {
+  list-style: none;
+}
+#sidebar .sidebar-menu .sidebar-item-button {
+  margin: auto;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  align-self: center;
+  border-radius: 7px;
+  padding: 5px;
+  gap: 10px;
+  width: 220px;
+  height: 40px;
+  background: none;
+  border: none;
+  color: var(--off-white);
+  font-size: var(--body-text-size);
+}
+#sidebar .sidebar-menu .sidebar-item-button:hover {
+  transition: ease 0.2s;
+  background-color: var(--weak-blue);
+}
+#sidebar .sidebar-menu .sidebar-item-button img {
+  width: 20px;
+  height: 20px;
+}
+
+.content-panel {
+  flex: 1;
+}
+
+.layout-column {
+  display: flex;
+  flex-direction: column;
+}
+
+.layout-row {
+  display: flex;
+  flex-direction: row;
+}
+
+.hidden {
+  display: none;
+}
+
+.container {
+  border: 1px solid var(--strong-grey);
+  border-radius: 20px;
+  padding: 15px;
+}/*# sourceMappingURL=index.css.map */
