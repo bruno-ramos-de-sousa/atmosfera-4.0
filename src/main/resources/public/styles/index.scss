@@ -20,7 +20,7 @@ body {
   min-height: 0;
 }
 
-// *----------------------------------------------------------------------------*
+// *---------------------------------- Estilização do corpo do site ------------------------------------------*
 
 .page-header {
   display: flex;
@@ -65,11 +65,11 @@ body {
 
 #hero-title {
   margin: 0 auto;
-  font-size: var(--tittle-size);
+  font-size: var(--big-tittle-size);
   font-weight: 600;
 }
 
-// *----------------------------------------------------------------------------*
+// *----------------------------------- Estilização do cabeçalho do site -----------------------------------------*
 
 #sidebar {
   width: min(80%, 255px);
@@ -78,7 +78,10 @@ body {
   z-index: 9;
   padding-top: 20px;
   overflow: hidden;
-  transition: width 500ms ease, padding-top 200ms ease, opacity 400ms ease;
+  transition:
+    width 500ms ease,
+    padding-top 200ms ease,
+    opacity 400ms ease;
 
   &.sidebar-collapsed {
     width: 0;
@@ -112,16 +115,17 @@ body {
       background: none;
       border: none;
       color: var(--off-white);
-      font-size: var(--body-text-size);
+      font-size: var(--menu-text-size);
 
       &:hover {
-        transition: ease 0.2s;
+        transform: scale(0.99);
         background-color: var(--weak-blue);
+        transition: ease-in-out 0.3s;
       }
 
       img {
-        width: 20px;
-        height: 20px;
+        width: 22px;
+        height: 22px;
       }
     }
   }
@@ -134,8 +138,78 @@ body {
   pointer-events: none;
 }
 
+// *----------------------------------- Estilização do menu lateral -----------------------------------------*
+
 .content-panel {
   flex: 1;
+  padding: 10px 20px;
+}
+
+#home-dashboard {
+  display: grid;
+  grid-template-columns: 0.5fr 1fr;
+  gap: 15px;
+
+  .container:nth-child(3) {
+    grid-column: span 2;
+  }
+
+  article:first-child {
+    display: flex;
+    flex-direction: column;
+
+    h3 small {
+      position: absolute;
+      right: 30px;
+    }
+
+    hr {
+      margin: auto;
+      width: 80%;
+      opacity: 0.6;
+    }
+
+    dd:nth-child(1) {
+      margin-top: 25px;
+      span {
+        font-size: var(--small-body-text-size);
+      }
+    }
+
+    .metric-grid {
+      margin-top: auto;
+    }
+  }
+}
+
+.metric-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+  gap: 10px;
+}
+
+.low-opacity-text {
+  opacity: 0.4;
+  font-size: var(--small-body-text-size);
+}
+
+.reading {
+  font-size: var(--body-text-size);
+  font-weight: 500;
+}
+
+#average-temperature {
+  font-size: 65px;
+  font-weight: 700;
+}
+
+#expand-button {
+  position: absolute;
+  right: 20px;
+  bottom: 20px;
+  width: 40px;
+  height: 40px;
+  background-color: var(--strong-grey);
 }
 
 .layout-column {
@@ -152,8 +226,23 @@ body {
   display: none;
 }
 
-.container {
+.container-tittle {
+  font-size: 28px;
+  margin-bottom: 5px;
+}
+
+.reading-card {
+  display: flex;
+  flex-direction: column;
+  background-color: var(--primary-grey);
+  padding: 15px;
   border: 1px solid var(--strong-grey);
   border-radius: 20px;
-  padding: 15px;
+}
+
+.container {
+  position: relative;
+  border: 1px solid var(--strong-grey);
+  border-radius: 20px;
+  padding: 25px;
 }
