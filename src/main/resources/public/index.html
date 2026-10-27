@@ -26,31 +26,31 @@
           <ul class="sidebar-menu">
 
             <li class="sidebar-item">
-              <button type="button" class="sidebar-item-button">
+              <button type="button" class="sidebar-item-button" onclick="mudarTela('home')">
                 <img src="assets/home-icon.png" alt="" />Hoje
               </button>
             </li>
 
             <li class="sidebar-item">
-              <button type="button" class="sidebar-item-button">
+              <button type="button" class="sidebar-item-button" onclick="mudarTela('historico')">
                 <img src="assets/history-icon.png" alt="" />Histórico
               </button>
             </li>
 
             <li class="sidebar-item">
-              <button type="button" class="sidebar-item-button">
+              <button type="button" class="sidebar-item-button" onclick="mudarTela('mapa')">
                 <img src="assets/map-icon.png" alt="" />Mapa do Campus
               </button>
             </li>
 
             <li class="sidebar-item">
-              <button type="button" class="sidebar-item-button">
+              <button type="button" class="sidebar-item-button" onclick="mudarTela('sobre')">
                 <img src="assets/info-icon.png" alt="" />Sobre
               </button>
             </li>
 
             <li class="sidebar-item">
-              <button type="button" class="sidebar-item-button">
+              <button type="button" class="sidebar-item-button" onclick="mudarTela('robo')">
                 <img src="assets/robot-icon.png" alt="" />Robô
               </button>
             </li>
@@ -62,82 +62,6 @@
       <script src="scripts/sandwich.js"></script>
 
       <main class="content-panel">
-        <div id="home-dashboard">
-          <article class="container">
-            <h3 class="container-tittle">Média do Campus<small class="low-opacity-text">Atualizado há 30 segundos</small></h3 class="container-tittle">
-
-            <dd><output class="reading" id="average-temperature">26,1°C</output> <span class="low-opacity-text">Tempo Limpo</span></dd>
-            
-            <hr>
-
-            <dl class="metric-grid">
-            <div class="reading-card">
-              <dt class="low-opacity-text">Umidade Média</dt>
-              <dd><output class="reading" id="average-humidity">90%</output></dd>
-            </div>
-
-            <div class="reading-card">
-              <dt class="low-opacity-text">Pressão Média</dt>
-              <dd><output class="reading" id="avarage-pressure">922,73 hPa</output></dd>
-            </div>
-            </dl>
-
-          </article>
-          <article class="container">
-            <h3 class="container-tittle">Outros Parâmetros Ambientais</h3 class="container-tittle">
-            <dl class="metric-grid">
-
-            <div class="reading-card">
-              <dt class="low-opacity-text">Luminosidade</dt>
-              <dd><output class="reading" id="luminosity-reading">72%</output></dd>
-            </div>
-
-            <div class="reading-card">
-              <dt class="low-opacity-text">Vel. Vento</dt>
-              <dd><output class="reading" id="wind-speed-reading">3,3 m/s</output></dd>
-            </div>
-
-            <div class="reading-card">
-              <dt class="low-opacity-text">Dir. Vento</dt>
-              <dd><output class="reading" id="wind-direction-reading">Sul (179°)</output></dd>
-            </div>
-
-            <div class="reading-card">
-              <dt class="low-opacity-text">Altitude</dt>
-              <dd><output class="reading" id="altitude-reading">781 m</output></dd>
-            </div>
-
-            </dl>
-            <canvas></canvas>
-          </article>
-          <article class="container">
-            <h3 class="container-tittle">Monitoramento por Área</h3 class="container-tittle">
-            <dt class="low-opacity-text"></dt>
-              Navegue pelos sensores individuais do campus.
-            </dt>
-            <button></button><button></button>
-            <div class="reading-card">
-              <span>Gateway</span>
-              <dd><output class="reading" id="gateway-location">Sensor Refeitorio</output></dd>
-              <dt class="low-opacity-text">Status do Atuador</dt>
-              <dd><output class="reading" id="actuator-status">Ligado</output></dd>
-              <div>
-                <dt class="low-opacity-text">Temperatura</dt>
-                <dd><output class="reading" id="gateway-temperature"></output></dd>
-                <dt class="low-opacity-text">Umidade</dt>
-                <dd><output class="reading" id="gateway-humidity"></output></dd>
-                <dt class="low-opacity-text">Luminosidade</dt>
-                <dd><output class="reading" id="gateway-luminosity"></output></dd>
-                <dt class="low-opacity-text">Pressão</dt>
-                <dd><output class="reading" id="gateway-pressure"></output></dd>
-                <dt class="low-opacity-text">Altitude</dt>
-                <dd><output class="reading" id="gateway-altitude"></output></dd>
-                <dt class="low-opacity-text">Velocidade do Vento</dt>
-                <dd><output class="reading" id="gateway-wind-speed"></output></dd>
-              </div>
-            </div>
-          </article>
-        </div>
         <span id="expand-button"> </span>
       </main>
     </div>
