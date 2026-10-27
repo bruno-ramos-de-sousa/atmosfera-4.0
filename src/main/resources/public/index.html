@@ -26,7 +26,7 @@
           <ul class="sidebar-menu">
 
             <li class="sidebar-item">
-              <button type="button" class="sidebar-item-button">
+              <button type="button" class="sidebar-item-button-selected">
                 <img src="assets/home-icon.png" alt="" />Hoje
               </button>
             </li>
@@ -106,34 +106,50 @@
               <dt class="low-opacity-text">Altitude</dt>
               <dd><output class="reading" id="altitude-reading">781 m</output></dd>
             </div>
-
             </dl>
-            <canvas></canvas>
+
+            <canvas id="temperature-graph"></canvas>
           </article>
           <article class="container">
+            <div>
             <h3 class="container-tittle">Monitoramento por Área</h3 class="container-tittle">
             <dt class="low-opacity-text"></dt>
               Navegue pelos sensores individuais do campus.
             </dt>
             <button></button><button></button>
+            </div>
+
             <div class="reading-card">
-              <span>Gateway</span>
+
+              <div>
+              <span id="device-type"> <span></span>Gateway</span>
+
               <dd><output class="reading" id="gateway-location">Sensor Refeitorio</output></dd>
               <dt class="low-opacity-text">Status do Atuador</dt>
-              <dd><output class="reading" id="actuator-status">Ligado</output></dd>
-              <div>
+
+              <dd><output class="reading" id="actuator-status"><span></span>Ligado</output></dd>
+              </div>
+              
+              <div class="container">
+
                 <dt class="low-opacity-text">Temperatura</dt>
                 <dd><output class="reading" id="gateway-temperature"></output></dd>
+
                 <dt class="low-opacity-text">Umidade</dt>
                 <dd><output class="reading" id="gateway-humidity"></output></dd>
+
                 <dt class="low-opacity-text">Luminosidade</dt>
                 <dd><output class="reading" id="gateway-luminosity"></output></dd>
+
                 <dt class="low-opacity-text">Pressão</dt>
                 <dd><output class="reading" id="gateway-pressure"></output></dd>
+
                 <dt class="low-opacity-text">Altitude</dt>
                 <dd><output class="reading" id="gateway-altitude"></output></dd>
+
                 <dt class="low-opacity-text">Velocidade do Vento</dt>
                 <dd><output class="reading" id="gateway-wind-speed"></output></dd>
+
               </div>
             </div>
           </article>
