@@ -1,0 +1,20 @@
+:root {
+    --strong-black: rgb(40, 40, 40);
+    --medium-black: rgb(60, 60, 60);
+    
+    --primary-blue: #192CFF;
+    --secondary-blue: #19A5FF;
+    --weak-blue: rgba(25, 165, 255, 0.4);
+
+    --off-white: #FAF9F6;
+    --primary-grey: rgba(164, 164, 164, 0.1);
+    --strong-grey: #D9D9D9;
+    --weak-grey: #F8F8F8;
+
+    --big-tittle-size: 30px;
+    --body-text-size: 24px;
+    --menu-text-size: 22px;
+    --small-body-text-size: 18px;
+
+    --font-family: 'inter', sans-serif;
+}

@@ -32,15 +32,34 @@ public class Main {
             response(exchange, 405, "Metodo não permitido", "text/plain");
             return;
         }
-        try (InputStream file = Main.class.getResourceAsStream("/public/index.html")) {
+
+        String path = exchange.getRequestURI().getPath();
+
+        if (path.equals("/")) {
+            path = "/index.html";
+        }
+
+        String resourcePath = "/public" + path;
+
+        try (InputStream file = Main.class.getResourceAsStream(resourcePath)) {
             if (file == null) {
-                response(exchange, 404, "Pagina não econtrada", "text/plain");
+                response(exchange, 404, "Arquivo não encontrado", "text/plain");
                 return;
             }
-            byte[] page = file.readAllBytes();
-            exchange.getResponseHeaders().set("Content-Type", "text/html; charset=UTF-8");
-            exchange.sendResponseHeaders(200, page.length);
-            exchange.getResponseBody().write(page);
+
+            String contentType = "text/plain";
+            if (resourcePath.endsWith(".html")) {
+                contentType = "text/html; charset=UTF-8";
+            } else if (resourcePath.endsWith(".css")) {
+                contentType = "text/css; charset=UTF-8";
+            } else if (resourcePath.endsWith(".js")) {
+                contentType = "application/javascript; charset=UTF-8";
+            }
+
+            byte[] bytes = file.readAllBytes();
+            exchange.getResponseHeaders().set("Content-Type", contentType);
+            exchange.sendResponseHeaders(200, bytes.length);
+            exchange.getResponseBody().write(bytes);
             exchange.close();
         }
     }
