@@ -1,6 +1,6 @@
 :root {
     --strong-black: rgb(40, 40, 40);
-    --medium-black: rgb(60, 60, 60);
+    --medium-black: rgba(60, 60, 60, 0.3);
     
     --primary-blue: #192CFF;
     --secondary-blue: #19A5FF;

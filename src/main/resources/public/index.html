@@ -112,43 +112,69 @@
           </article>
           <article class="container">
             <div>
-            <h3 class="container-tittle">Monitoramento por Área</h3 class="container-tittle">
-            <dt class="low-opacity-text"></dt>
-              Navegue pelos sensores individuais do campus.
-            </dt>
-            <button></button><button></button>
+              <div>
+                <h3 class="container-tittle">Monitoramento por Área</h3 class="container-tittle">
+                <dt class="low-opacity-text">Navegue pelos sensores individuais do campus.</dt>
+              </div>
+              <div id="corrosel-dis">
+                <p class="container">Area 1 de 3</p>
+                <button class="container"><span></span><span></span></button>
+                <button class="container"><span></span><span></span></button>
+              </div>
             </div>
 
             <div class="reading-card">
 
               <div>
-              <span id="device-type"> <span></span>Gateway</span>
+                <span id="device-type"> <span></span>Gateway</span>
 
-              <dd><output class="reading" id="gateway-location">Sensor Refeitorio</output></dd>
-              <dt class="low-opacity-text">Status do Atuador</dt>
+                <dd><output class="reading" id="gateway-location">Sensor Refeitorio</output></dd>
+                <dt class="low-opacity-text">Status do Atuador (Led 1):</dt>
 
-              <dd><output class="reading" id="actuator-status"><span></span>Ligado</output></dd>
+                <dd><output class="reading" id="actuator-status"><span></span>Ligado</output></dd>
               </div>
               
-              <div class="container">
+              <div class="metric-grid container">
 
-                <dt class="low-opacity-text">Temperatura</dt>
-                <dd><output class="reading" id="gateway-temperature"></output></dd>
+                <div>
+                  <dt class="low-opacity-text">Temperatura</dt>
+                  <dd><output class="reading" id="gateway-temperature">26,8°C</output></dd>
+                </div>
 
-                <dt class="low-opacity-text">Umidade</dt>
-                <dd><output class="reading" id="gateway-humidity"></output></dd>
+                <div>
+                  <dt class="low-opacity-text">Umidade</dt>
+                  <dd><output class="reading" id="gateway-humidity">93%</output></dd>
+                </div>
 
-                <dt class="low-opacity-text">Luminosidade</dt>
-                <dd><output class="reading" id="gateway-luminosity"></output></dd>
+                <div>
+                  <dt class="low-opacity-text">Luminosidade</dt>
+                  <dd><output class="reading" id="gateway-luminosity">72%</output></dd>
+                </div>
 
-                <dt class="low-opacity-text">Pressão</dt>
-                <dd><output class="reading" id="gateway-pressure"></output></dd>
+                <div>
+                  <dt class="low-opacity-text">Sinal Wi-Fi</dt>
+                  <dd><output class="reading" id="gateway-wifi-signal">52 dBm</output></dd>
+                </div>
 
-                <dt class="low-opacity-text">Altitude</dt>
-                <dd><output class="reading" id="gateway-altitude"></output></dd>
+                <div>
+                  <dt class="low-opacity-text">Pressão</dt>
+                  <dd><output class="reading" id="gateway-pressure">921,9 hPa</output></dd>
+                </div>
 
-                <dt class="low-opacity-text">Velocidade do Vento</dt>
-                <dd><output class="reading" id="gateway-wind-speed"></output></dd>
+                <div>
+                  <dt class="low-opacity-text">Altitude</dt>
+                  <dd><output class="reading" id="gateway-altitude">781 m</output></dd>
+                </div>
+
+                <div>
+                  <dt class="low-opacity-text">Velocidade do Vento</dt>
+                  <dd><output class="reading" id="gateway-wind-speed">3,6 m/s</output></dd>
+                </div>
+
+                <div>
+                  <dt class="low-opacity-text">Direção do Vento</dt>
+                  <dd><output class="reading" id="gateway-wind-direction">Sul (178°)</output></dd>
+                </div>
 
               </div>
             </div>
