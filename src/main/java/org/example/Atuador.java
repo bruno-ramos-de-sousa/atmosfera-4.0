@@ -3,11 +3,11 @@ package org.example;
 import java.time.LocalDateTime;
 
 public record Atuador(
-    int id_atuador,
-    int id_dispositivo_fk,
-    String nome_atuador,
-    boolean status_atual,
-    LocalDateTime ultimo_comando
+        int id_atuador,
+        int id_dispositivo_fk,
+        String nome_atuador,
+        boolean status_atual,
+        LocalDateTime ultimo_comando
 ) {
 
     public String toJson() {
