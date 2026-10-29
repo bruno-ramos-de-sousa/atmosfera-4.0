@@ -20,6 +20,13 @@ body {
   min-height: 0;
 }
 
+.content-panel {
+  display: flex;
+  flex: 1;
+  padding: 10px 20px;
+  width: 100vw;
+}
+
 // *---------------------------------- Estilização do corpo do site ------------------------------------------*
 
 .page-header {
@@ -144,14 +151,7 @@ body {
 
 // *----------------------------------- Estilização do menu lateral -----------------------------------------*
 
-.content-panel {
-  display: flex;
-  flex: 1;
-  padding: 10px 20px;
-  width: 100vw;
-}
-
-#home-dashboard {
+#dashboard {
   display: grid;
   grid-template-columns: 0.5fr 1fr;
   gap: 15px;
@@ -347,6 +347,8 @@ body {
   gap: 10px;
 }
 
+// *----------------------------------- Estilização da pagina home -----------------------------------------*
+
 .low-opacity-text {
   opacity: 0.4;
   font-size: var(--small-body-text-size);
@@ -401,12 +403,23 @@ body {
 }
 
 #expand-button {
-  position: absolute;
+  position: fixed;
+  z-index: 99;
   right: 20px;
   bottom: 20px;
   width: 40px;
   height: 40px;
   background-color: var(--strong-grey);
+}
+
+// **
+
+#robot-button {
+  width: 120px;
+  height: 30px;
+}
+
+#robot-config-button {
 }
 
 .layout-column {
@@ -444,8 +457,8 @@ body {
   border-radius: 20px;
 }
 
-@media screen and (max-width: 320px) {
-  #home-dashboard {
+@media screen and (max-width: 420px) {
+  #dashboard {
     grid-template-columns: 1fr;
   }
 }

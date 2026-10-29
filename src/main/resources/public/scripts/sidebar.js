@@ -1,6 +1,6 @@
 const screens = {
   home: `
-    <div id="home-dashboard">
+    <div id="dashboard">
           <article class="container">
             <h3 class="container-tittle">Média do Campus<small class="low-opacity-text">Atualizado há 30 segundos</small></h3 class="container-tittle">
 
@@ -118,6 +118,9 @@ const screens = {
             </div>
           </article>
         </div>
+
+        <script src="scripts/dailyRegistros.js"></script>
+
         <span id="expand-button"> </span>
         `,
   historico: `
@@ -135,6 +138,10 @@ function changeScreen(screenName) {
 
   if (screens[screenName]) {
     mainContainer.innerHTML = screens[screenName];
+  }
+
+  if (screenName === "robo") {
+    mainContainer.classList.toggle("robot")
   }
 }
 

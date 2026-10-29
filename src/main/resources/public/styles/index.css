@@ -19,6 +19,13 @@ body {
   min-height: 0;
 }
 
+.content-panel {
+  display: flex;
+  flex: 1;
+  padding: 10px 20px;
+  width: 100vw;
+}
+
 .page-header {
   display: flex;
   flex-direction: row;
@@ -125,14 +132,7 @@ body {
   pointer-events: none;
 }
 
-.content-panel {
-  display: flex;
-  flex: 1;
-  padding: 10px 20px;
-  width: 100vw;
-}
-
-#home-dashboard {
+#dashboard {
   display: grid;
   grid-template-columns: 0.5fr 1fr;
   gap: 15px;
@@ -140,77 +140,77 @@ body {
   min-height: calc(100vh - 65px - 20px);
   align-items: stretch;
 }
-#home-dashboard .container:nth-child(3) {
+#dashboard .container:nth-child(3) {
   display: flex;
   flex-direction: column;
   grid-column: span 2;
 }
-#home-dashboard article:first-child {
+#dashboard article:first-child {
   display: flex;
   flex-direction: column;
 }
-#home-dashboard article:first-child h3 small {
+#dashboard article:first-child h3 small {
   position: absolute;
   right: 30px;
   margin-top: 5px;
   font-weight: normal;
 }
-#home-dashboard article:first-child .metric-grid {
+#dashboard article:first-child .metric-grid {
   position: absolute;
   bottom: 10px;
   width: 90%;
 }
-#home-dashboard article:first-child > dd {
+#dashboard article:first-child > dd {
   margin: 30px 0;
 }
-#home-dashboard article:first-child > hr {
+#dashboard article:first-child > hr {
   margin: 0px auto;
   margin-top: 25%;
   width: 80%;
   opacity: 0.2;
 }
-#home-dashboard article:nth-child(2) {
+#dashboard article:nth-child(2) {
   display: flex;
   flex-direction: column;
 }
-#home-dashboard article:nth-child(2) > .metric-grid {
+#dashboard article:nth-child(2) > .metric-grid {
   margin: 20px 0px;
 }
-#home-dashboard article:nth-child(2) #temperature-graph {
+#dashboard article:nth-child(2) #temperature-graph {
   margin-top: auto;
 }
-#home-dashboard article:last-child {
+#dashboard article:last-child {
   display: flex;
   flex-direction: column;
   min-height: 0;
 }
-#home-dashboard article:last-child > div:first-child {
+#dashboard article:last-child > div:first-child {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
 }
-#home-dashboard article:last-child > div:first-child > div:last-child {
+#dashboard article:last-child > div:first-child > div:last-child {
   display: flex;
   flex-direction: row;
   align-items: center;
   margin-right: 10px;
   gap: 20px;
 }
-#home-dashboard article:last-child > div:first-child > div:last-child .container {
+#dashboard article:last-child > div:first-child > div:last-child .container {
   height: -moz-fit-content;
   height: fit-content;
   width: -moz-fit-content;
   width: fit-content;
   padding: 10px;
 }
-#home-dashboard article:last-child > div:first-child > div:last-child .container:nth-child(2), #home-dashboard article:last-child > div:first-child > div:last-child .container:nth-child(3) {
+#dashboard article:last-child > div:first-child > div:last-child .container:nth-child(2), #dashboard article:last-child > div:first-child > div:last-child .container:nth-child(3) {
   position: relative;
   height: 30px;
   width: 30px;
   cursor: pointer;
 }
-#home-dashboard article:last-child > div:first-child > div:last-child .container:nth-child(2) span:first-child,
-#home-dashboard article:last-child > div:first-child > div:last-child .container:nth-child(2) span:last-child {
+#dashboard article:last-child > div:first-child > div:last-child .container:nth-child(2) span:first-child,
+#dashboard article:last-child > div:first-child > div:last-child .container:nth-child(2) span:last-child {
   position: absolute;
   display: block;
   left: 50%;
@@ -220,16 +220,16 @@ body {
   background-color: black;
   transform-origin: left center;
 }
-#home-dashboard article:last-child > div:first-child > div:last-child .container:nth-child(2) span:first-child {
+#dashboard article:last-child > div:first-child > div:last-child .container:nth-child(2) span:first-child {
   position: absolute;
   transform: translate(-50%, -50%) rotate(45deg);
 }
-#home-dashboard article:last-child > div:first-child > div:last-child .container:nth-child(2) span:last-child {
+#dashboard article:last-child > div:first-child > div:last-child .container:nth-child(2) span:last-child {
   position: absolute;
   transform: translate(-50%, -50%) rotate(-45deg);
 }
-#home-dashboard article:last-child > div:first-child > div:last-child .container:nth-child(3) span:first-child,
-#home-dashboard article:last-child > div:first-child > div:last-child .container:nth-child(3) span:last-child {
+#dashboard article:last-child > div:first-child > div:last-child .container:nth-child(3) span:first-child,
+#dashboard article:last-child > div:first-child > div:last-child .container:nth-child(3) span:last-child {
   position: absolute;
   display: block;
   left: 50%;
@@ -239,52 +239,52 @@ body {
   background-color: black;
   transform-origin: left center;
 }
-#home-dashboard article:last-child > div:first-child > div:last-child .container:nth-child(3) span:first-child {
+#dashboard article:last-child > div:first-child > div:last-child .container:nth-child(3) span:first-child {
   transform: translate(50%, -50%) rotate(135deg);
 }
-#home-dashboard article:last-child > div:first-child > div:last-child .container:nth-child(3) span:last-child {
+#dashboard article:last-child > div:first-child > div:last-child .container:nth-child(3) span:last-child {
   transform: translate(50%, -50%) rotate(-135deg);
 }
-#home-dashboard article:last-child .reading-card {
+#dashboard article:last-child .reading-card {
   display: flex;
   flex-direction: row;
   flex: 1;
   min-height: 0;
   gap: 15px;
 }
-#home-dashboard article:last-child .reading-card > div {
+#dashboard article:last-child .reading-card > div {
   padding: 10px 20px;
 }
-#home-dashboard article:last-child .reading-card > div > dd {
+#dashboard article:last-child .reading-card > div > dd {
   margin: 5px 0px;
 }
-#home-dashboard article:last-child .reading-card > div > dt {
+#dashboard article:last-child .reading-card > div > dt {
   margin: 30px 0px 10px 0px;
 }
-#home-dashboard article:last-child .reading-card .metric-grid {
+#dashboard article:last-child .reading-card .metric-grid {
   margin-left: auto;
   background-color: #ffffff;
   width: 80%;
   grid-template-columns: repeat(4, 1fr);
   gap: 0;
 }
-#home-dashboard article:last-child .reading-card .metric-grid div {
+#dashboard article:last-child .reading-card .metric-grid div {
   padding: 15px;
 }
-#home-dashboard article:last-child .reading-card .metric-grid div:nth-child(1), #home-dashboard article:last-child .reading-card .metric-grid div:nth-child(2), #home-dashboard article:last-child .reading-card .metric-grid div:nth-child(3) {
+#dashboard article:last-child .reading-card .metric-grid div:nth-child(1), #dashboard article:last-child .reading-card .metric-grid div:nth-child(2), #dashboard article:last-child .reading-card .metric-grid div:nth-child(3) {
   border-bottom: 1px solid var(--medium-black);
   border-right: 1px solid var(--medium-black);
 }
-#home-dashboard article:last-child .reading-card .metric-grid div:nth-child(4) {
+#dashboard article:last-child .reading-card .metric-grid div:nth-child(4) {
   border-bottom: 1px solid var(--medium-black);
 }
-#home-dashboard article:last-child .reading-card .metric-grid div:nth-child(5) {
+#dashboard article:last-child .reading-card .metric-grid div:nth-child(5) {
   border-right: 1px solid var(--medium-black);
 }
-#home-dashboard article:last-child .reading-card .metric-grid div:nth-child(6) {
+#dashboard article:last-child .reading-card .metric-grid div:nth-child(6) {
   border-right: 1px solid var(--medium-black);
 }
-#home-dashboard article:last-child .reading-card .metric-grid div:nth-child(7) {
+#dashboard article:last-child .reading-card .metric-grid div:nth-child(7) {
   border-right: 1px solid var(--medium-black);
 }
 
@@ -350,12 +350,18 @@ body {
 }
 
 #expand-button {
-  position: absolute;
+  position: fixed;
+  z-index: 99;
   right: 20px;
   bottom: 20px;
   width: 40px;
   height: 40px;
   background-color: var(--strong-grey);
+}
+
+#robot-button {
+  width: 120px;
+  height: 30px;
 }
 
 .layout-column {
@@ -393,8 +399,8 @@ body {
   border-radius: 20px;
 }
 
-@media screen and (max-width: 320px) {
-  #home-dashboard {
+@media screen and (max-width: 420px) {
+  #dashboard {
     grid-template-columns: 1fr;
   }
 }/*# sourceMappingURL=index.css.map */
