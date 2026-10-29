@@ -12,10 +12,10 @@ public record Atuador(
 
     public String toJson() {
         return "{\"id_atuador\":" + id_atuador +
-                ", \"id_dispositivo_fk\":\"" + id_dispositivo_fk + "\"" +
-                "\"nome_atuador\":\"" + escape(nome_atuador) + "\"" +
-                "\"status_atual\":\"" + status_atual + "\"" +
-                "\"ultimo_comando\":\"" + ultimo_comando + "\"}";
+                ", \"id_dispositivo_fk\":" + id_dispositivo_fk +
+                ", \"nome_atuador\":\"" + escape(nome_atuador) + "\"" +
+                ", \"status_atual\":" + status_atual +
+                ", \"ultimo_comando\":\"" + ultimo_comando + "\"}";
     }
 
     public String escape(String texto) {
