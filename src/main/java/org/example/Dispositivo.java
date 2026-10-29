@@ -12,7 +12,7 @@ public record Dispositivo(
                 + ", \"nome_dispositivo\":\"" + escape(nome_dispositivo) + "\""
                 + ", \"localizacao\":\"" + escape(localizacao) + "\""
                 + ", \"tipo_dispositivo\":\"" + escape(tipo_dispositivo) + "\""
-                + ", \"gateway_pai_fk\":\"" + gateway_pai_fk +
+                + ", \"gateway_pai_fk\":" + gateway_pai_fk +
                 "}";
     }
 

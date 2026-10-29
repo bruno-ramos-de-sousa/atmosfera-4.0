@@ -8,10 +8,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class AtuadorDAO {
-    public void create (Atuador atuador)  throws SQLException{
+    public void create(Atuador atuador) throws SQLException {
         String sql = "INSERT INTO atuadores (id_dispositivo_fk, nome_atuador, status_atual, ultimo_comando) VALUES (?, ?, ?, ?)";
 
-        try (java.sql.Connection connection = Connection.OpenDataBase();
+        try (java.sql.Connection connection = Connection.openDataBase();
              PreparedStatement pstmt = connection.prepareStatement(sql)) {
             pstmt.setInt(1, atuador.id_dispositivo_fk());
             pstmt.setString(2, atuador.nome_atuador());
@@ -25,7 +25,7 @@ public class AtuadorDAO {
         String sql = "SELECT id, id_dispositivo_fk, nome_atuador, status_atual, ultimo_comando FROM atuadores ORDER BY id DESC";
         List<Atuador> atuadores = new ArrayList<>();
 
-        try (java.sql.Connection connection = Connection.OpenDataBase();
+        try (java.sql.Connection connection = Connection.openDataBase();
              PreparedStatement pstmt = connection.prepareStatement(sql);
              ResultSet resultSet = pstmt.executeQuery()) {
 

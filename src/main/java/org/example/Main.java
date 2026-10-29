@@ -8,8 +8,12 @@ import java.io.InputStream;
 import java.net.InetSocketAddress;
 import java.nio.charset.StandardCharsets;
 import java.sql.SQLException;
+import java.util.List;
 
 public class Main {
+    private static final RegistroDAO registroDAO = new RegistroDAO();
+    private static final DispositivoDAO dispositivoDAO = new DispositivoDAO();
+    private static final AtuadorDAO atuadorDAO = new AtuadorDAO();
     public static void main(String[] args) throws IOException, SQLException {
         testConnection();
 
@@ -17,12 +21,114 @@ public class Main {
                 new InetSocketAddress("0.0.0.0", 8080), 0);
 
         server.createContext("/", Main::loadPage);
+        server.createContext("/api/registros/diarios", Main::listenDailyRegistros);
+        server.createContext("/api/dispositivos", Main::listenDispositivos);
+        server.createContext("/api/atuadores", Main::listenAtuadores);
 
         server.start();
     }
 
+    private static void setAccess(HttpExchange exchange) {
+        exchange.getResponseHeaders().set("Access-Control-Allow-Origin", "*");
+        exchange.getResponseHeaders().set("Access-Control-Allow-Methods", "GET, OPTIONS");
+        exchange.getResponseHeaders().set("Access-Control-Allow-Headers", "Content-Type");
+    }
+
+    private static void listenDailyRegistros(HttpExchange exchange) throws IOException {
+        setAccess(exchange);
+
+        try {
+            if (exchange.getRequestMethod().equals("OPTIONS")) {
+                exchange.sendResponseHeaders(204, -1);
+                exchange.close();
+            } else if (exchange.getRequestMethod().equals("GET")) {
+                listDailyRegistros(exchange);
+            } else {
+                exchange.getRequestHeaders().set("Allow", "GET, OPTIONS");
+                response(exchange, 405, "{\"erro\":\"Método não permitido\"}");
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+            response(exchange, 500, "{\"erro\":\"Erro ao cessar o banco\"}");
+        }
+    }
+
+    private static void listenDispositivos(HttpExchange exchange) throws IOException {
+        setAccess(exchange);
+
+        try {
+            if (exchange.getRequestMethod().equals("OPTIONS")) {
+                exchange.sendResponseHeaders(204, -1);
+                exchange.close();
+            } else if (exchange.getRequestMethod().equals("GET")) {
+                listDispositivos(exchange);
+            } else {
+                exchange.getRequestHeaders().set("Allow", "GET, OPTIONS");
+                response(exchange, 405, "{\"erro\":\"Método não permitido\"}");
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+            response(exchange, 500, "{\"erro\":\"Erro ao cessar o banco\"}");
+        }
+    }
+
+    private static void listenAtuadores(HttpExchange exchange) throws IOException {
+        setAccess(exchange);
+
+        try {
+            if (exchange.getRequestMethod().equals("OPTIONS")) {
+                exchange.sendResponseHeaders(204, -1);
+                exchange.close();
+            } else if (exchange.getRequestMethod().equals("GET")) {
+                listAtuadores(exchange);
+            } else {
+                exchange.getRequestHeaders().set("Allow", "GET, OPTIONS");
+                response(exchange, 405, "{\"erro\":\"Método não permitido\"}");
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+            response(exchange, 500, "{\"erro\":\"Erro ao cessar o banco\"}");
+        }
+    }
+
+    private static void listDailyRegistros(HttpExchange exchange) throws IOException, SQLException {
+        List<Registro> registros = registroDAO.listDailyRegistros();
+        StringBuilder json = new StringBuilder("[");
+
+        for (int i = 0; i < registros.size(); i++) {
+            if (i > 0) json.append(",");
+            json.append(registros.get(i).toJson());
+        }
+        json.append("]");
+        response(exchange, 200, json.toString());
+    }
+
+    private static void listDispositivos(HttpExchange exchange) throws IOException, SQLException {
+        List<Dispositivo> dispositivos = dispositivoDAO.listDispositivos();
+        StringBuilder json = new StringBuilder("[");
+
+        for (int i = 0; i < dispositivos.size(); i++) {
+            if (i > 0) json.append(",");
+            json.append(dispositivos.get(i).toJson());
+        }
+        json.append("]");
+        response(exchange, 200, json.toString());
+    }
+
+    private static void listAtuadores(HttpExchange exchange) throws IOException, SQLException {
+        List<Atuador> atuadores = atuadorDAO.listAtuadores();
+        StringBuilder json = new StringBuilder("[");
+
+        for (int i = 0; i < atuadores.size(); i++) {
+            if (i > 0) json.append(",");
+            json.append(atuadores.get(i).toJson());
+        }
+        json.append("]");
+        response(exchange, 200, json.toString());
+    }
+
     private static void testConnection() throws SQLException {
-        try (java.sql.Connection ignored = Connection.OpenDataBase()) {
+        try (java.sql.Connection ignored = Connection.openDataBase()) {
             System.out.println("Banco conectado com sucesso!!!");
         }
     }
