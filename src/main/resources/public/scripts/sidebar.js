@@ -1,22 +1,22 @@
 const screens = {
   home: `
-    <div id="home-dashboard">
+        <div id="home-dashboard">
           <article class="container">
             <h3 class="container-tittle">Média do Campus<small class="low-opacity-text">Atualizado há 30 segundos</small></h3 class="container-tittle">
 
-            <dd><output class="reading" id="average-temperature">26,1°C</output> <span class="low-opacity-text">Tempo Limpo</span></dd>
+            <dd><output class="reading" id="average-temperature"></output> <span class="low-opacity-text">Tempo Limpo</span></dd>
             
             <hr>
 
             <dl class="metric-grid">
             <div class="reading-card">
               <dt class="low-opacity-text">Umidade Média</dt>
-              <dd><output class="reading" id="average-humidity">90%</output></dd>
+              <dd><output class="reading" id="average-humidity"></output></dd>
             </div>
 
             <div class="reading-card">
               <dt class="low-opacity-text">Pressão Média</dt>
-              <dd><output class="reading" id="avarage-pressure">922,73 hPa</output></dd>
+              <dd><output class="reading" id="avarage-pressure"></output></dd>
             </div>
             </dl>
 
@@ -27,22 +27,22 @@ const screens = {
 
             <div class="reading-card">
               <dt class="low-opacity-text">Luminosidade</dt>
-              <dd><output class="reading" id="luminosity-reading">72%</output></dd>
+              <dd><output class="reading" id="luminosity-reading"></output></dd>
             </div>
 
             <div class="reading-card">
               <dt class="low-opacity-text">Vel. Vento</dt>
-              <dd><output class="reading" id="wind-speed-reading">3,3 m/s</output></dd>
+              <dd><output class="reading" id="wind-speed-reading"></output></dd>
             </div>
 
             <div class="reading-card">
               <dt class="low-opacity-text">Dir. Vento</dt>
-              <dd><output class="reading" id="wind-direction-reading">Sul (179°)</output></dd>
+              <dd><output class="reading" id="wind-direction-reading"></output></dd>
             </div>
 
             <div class="reading-card">
               <dt class="low-opacity-text">Altitude</dt>
-              <dd><output class="reading" id="altitude-reading">781 m</output></dd>
+              <dd><output class="reading" id="altitude-reading"></output></dd>
             </div>
             </dl>
 
@@ -76,51 +76,71 @@ const screens = {
 
                 <div>
                   <dt class="low-opacity-text">Temperatura</dt>
-                  <dd><output class="reading" id="gateway-temperature">26,8°C</output></dd>
+                  <dd><output class="reading" id="gateway-temperature"></output></dd>
                 </div>
 
                 <div>
                   <dt class="low-opacity-text">Umidade</dt>
-                  <dd><output class="reading" id="gateway-humidity">93%</output></dd>
+                  <dd><output class="reading" id="gateway-humidity"></output></dd>
                 </div>
 
                 <div>
                   <dt class="low-opacity-text">Luminosidade</dt>
-                  <dd><output class="reading" id="gateway-luminosity">72%</output></dd>
+                  <dd><output class="reading" id="gateway-luminosity"></output></dd>
                 </div>
 
                 <div>
                   <dt class="low-opacity-text">Sinal Wi-Fi</dt>
-                  <dd><output class="reading" id="gateway-wifi-signal">52 dBm</output></dd>
+                  <dd><output class="reading" id="gateway-wifi-signal"></output></dd>
                 </div>
 
                 <div>
                   <dt class="low-opacity-text">Pressão</dt>
-                  <dd><output class="reading" id="gateway-pressure">921,9 hPa</output></dd>
+                  <dd><output class="reading" id="gateway-pressure"></output></dd>
                 </div>
 
                 <div>
                   <dt class="low-opacity-text">Altitude</dt>
-                  <dd><output class="reading" id="gateway-altitude">781 m</output></dd>
+                  <dd><output class="reading" id="gateway-altitude"></output></dd>
                 </div>
 
                 <div>
                   <dt class="low-opacity-text">Velocidade do Vento</dt>
-                  <dd><output class="reading" id="gateway-wind-speed">3,6 m/s</output></dd>
+                  <dd><output class="reading" id="gateway-wind-speed"></output></dd>
                 </div>
 
                 <div>
                   <dt class="low-opacity-text">Direção do Vento</dt>
-                  <dd><output class="reading" id="gateway-wind-direction">Sul (178°)</output></dd>
+                  <dd><output class="reading" id="gateway-wind-direction"></output></dd>
                 </div>
 
               </div>
             </div>
           </article>
         </div>
-        <span id="expand-button"> </span>
         `,
   historico: `
+        <div class="table-container">
+            <table class="historico-table">
+                <thead>
+                    <tr>
+                        <th>DISPOSITIVO</th>
+                        <th>DATA E HORA</th>
+                        <th>TEMPERATURA</th>
+                        <th>UMIDADE</th>
+                        <th>PRESSÃO</th>
+                        <th>ALTITUDE</th>
+                        <th>LUMINOSIDADE</th>
+                        <th>VEL. VENTO</th>
+                        <th">DIR. VENTO</th>
+                        <th>SINAL WI-FI</th>
+                    </tr>
+                </thead>
+                <tbody>
+
+                </tbody>
+            </table>
+          </div>
         `,
   mapa: `
         `,
@@ -135,6 +155,10 @@ function changeScreen(screenName) {
 
   if (screens[screenName]) {
     mainContainer.innerHTML = screens[screenName];
+
+    if (screenName == 'home') {
+      loadingDataHome()
+    }
   }
 }
 
