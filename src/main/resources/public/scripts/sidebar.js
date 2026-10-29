@@ -1,4 +1,4 @@
-const telas = {
+const screens = {
   home: `
     <div id="home-dashboard">
           <article class="container">
@@ -130,29 +130,29 @@ const telas = {
         `,
 };
 
-function mudarTela(nomeTela) {
+function changeScreen(screenName) {
   const mainContainer = document.querySelector(".content-panel");
 
-  if (telas[nomeTela]) {
-    mainContainer.innerHTML = telas[nomeTela];
+  if (screens[screenName]) {
+    mainContainer.innerHTML = screens[screenName];
   }
 }
 
 document.addEventListener("DOMContentLoaded", () => {
   const buttons = document.querySelectorAll(".sidebar-item-button");
 
-  function selecionarBotao(botaoClicado) {
-    buttons.forEach((botao) => {
-      botao.classList.toggle("is-selected", botao === botaoClicado);
+  function selectButon(clickedButton) {
+    buttons.forEach((button) => {
+      button.classList.toggle("is-selected", button === clickedButton);
     });
   }
 
-  buttons.forEach((botao) => {
-    botao.addEventListener("click", () => {
-      selecionarBotao(botao);
-      mudarTela(botao.dataset.tela);
+  buttons.forEach((button) => {
+    button.addEventListener("click", () => {
+      selectButon(button);
+      changeScreen(button.dataset.tela);
     });
   });
 
-  mudarTela("home");
+  changeScreen("home");
 });
