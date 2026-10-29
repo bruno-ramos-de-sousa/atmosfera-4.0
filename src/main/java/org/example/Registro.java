@@ -19,17 +19,17 @@ public record Registro(
 ) {
     public String toJson() {
         return "{\"id_registro\":" + id_registro
-                + ", \"id_dispositivo_fk\":\"" + id_dispositivo_fk + "\""
+                + ", \"id_dispositivo_fk\":" + id_dispositivo_fk
                 + ", \"time_stamp\":\"" + escape(time_stamp) + "\""
                 + ", \"data_hora\":\"" + data_hora + "\""
-                + ", \"temperatura\":\"" + temperatura + "\""
-                + ", \"umidade\":\"" + umidade + "\""
-                + ", \"pressao\":\"" + pressao + "\""
-                + ", \"altitude\":\"" + altitude + "\""
-                + ", \"luminosidade\":\"" + luminosidade + "\""
-                + ", \"velocidade_vento\":\"" + velocidade_vento + "\""
-                + ", \"direcao_vento\":\"" + direcao_vento + "\""
-                + ", \"intensidade_wifi\":\"" + intensidade_wifi +
+                + ", \"temperatura\":" + temperatura
+                + ", \"umidade\":" + umidade
+                + ", \"pressao\":" + pressao
+                + ", \"altitude\":" + altitude
+                + ", \"luminosidade\":" + luminosidade
+                + ", \"velocidade_vento\":" + velocidade_vento
+                + ", \"direcao_vento\":" + direcao_vento
+                + ", \"intensidade_wifi\":" + intensidade_wifi +
                 "}";
     }
 

@@ -8,7 +8,7 @@ public class Connection {
     private static final String USER = "root";
     private static final String PASSWORD = "senaisp";
 
-    public static java.sql.Connection OpenDataBase() throws SQLException {
+    public static java.sql.Connection openDataBase() throws SQLException {
         return DriverManager.getConnection(URL, USER, PASSWORD);
     }
 }

@@ -11,7 +11,7 @@ public class RegistroDAO {
     public void create(Registro registro) throws SQLException {
         String sql = "INSERT INTO registros (id_dispositivo_fk, time_stamp, data_hora, temperatura, umidade, pressao, altitude, luminosidade, velocidade_vento, direcao_vento, intensidade_wifi) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
-        try (java.sql.Connection connection = Connection.OpenDataBase();
+        try (java.sql.Connection connection = Connection.openDataBase();
              PreparedStatement command = connection.prepareStatement(sql)) {
             command.setInt(1, registro.id_dispositivo_fk());
             command.setString(2, registro.time_stamp());
@@ -29,10 +29,39 @@ public class RegistroDAO {
     }
 
     public List<Registro> listRegistros() throws SQLException {
-        String sql = "SELECT id_registro, id_dispositivo_fk, time_stamp, data_hora, temperatura, umidade, pressao, altitude, luminosidade, velocidade_vento, direcao_vento, intensidade_wifi FROM registros ORDER BY id_registros";
+        String sql = "SELECT id_registro, id_dispositivo_fk, time_stamp, data_hora, temperatura, umidade, pressao, altitude, luminosidade, velocidade_vento, direcao_vento, intensidade_wifi FROM registros ORDER BY id_registro";
         List<Registro> listaRegistro = new ArrayList<>();
 
-        try (java.sql.Connection connection = Connection.OpenDataBase();
+        try (java.sql.Connection connection = Connection.openDataBase();
+             PreparedStatement command = connection.prepareStatement(sql);
+             ResultSet result = command.executeQuery()) {
+
+            while (result.next()) {
+                Registro registros = new Registro(
+                        result.getLong("id_registro"),
+                        result.getInt("id_dispositivo_fk"),
+                        result.getString("time_stamp"),
+                        (LocalDateTime) result.getObject("data_hora"),
+                        result.getFloat("temperatura"),
+                        result.getFloat("umidade"),
+                        result.getFloat("pressao"),
+                        result.getFloat("altitude"),
+                        result.getFloat("luminosidade"),
+                        result.getFloat("velocidade_vento"),
+                        result.getInt("direcao_vento"),
+                        result.getInt("intensidade_wifi")
+                );
+                listaRegistro.add(registros);
+            }
+        }
+        return listaRegistro;
+    }
+
+    public List<Registro> listDailyRegistros() throws SQLException {
+        String sql = "SELECT id_registro, id_dispositivo_fk, time_stamp, data_hora, temperatura, umidade, pressao, altitude, luminosidade, velocidade_vento, direcao_vento, intensidade_wifi FROM registros WHERE DATE(data_hora) = CURDATE() ORDER BY id_registro";
+        List<Registro> listaRegistro = new ArrayList<>();
+
+        try (java.sql.Connection connection = Connection.openDataBase();
              PreparedStatement command = connection.prepareStatement(sql);
              ResultSet result = command.executeQuery()) {
 
