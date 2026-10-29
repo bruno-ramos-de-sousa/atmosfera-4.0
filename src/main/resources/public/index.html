@@ -30,7 +30,11 @@
                 class="sidebar-item-button is-selected"
                 onclick="changeScreen('home')"
               >
-                <img src="assets/home-icon.png" alt="" />Hoje
+                <img
+                  src="assets/home-icon.png"
+                  alt="Home Icon"
+                  class="icon"
+                />Hoje
               </button>
             </li>
 
@@ -40,7 +44,11 @@
                 class="sidebar-item-button"
                 onclick="changeScreen('historico')"
               >
-                <img src="assets/history-icon.png" alt="" />Histórico
+                <img
+                  src="assets/history-icon.png"
+                  alt=""
+                  class="icon"
+                />Histórico
               </button>
             </li>
 
@@ -50,7 +58,11 @@
                 class="sidebar-item-button"
                 onclick="changeScreen('mapa')"
               >
-                <img src="assets/map-icon.png" alt="" />Mapa do Campus
+                <img
+                  src="assets/map-icon.png"
+                  alt="Map Icon"
+                  class="icon"
+                />Mapa do Campus
               </button>
             </li>
 
@@ -60,7 +72,11 @@
                 class="sidebar-item-button"
                 onclick="changeScreen('sobre')"
               >
-                <img src="assets/info-icon.png" alt="" />Sobre
+                <img
+                  src="assets/info-icon.png"
+                  alt="Info Icon"
+                  class="icon"
+                />Sobre
               </button>
             </li>
 
@@ -70,7 +86,11 @@
                 class="sidebar-item-button"
                 onclick="changeScreen('robo')"
               >
-                <img src="assets/robot-icon.png" alt="" />Robô
+                <img
+                  src="assets/robot-icon.png"
+                  alt="Robot Icon"
+                  class="icon"
+                />Robô
               </button>
             </li>
           </ul>
@@ -84,7 +104,7 @@
         <div id="dashboard">
           <article class="container">
             <h3 class="container-tittle">
-              Média do Campus<small class="low-opacity-text"
+              Média do Campus<small class="low-opacity-text" id="update-time"
                 >Atualizado há 30 segundos</small
               >
             </h3>
@@ -257,6 +277,7 @@
         </div>
 
         <script src="scripts/dailyRegistros.js"></script>
+        <script src="scripts/robot.js"></script>
 
         <span id="expand-button"> </span>
       </main>
