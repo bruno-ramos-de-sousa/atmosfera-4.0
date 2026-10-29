@@ -29,7 +29,7 @@ public class RegistroDAO {
     }
 
     public List<Registro> listRegistros() throws SQLException {
-        String sql = "SELECT id_registro, id_dispositivo_fk, time_stamp, data_hora, temperatura, umidade, pressao, altitude, luminosidade, velocidade_vento, direcao_vento, intensidade_wifi FROM registros ORDER BY id_registros";
+        String sql = "SELECT id_registro, id_dispositivo_fk, time_stamp, data_hora, temperatura, umidade, pressao, altitude, luminosidade, velocidade_vento, direcao_vento, intensidade_wifi FROM registros ORDER BY id_registro";
         List<Registro> listaRegistro = new ArrayList<>();
 
         try (java.sql.Connection connection = Connection.openDataBase();
@@ -58,7 +58,7 @@ public class RegistroDAO {
     }
 
     public List<Registro> listDailyRegistros() throws SQLException {
-        String sql = "SELECT id_registro, id_dispositivo_fk, time_stamp, data_hora, temperatura, umidade, pressao, altitude, luminosidade, velocidade_vento, direcao_vento, intensidade_wifi FROM registros ORDER BY id_registros WHERE DATE(data_hora) = CURDATE()";
+        String sql = "SELECT id_registro, id_dispositivo_fk, time_stamp, data_hora, temperatura, umidade, pressao, altitude, luminosidade, velocidade_vento, direcao_vento, intensidade_wifi FROM registros WHERE DATE(data_hora) = CURDATE() ORDER BY id_registro";
         List<Registro> listaRegistro = new ArrayList<>();
 
         try (java.sql.Connection connection = Connection.openDataBase();
