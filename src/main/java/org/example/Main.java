@@ -41,6 +41,7 @@ public class Main {
             if (exchange.getRequestMethod().equals("OPTIONS")) {
                 exchange.sendResponseHeaders(204, -1);
                 exchange.close();
+                return;
             } else if (exchange.getRequestMethod().equals("GET")) {
                 listDailyRegistros(exchange);
             } else {
@@ -49,7 +50,7 @@ public class Main {
             }
         } catch (SQLException e) {
             e.printStackTrace();
-            response(exchange, 500, "{\"erro\":\"Erro ao cessar o banco\"}");
+            response(exchange, 500, "{\"erro\":\"Erro ao acessar o banco\"}");
         }
     }
 
@@ -60,6 +61,7 @@ public class Main {
             if (exchange.getRequestMethod().equals("OPTIONS")) {
                 exchange.sendResponseHeaders(204, -1);
                 exchange.close();
+                return;
             } else if (exchange.getRequestMethod().equals("GET")) {
                 listDispositivos(exchange);
             } else {
@@ -68,7 +70,7 @@ public class Main {
             }
         } catch (SQLException e) {
             e.printStackTrace();
-            response(exchange, 500, "{\"erro\":\"Erro ao cessar o banco\"}");
+            response(exchange, 500, "{\"erro\":\"Erro ao acessar o banco\"}");
         }
     }
 
@@ -79,6 +81,7 @@ public class Main {
             if (exchange.getRequestMethod().equals("OPTIONS")) {
                 exchange.sendResponseHeaders(204, -1);
                 exchange.close();
+                return;
             } else if (exchange.getRequestMethod().equals("GET")) {
                 listAtuadores(exchange);
             } else {
@@ -87,7 +90,7 @@ public class Main {
             }
         } catch (SQLException e) {
             e.printStackTrace();
-            response(exchange, 500, "{\"erro\":\"Erro ao cessar o banco\"}");
+            response(exchange, 500, "{\"erro\":\"Erro ao acessar o banco\"}");
         }
     }
 

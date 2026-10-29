@@ -22,7 +22,7 @@ public class AtuadorDAO {
     }
 
     public List<Atuador> listAtuadores() throws SQLException {
-        String sql = "SELECT id, id_dispositivo_fk, nome_atuador, status_atual, ultimo_comando FROM atuadores ORDER BY id DESC";
+        String sql = "SELECT id_atuador, id_dispositivo_fk, nome_atuador, status_atual, ultimo_comando FROM atuadores ORDER BY id_atuador DESC";
         List<Atuador> atuadores = new ArrayList<>();
 
         try (java.sql.Connection connection = Connection.openDataBase();
@@ -31,7 +31,7 @@ public class AtuadorDAO {
 
             while (resultSet.next()) {
                 Atuador atuador = new Atuador(
-                        resultSet.getInt("id"),
+                        resultSet.getInt("id_atuador"),
                         resultSet.getInt("id_dispositivo_fk"),
                         resultSet.getString("nome_atuador"),
                         resultSet.getBoolean("status_atual"),

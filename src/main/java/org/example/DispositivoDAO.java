@@ -21,7 +21,7 @@ public class DispositivoDAO {
     }
 
     public List<Dispositivo> listDispositivos() throws SQLException {
-        String sql = "SELECT id_dispositivo, nome_dispositivo, localizacao, tipo_dispositivo, gateway_pai_fk FROM dispositovos;";
+        String sql = "SELECT id_dispositivo, nome_dispositivo, localizacao, tipo_dispositivo, gateway_pai_fk FROM dispositivos;";
         List<Dispositivo> dispositivos = new ArrayList<>();
 
         try (java.sql.Connection connection = Connection.openDataBase();
