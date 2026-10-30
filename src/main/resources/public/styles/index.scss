@@ -1,4 +1,4 @@
-@import url(variables.css);
+@import url("variables.css");
 
 * {
   padding: 0;
@@ -30,30 +30,29 @@ body {
   padding: var(--low-spacing) var(--hg-spacing);
 }
 
-// *---------------------------------- Estilização do corpo do site ------------------------------------------*
-
+// -------------------------------------- Header --------------------------------------
 .page-header {
   display: flex;
-  flex-direction: row;
   align-items: center;
+  position: relative;
   z-index: 10;
-  height: 65px;
   width: 100dvw;
   max-width: 100dvw;
+  height: 65px;
   padding: var(--low-spacing);
   background-color: var(--primary-blue);
   color: var(--off-white);
-  -webkit-box-shadow: 0px 8px 50px 0px rgba(0, 0, 0, 0.5);
-  box-shadow: 0px 0px 20px 0px rgba(0, 0, 0, 0.5);
+  box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.5);
 }
 
 #sandwich-button {
   position: absolute;
-  cursor: pointer;
+  display: flex;
   align-items: center;
-  margin-left: var(--low-spacing);
   width: 30px;
   height: 20px;
+  margin-left: var(--low-spacing);
+  cursor: pointer;
 
   span {
     position: absolute;
@@ -62,6 +61,7 @@ body {
     height: 4px;
     border-radius: var(--low-border-radius);
     background-color: var(--off-white);
+
     &:nth-child(1) {
       top: 0;
     }
@@ -80,14 +80,13 @@ body {
   font-weight: 600;
 }
 
-// *----------------------------------- Estilização do cabeçalho do site -----------------------------------------*
-
+// -------------------------------------- Sidebar --------------------------------------
 #sidebar {
   width: min(80%, 255px);
-  background-color: var(--primary-blue);
   flex-shrink: 0;
   z-index: 9;
   padding-top: var(--hg-spacing);
+  background-color: var(--primary-blue);
   overflow: hidden;
   transition:
     width 500ms ease,
@@ -113,43 +112,34 @@ body {
     }
 
     .sidebar-item-button {
-      margin: auto;
       display: flex;
-      flex-direction: row;
       align-items: center;
       align-self: center;
-      border-radius: var(--md-border-radius);
-      padding: 5px;
-      gap: var(--low-spacing);
       width: 220px;
       height: 40px;
+      margin: auto;
+      padding: 5px;
+      gap: var(--low-spacing);
       border: none;
+      border-radius: var(--md-border-radius);
+      background-color: transparent;
       color: var(--off-white);
       font-size: var(--menu-text-size);
-      background-color: transparent;
 
       &:hover {
-        transform: scale(0.99);
         background-color: var(--weak-blue);
+        transform: scale(0.99);
         transition: ease-in-out 0.3s;
       }
-    }
 
-    .sidebar-item-button.is-selected {
-      background: var(--secondary-blue);
+      &.is-selected {
+        background: var(--secondary-blue);
+      }
     }
   }
 }
 
-#sidebar.sidebar-collapsed {
-  width: 0;
-  padding-top: 0;
-  opacity: 0;
-  pointer-events: none;
-}
-
-// *----------------------------------- Estilização do menu lateral -----------------------------------------*
-
+// -------------------------------------- Dashboard --------------------------------------
 #dashboard {
   display: grid;
   grid-template-columns: 0.5fr 1fr;
@@ -161,6 +151,7 @@ body {
   article:first-of-type {
     display: flex;
     flex-direction: column;
+    align-items: center;
 
     > .container-tittle .low-opacity-text {
       position: absolute;
@@ -170,18 +161,19 @@ body {
     }
 
     .metric-grid {
-      position: absolute;
-      bottom: var(--low-spacing);
       width: 90%;
+      margin-top: auto;
+      bottom: var(--low-spacing);
     }
 
     > dd {
+      width: 100%;
       margin: 30px 0;
     }
 
     > hr {
-      margin: 0px auto;
       width: 80%;
+      margin: 0 auto;
       opacity: 0.2;
     }
   }
@@ -191,7 +183,7 @@ body {
     flex-direction: column;
 
     > .metric-grid {
-      margin: var(--hg-spacing) 0px;
+      margin: var(--hg-spacing) 0;
     }
 
     #temperature-graph {
@@ -207,76 +199,8 @@ body {
 
     > div:first-child {
       display: flex;
-      flex-direction: row;
       justify-content: space-between;
-
-      > div:last-child {
-        display: flex;
-        flex-direction: row;
-        align-items: center;
-        margin-right: var(--low-spacing);
-        gap: var(--hg-spacing);
-
-        .container {
-          height: fit-content;
-          width: fit-content;
-          padding: var(--low-spacing);
-
-          &:nth-child(2),
-          &:nth-child(3) {
-            position: relative;
-            height: 30px;
-            width: 30px;
-            cursor: pointer;
-          }
-
-          &:nth-child(2) {
-            span:first-child,
-            span:last-child {
-              position: absolute;
-              display: block;
-              left: 50%;
-              top: 50%;
-              width: 10px;
-              height: 3px;
-              background-color: black;
-              transform-origin: left center;
-            }
-
-            span:first-child {
-              position: absolute;
-              transform: translate(-50%, -50%) rotate(45deg);
-            }
-
-            span:last-child {
-              position: absolute;
-              transform: translate(-50%, -50%) rotate(-45deg);
-            }
-          }
-
-          &:nth-child(3) {
-            span:first-child,
-            span:last-child {
-              position: absolute;
-              display: block;
-              left: 50%;
-              top: 50%;
-              width: 10px;
-              height: 3px;
-              background-color: black;
-              transform-origin: left center;
-            }
-
-            span:first-child {
-              transform: translate(50%, -50%) rotate(135deg);
-            }
-
-            span:last-child {
-              transform: translate(50%, -50%) rotate(-135deg);
-            }
-          }
-        }
-      }
+      flex-direction: row;
     }
 
     .reading-card {
@@ -288,18 +212,20 @@ body {
 
       > div {
         padding: var(--low-spacing) var(--hg-spacing);
+
         > dd {
-          margin: 5px 0px;
+          margin: 5px 0;
         }
+
         > dt {
-          margin: 30px 0px var(--low-spacing) 0px;
+          margin: 30px 0 var(--low-spacing) 0;
         }
       }
 
       .metric-grid {
+        width: max(80%, 5vw);
         margin-left: auto;
         background-color: #ffffff;
-        width: max(80%, 5vw);
         grid-template-columns: repeat(4, 1fr);
         gap: 0;
 
@@ -309,26 +235,87 @@ body {
           &:nth-child(1),
           &:nth-child(2),
           &:nth-child(3) {
-            border-bottom: 1px solid var(--medium-black);
             border-right: 1px solid var(--medium-black);
+            border-bottom: 1px solid var(--medium-black);
           }
 
           &:nth-child(4) {
             border-bottom: 1px solid var(--medium-black);
           }
 
-          &:nth-child(5) {
-            border-right: 1px solid var(--medium-black);
-          }
-
-          &:nth-child(6) {
-            border-right: 1px solid var(--medium-black);
-          }
-
+          &:nth-child(5),
+          &:nth-child(6),
           &:nth-child(7) {
             border-right: 1px solid var(--medium-black);
           }
         }
+      }
+    }
+  }
+}
+
+#corrosel-dis {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: var(--hg-spacing);
+  margin-right: var(--low-spacing);
+  flex-wrap: wrap;
+
+  .container {
+    width: fit-content;
+    height: fit-content;
+    padding: var(--low-spacing);
+
+    &:nth-child(2),
+    &:nth-child(3) {
+      position: relative;
+      width: 30px;
+      height: 30px;
+      cursor: pointer;
+    }
+
+    &:nth-child(2) {
+      span:first-child,
+      span:last-child {
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        display: block;
+        width: 10px;
+        height: 3px;
+        background-color: black;
+        transform-origin: left center;
+      }
+
+      span:first-child {
+        transform: translate(-50%, -50%) rotate(45deg);
+      }
+
+      span:last-child {
+        transform: translate(-50%, -50%) rotate(-45deg);
+      }
+    }
+
+    &:nth-child(3) {
+      span:first-child,
+      span:last-child {
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        display: block;
+        width: 10px;
+        height: 3px;
+        background-color: black;
+        transform-origin: left center;
+      }
+
+      span:first-child {
+        transform: translate(50%, -50%) rotate(135deg);
+      }
+
+      span:last-child {
+        transform: translate(50%, -50%) rotate(-135deg);
       }
     }
   }
@@ -340,8 +327,7 @@ body {
   gap: var(--low-spacing);
 }
 
-// *----------------------------------- Estilização da pagina home -----------------------------------------*
-
+// -------------------------------------- Textos e leitura --------------------------------------
 .low-opacity-text {
   opacity: 0.4;
   font-size: var(--small-body-text-size);
@@ -353,9 +339,10 @@ body {
 }
 
 #average-temperature {
-  font-size: 80px;
-  font-weight: 700;
   margin: var(--hg-spacing);
+  font-size: var(--temp-size);
+  font-weight: 700;
+
   + span {
     font-size: var(--small-body-text-size);
   }
@@ -369,44 +356,43 @@ body {
 }
 
 #device-type {
+  width: fit-content;
   padding: 5px var(--low-spacing);
   border-radius: var(--md-border-radius);
-  width: fit-content;
   background-color: var(--primary-blue);
   color: var(--off-white);
 }
 
 #actuator-status {
   display: flex;
-  flex-direction: row;
   align-items: center;
-  border-radius: var(--md-border-radius);
-  padding: 2px 5px;
-  gap: 3px;
   width: fit-content;
+  gap: 3px;
+  padding: 2px 5px;
+  border-radius: var(--md-border-radius);
   background-color: #15ff00;
   font-size: var(--small-body-text-size);
+
   > span {
     display: block;
-    background-color: green;
     width: 10px;
     height: 10px;
+    background-color: green;
     border-radius: 50%;
   }
 }
 
 #expand-button {
   position: fixed;
-  z-index: 99;
   right: var(--hg-spacing);
   bottom: var(--hg-spacing);
+  z-index: 99;
   width: 40px;
   height: 40px;
   background-color: var(--strong-grey);
 }
 
-// **
-
+// -------------------------------------- Robot / bot --------------------------------------
 .robot-container {
   grid-column: span 2;
   width: 100%;
@@ -415,19 +401,20 @@ body {
 
 #robot-button,
 #robot-config-button {
-  border-radius: var(--md-border-radius);
+  width: min(220px, 40vw);
+  height: 40px;
+  margin: 0 var(--low-spacing);
   padding: 5px;
   gap: var(--low-spacing);
-  width: max(220px, 2vw);
-  height: 40px;
   border: none;
-  margin: 0 var(--low-spacing);
+  border-radius: var(--md-border-radius);
+  background: var(--primary-orange);
   color: var(--off-white);
   font-size: var(--menu-text-size);
-  background: var(--primary-orange);
+
   &:hover {
-    transition: ease-in-out 0.3s;
     background: var(--secondary-blue);
+    transition: ease-in-out 0.3s;
   }
 }
 
@@ -447,26 +434,27 @@ body {
   flex-direction: row;
 }
 
+// -------------------------------------- Cards / containers --------------------------------------
 .container {
   position: relative;
+  padding: 25px;
   border: 1px solid var(--strong-grey);
   border-radius: var(--hg-border-radius);
-  padding: 25px;
 }
 
 .container-tittle {
   width: 100%;
-  font-size: 28px;
   margin-bottom: var(--low-spacing);
+  font-size: var(--big-tittle-size);
 }
 
 .reading-card {
   display: flex;
   flex-direction: column;
-  background-color: var(--primary-grey);
   padding: var(--md-spacing);
   border: 1px solid var(--strong-grey);
   border-radius: var(--hg-border-radius);
+  background-color: var(--primary-grey);
 }
 
 .icon {
@@ -474,12 +462,13 @@ body {
   height: 22px;
 }
 
+// -------------------------------------- Modal --------------------------------------
 .modal {
-  display: none;
   position: fixed;
-  z-index: 1000;
-  left: 0;
   top: 0;
+  left: 0;
+  z-index: 1000;
+  display: none;
   width: 100%;
   height: 100%;
   background-color: rgba(0, 0, 0, 0.5);
@@ -488,15 +477,15 @@ body {
 }
 
 .modal-content {
+  position: relative;
   display: flex;
   flex-direction: column;
   gap: var(--low-spacing);
-  background-color: #fff;
+  width: 300px;
   padding: 20px;
   border-radius: 8px;
-  width: 300px;
+  background-color: #fff;
   text-align: left;
-  position: relative;
 
   h2 {
     margin-bottom: var(--low-spacing);
@@ -517,8 +506,8 @@ body {
 #close-modal {
   width: 22px;
   height: 22px;
-  background: none;
   border: none;
+  background: none;
 }
 
 .modal-submit {
@@ -542,17 +531,68 @@ body {
   display: flex;
 }
 
-@media all and (max-width: 420px) {
+// -------------------------------------- Responsivo --------------------------------------
+@media all and (max-width: 728px) {
+  .app-shell {
+    position: relative;
+  }
+
+  #sidebar {
+    display: inline;
+    position: absolute;
+    flex: 1;
+    padding: var(--hg-spacing);
+    background-color: var(--primary-blue);
+
+    &.sidebar-collapsed {
+      display: none;
+      width: 0;
+      opacity: 0;
+      pointer-events: none;
+    }
+  }
+
   #dashboard {
+    position: relative;
+    z-index: 1;
     grid-template-columns: 1fr;
+
+    article:last-child {
+      grid-column: 1;
+    }
+
+    article:first-of-type > dd {
+      margin: 40px 0;
+    }
   }
 
   #dashboard article:last-child {
     .reading-card {
       flex-direction: column;
+
       .metric-grid {
         grid-template-columns: repeat(2, 1fr);
+        width: 100%;
       }
     }
+  }
+
+  #corrosel-dis {
+    justify-content: center;
+    margin: var(--md-spacing);
+
+    .container:first-child {
+      width: 80%;
+      text-align: center;
+    }
+  }
+
+  .robot-container {
+    grid-column: span 1;
+    justify-content: center;
+  }
+
+  #hero-title {
+    justify-content: end;
   }
 }
