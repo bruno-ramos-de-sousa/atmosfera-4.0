@@ -13,18 +13,18 @@
   </head>
 
   <body>
-    <header class="page-header">
-      <span id="sandwich-button" aria-label="Abrir menu">
+    <header class="page-header layout-row layout-row">
+      <span id="sandwich-button" class="layout-column" aria-label="Abrir menu">
         <span></span><span></span><span></span>
       </span>
       <h1 id="hero-title">SENAI "Anchieta" - Atmosfera 4.0</h1>
     </header>
 
-    <div class="app-shell">
+    <div class="app-shell layout-row">
       <aside id="sidebar" class="sidebar-collapsed">
         <nav aria-label="Menu lateral">
-          <ul class="sidebar-menu">
-            <li class="sidebar-item">
+          <ul class="sidebar-menu layout-column">
+            <li class="sidebar-item layout-column">
               <button
                 type="button"
                 class="sidebar-item-button is-selected"
@@ -38,7 +38,7 @@
               </button>
             </li>
 
-            <li class="sidebar-item">
+            <li class="sidebar-item layout-column">
               <button
                 type="button"
                 class="sidebar-item-button"
@@ -52,7 +52,7 @@
               </button>
             </li>
 
-            <li class="sidebar-item">
+            <li class="sidebar-item layout-column">
               <button
                 type="button"
                 class="sidebar-item-button"
@@ -66,7 +66,7 @@
               </button>
             </li>
 
-            <li class="sidebar-item">
+            <li class="sidebar-item layout-column">
               <button
                 type="button"
                 class="sidebar-item-button"
@@ -80,7 +80,7 @@
               </button>
             </li>
 
-            <li class="sidebar-item">
+            <li class="sidebar-item layout-column">
               <button
                 type="button"
                 class="sidebar-item-button"
@@ -100,9 +100,9 @@
       <script src="scripts/sidebar.js"></script>
       <script src="scripts/sandwich.js"></script>
 
-      <main class="content-panel">
+      <main class="content-panel layout-row">
         <div id="dashboard">
-          <article class="container">
+          <article class="container" id="average-card">
             <h3 class="container-tittle">
               Média do Campus<small class="low-opacity-text" id="update-time"
                 >Atualizado há 30 segundos</small
@@ -117,14 +117,14 @@
             <hr />
 
             <dl class="metric-grid">
-              <div class="reading-card">
+              <div class="reading-card layout-column">
                 <dt class="low-opacity-text">Umidade Média</dt>
                 <dd>
                   <output class="reading" id="average-humidity">90%</output>
                 </dd>
               </div>
 
-              <div class="reading-card">
+              <div class="reading-card layout-column">
                 <dt class="low-opacity-text">Pressão Média</dt>
                 <dd>
                   <output class="reading" id="avarage-pressure"
@@ -134,17 +134,17 @@
               </div>
             </dl>
           </article>
-          <article class="container">
+          <article class="container layout-column" id="enviroment-parameters-card">
             <h3 class="container-tittle">Outros Parâmetros Ambientais</h3>
             <dl class="metric-grid">
-              <div class="reading-card">
+              <div class="reading-card layout-column">
                 <dt class="low-opacity-text">Luminosidade</dt>
                 <dd>
                   <output class="reading" id="luminosity-reading">72%</output>
                 </dd>
               </div>
 
-              <div class="reading-card">
+              <div class="reading-card layout-column">
                 <dt class="low-opacity-text">Vel. Vento</dt>
                 <dd>
                   <output class="reading" id="wind-speed-reading"
@@ -153,7 +153,7 @@
                 </dd>
               </div>
 
-              <div class="reading-card">
+              <div class="reading-card layout-column">
                 <dt class="low-opacity-text">Dir. Vento</dt>
                 <dd>
                   <output class="reading" id="wind-direction-reading"
@@ -162,7 +162,7 @@
                 </dd>
               </div>
 
-              <div class="reading-card">
+              <div class="reading-card layout-column">
                 <dt class="low-opacity-text">Altitude</dt>
                 <dd>
                   <output class="reading" id="altitude-reading">781 m</output>
@@ -172,8 +172,8 @@
 
             <canvas id="temperature-graph"></canvas>
           </article>
-          <article class="container">
-            <div>
+          <article class="container layout-column" id="device-reading-card">
+            <div class="layout-row">
               <div>
                 <h3 class="container-tittle">Monitoramento por Área</h3>
                 <dt class="low-opacity-text">
@@ -187,7 +187,7 @@
               </div>
             </div>
 
-            <div class="reading-card">
+            <div class="reading-card layout-row">
               <div>
                 <span id="device-type"> <span></span>Gateway</span>
 

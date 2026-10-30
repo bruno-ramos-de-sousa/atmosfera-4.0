@@ -1,7 +1,7 @@
 const screens = {
   home: `
     <div id="dashboard">
-          <article class="container">
+          <article class="container" id="average-card">
             <h3 class="container-tittle">
               Média do Campus<small class="low-opacity-text" id="update-time"
                 >Atualizado há 30 segundos</small
@@ -16,14 +16,14 @@ const screens = {
             <hr />
 
             <dl class="metric-grid">
-              <div class="reading-card">
+              <div class="reading-card layout-column">
                 <dt class="low-opacity-text">Umidade Média</dt>
                 <dd>
                   <output class="reading" id="average-humidity">90%</output>
                 </dd>
               </div>
 
-              <div class="reading-card">
+              <div class="reading-card layout-column">
                 <dt class="low-opacity-text">Pressão Média</dt>
                 <dd>
                   <output class="reading" id="avarage-pressure"
@@ -33,17 +33,17 @@ const screens = {
               </div>
             </dl>
           </article>
-          <article class="container">
+          <article class="container layout-column" id="enviroment-parameters-card">
             <h3 class="container-tittle">Outros Parâmetros Ambientais</h3>
             <dl class="metric-grid">
-              <div class="reading-card">
+              <div class="reading-card layout-column">
                 <dt class="low-opacity-text">Luminosidade</dt>
                 <dd>
                   <output class="reading" id="luminosity-reading">72%</output>
                 </dd>
               </div>
 
-              <div class="reading-card">
+              <div class="reading-card layout-column">
                 <dt class="low-opacity-text">Vel. Vento</dt>
                 <dd>
                   <output class="reading" id="wind-speed-reading"
@@ -52,7 +52,7 @@ const screens = {
                 </dd>
               </div>
 
-              <div class="reading-card">
+              <div class="reading-card layout-column">
                 <dt class="low-opacity-text">Dir. Vento</dt>
                 <dd>
                   <output class="reading" id="wind-direction-reading"
@@ -61,7 +61,7 @@ const screens = {
                 </dd>
               </div>
 
-              <div class="reading-card">
+              <div class="reading-card layout-column">
                 <dt class="low-opacity-text">Altitude</dt>
                 <dd>
                   <output class="reading" id="altitude-reading">781 m</output>
@@ -71,8 +71,8 @@ const screens = {
 
             <canvas id="temperature-graph"></canvas>
           </article>
-          <article class="container">
-            <div>
+          <article class="container layout-column" id="device-reading-card">
+            <div class="layout-row">
               <div>
                 <h3 class="container-tittle">Monitoramento por Área</h3>
                 <dt class="low-opacity-text">
@@ -86,7 +86,7 @@ const screens = {
               </div>
             </div>
 
-            <div class="reading-card">
+            <div class="reading-card layout-row">
               <div>
                 <span id="device-type"> <span></span>Gateway</span>
 
@@ -175,6 +175,9 @@ const screens = {
           </article>
         </div>
 
+        <script src="scripts/dailyRegistros.js"></script>
+        <script src="scripts/robot.js"></script>
+
         <span id="expand-button"> </span>
         `,
   historico: `
@@ -191,12 +194,12 @@ const screens = {
                 src="assets/settings-icon.svg"
                 alt="Engrenagem"
                 class="icon"
-              />Configrar Bot
+              />Configurar Bot
             </button>
           </div>
-          <article class="container">
+          <article class="container" id="average-card">
             <h3 class="container-tittle">
-              Média do Campus<small class="low-opacity-text"
+              Média do Campus<small class="low-opacity-text" id="update-time"
                 >Atualizado há 30 segundos</small
               >
             </h3>
@@ -209,14 +212,14 @@ const screens = {
             <hr />
 
             <dl class="metric-grid">
-              <div class="reading-card">
+              <div class="reading-card layout-column">
                 <dt class="low-opacity-text">Umidade Média</dt>
                 <dd>
                   <output class="reading" id="average-humidity">90%</output>
                 </dd>
               </div>
 
-              <div class="reading-card">
+              <div class="reading-card layout-column">
                 <dt class="low-opacity-text">Pressão Média</dt>
                 <dd>
                   <output class="reading" id="avarage-pressure"
@@ -226,17 +229,17 @@ const screens = {
               </div>
             </dl>
           </article>
-          <article class="container">
+          <article class="container layout-column" id="enviroment-parameters-card">
             <h3 class="container-tittle">Outros Parâmetros Ambientais</h3>
             <dl class="metric-grid">
-              <div class="reading-card">
+              <div class="reading-card layout-column">
                 <dt class="low-opacity-text">Luminosidade</dt>
                 <dd>
                   <output class="reading" id="luminosity-reading">72%</output>
                 </dd>
               </div>
 
-              <div class="reading-card">
+              <div class="reading-card layout-column">
                 <dt class="low-opacity-text">Vel. Vento</dt>
                 <dd>
                   <output class="reading" id="wind-speed-reading"
@@ -245,7 +248,7 @@ const screens = {
                 </dd>
               </div>
 
-              <div class="reading-card">
+              <div class="reading-card layout-column">
                 <dt class="low-opacity-text">Dir. Vento</dt>
                 <dd>
                   <output class="reading" id="wind-direction-reading"
@@ -254,7 +257,7 @@ const screens = {
                 </dd>
               </div>
 
-              <div class="reading-card">
+              <div class="reading-card layout-column">
                 <dt class="low-opacity-text">Altitude</dt>
                 <dd>
                   <output class="reading" id="altitude-reading">781 m</output>
@@ -264,8 +267,8 @@ const screens = {
 
             <canvas id="temperature-graph"></canvas>
           </article>
-          <article class="container">
-            <div>
+          <article class="container layout-column" id="device-reading-card">
+            <div class="layout-row">
               <div>
                 <h3 class="container-tittle">Monitoramento por Área</h3>
                 <dt class="low-opacity-text">
@@ -273,13 +276,13 @@ const screens = {
                 </dt>
               </div>
               <div id="corrosel-dis">
-                <p class="container">Area 1 de 3</p>
-                <button class="container"><span></span><span></span></button>
-                <button class="container"><span></span><span></span></button>
+                <div class="container"><p>Area 1 de 3</p></div>
+                <div class="container"><button id="button-backward"><span></span><span></span></button></div>
+                <div class="container"><button id="button-forward"><span></span><span></span></button></div>
               </div>
             </div>
 
-            <div class="reading-card">
+            <div class="reading-card layout-row">
               <div>
                 <span id="device-type"> <span></span>Gateway</span>
 
@@ -412,21 +415,4 @@ function changeScreen(screenName) {
   }
 }
 
-document.addEventListener("DOMContentLoaded", () => {
-  const buttons = document.querySelectorAll(".sidebar-item-button");
 
-  function selectButon(clickedButton) {
-    buttons.forEach((button) => {
-      button.classList.toggle("is-selected", button === clickedButton);
-    });
-  }
-
-  buttons.forEach((button) => {
-    button.addEventListener("click", () => {
-      selectButon(button);
-      changeScreen(button.dataset.tela);
-    });
-  });
-
-  changeScreen("home");
-});

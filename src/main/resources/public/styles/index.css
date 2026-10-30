@@ -14,27 +14,23 @@ body {
 }
 
 .app-shell {
-  display: flex;
   flex: 1;
   min-height: 0;
-  max-width: 100dvw;
+  max-width: 100%;
 }
 
 .content-panel {
-  display: flex;
   flex: 1;
   flex-wrap: wrap;
+  width: 100%;
   max-width: 100dvw;
-  overflow: hidden;
   padding: var(--low-spacing) var(--hg-spacing);
 }
 
 .page-header {
-  display: flex;
   align-items: center;
   position: relative;
   z-index: 10;
-  width: 100dvw;
   max-width: 100dvw;
   height: 65px;
   padding: var(--low-spacing);
@@ -45,7 +41,6 @@ body {
 
 #sandwich-button {
   position: absolute;
-  display: flex;
   align-items: center;
   width: 30px;
   height: 20px;
@@ -91,17 +86,18 @@ body {
   opacity: 0;
   pointer-events: none;
 }
-#sidebar .sidebar-menu {
-  display: flex;
-  flex-direction: column;
+
+.sidebar-menu {
   justify-content: center;
   gap: var(--hg-spacing);
   list-style: none;
 }
-#sidebar .sidebar-menu .sidebar-item {
+
+.sidebar-item {
   list-style: none;
 }
-#sidebar .sidebar-menu .sidebar-item-button {
+
+.sidebar-item-button {
   display: flex;
   align-items: center;
   align-self: center;
@@ -116,12 +112,12 @@ body {
   color: var(--off-white);
   font-size: var(--menu-text-size);
 }
-#sidebar .sidebar-menu .sidebar-item-button:hover {
+.sidebar-item-button:hover {
   background-color: var(--weak-blue);
   transform: scale(0.99);
   transition: ease-in-out 0.3s;
 }
-#sidebar .sidebar-menu .sidebar-item-button.is-selected {
+.sidebar-item-button.is-selected {
   background: var(--secondary-blue);
 }
 
@@ -130,89 +126,85 @@ body {
   grid-template-columns: 0.5fr 1fr;
   gap: var(--md-spacing);
   width: 100%;
-  min-height: calc(100vh - 65px - 20px);
+  max-width: 100%;
+  min-height: auto;
   align-items: stretch;
 }
-#dashboard article:first-of-type {
+
+#average-card {
   display: flex;
   flex-direction: column;
   align-items: center;
 }
-#dashboard article:first-of-type > .container-tittle .low-opacity-text {
+#average-card > .container-tittle .low-opacity-text {
   position: absolute;
   right: 30px;
   margin-top: 5px;
   font-weight: normal;
 }
-#dashboard article:first-of-type .metric-grid {
+#average-card > .metric-grid {
   width: 90%;
   margin-top: auto;
   bottom: var(--low-spacing);
 }
-#dashboard article:first-of-type > dd {
+#average-card > dd {
   width: 100%;
   margin: 30px 0;
 }
-#dashboard article:first-of-type > hr {
+#average-card > hr {
   width: 80%;
   margin: 0 auto;
   opacity: 0.2;
 }
-#dashboard article:nth-child(2) {
-  display: flex;
-  flex-direction: column;
-}
-#dashboard article:nth-child(2) > .metric-grid {
+
+#enviroment-parameters-card > .metric-grid {
   margin: var(--hg-spacing) 0;
 }
-#dashboard article:nth-child(2) #temperature-graph {
-  margin-top: auto;
+
+#temperature-graph {
+  margin-top: var(--hg-spacing);
 }
-#dashboard article:last-child {
+
+#device-reading-card {
   grid-column: 2 span;
-  display: flex;
-  flex-direction: column;
-  min-height: 0;
 }
-#dashboard article:last-child > div:first-child {
-  display: flex;
+#device-reading-card > div {
   justify-content: space-between;
-  flex-direction: row;
 }
-#dashboard article:last-child .reading-card {
+#device-reading-card .reading-card {
   display: flex;
   flex-direction: row;
   flex: 1;
   min-height: 0;
   gap: var(--md-spacing);
 }
-#dashboard article:last-child .reading-card > div {
+#device-reading-card .reading-card > div {
   padding: var(--low-spacing) var(--hg-spacing);
 }
-#dashboard article:last-child .reading-card > div > dd {
+#device-reading-card .reading-card > div > dd {
   margin: 5px 0;
 }
-#dashboard article:last-child .reading-card > div > dt {
+#device-reading-card .reading-card > div > dt {
   margin: 30px 0 var(--low-spacing) 0;
 }
-#dashboard article:last-child .reading-card .metric-grid {
+#device-reading-card .reading-card .metric-grid {
   width: max(80%, 5vw);
   margin-left: auto;
   background-color: #ffffff;
   grid-template-columns: repeat(4, 1fr);
   gap: 0;
 }
-#dashboard article:last-child .reading-card .metric-grid div {
+#device-reading-card .reading-card .metric-grid div {
   padding: var(--md-spacing);
 }
-#dashboard article:last-child .reading-card .metric-grid div:nth-child(1), #dashboard article:last-child .reading-card .metric-grid div:nth-child(2), #dashboard article:last-child .reading-card .metric-grid div:nth-child(3) {
+#device-reading-card .reading-card .metric-grid div:nth-child(1), #device-reading-card .reading-card .metric-grid div:nth-child(2), #device-reading-card .reading-card .metric-grid div:nth-child(3) {
   border-right: 1px solid var(--medium-black);
   border-bottom: 1px solid var(--medium-black);
 }
-#dashboard article:last-child .reading-card .metric-grid div:nth-child(4) {
+#device-reading-card .reading-card .metric-grid div:nth-child(4) {
   border-bottom: 1px solid var(--medium-black);
 }
-#dashboard article:last-child .reading-card .metric-grid div:nth-child(5), #dashboard article:last-child .reading-card .metric-grid div:nth-child(6), #dashboard article:last-child .reading-card .metric-grid div:nth-child(7) {
+#device-reading-card .reading-card .metric-grid div:nth-child(5), #device-reading-card .reading-card .metric-grid div:nth-child(6), #device-reading-card .reading-card .metric-grid div:nth-child(7) {
   border-right: 1px solid var(--medium-black);
 }
 
@@ -344,7 +336,9 @@ body {
 
 .robot-container {
   grid-column: span 2;
+  gap: 10px;
   width: 100%;
+  max-width: 100%;
   margin-top: var(--low-spacing);
 }
 
@@ -352,7 +346,6 @@ body {
 #robot-config-button {
   width: min(220px, 40vw);
   height: 40px;
-  margin: 0 var(--low-spacing);
   padding: 5px;
   gap: var(--low-spacing);
   border: none;
@@ -385,7 +378,7 @@ body {
 
 .container {
   position: relative;
-  padding: 25px;
+  padding: var(--hg-spacing);
   border: 1px solid var(--strong-grey);
   border-radius: var(--hg-border-radius);
 }
@@ -397,8 +390,6 @@ body {
 }
 
 .reading-card {
-  display: flex;
-  flex-direction: column;
   padding: var(--md-spacing);
   border: 1px solid var(--strong-grey);
   border-radius: var(--hg-border-radius);
@@ -500,7 +491,7 @@ body {
   #dashboard article:last-child {
     grid-column: 1;
   }
-  #dashboard article:first-of-type > dd {
+  #dashboard #temperature-card > dd {
     margin: 40px 0;
   }
   #dashboard article:last-child .reading-card {

@@ -15,28 +15,24 @@ body {
 }
 
 .app-shell {
-  display: flex;
   flex: 1;
   min-height: 0;
-  max-width: 100dvw;
+  max-width: 100%;
 }
 
 .content-panel {
-  display: flex;
   flex: 1;
   flex-wrap: wrap;
+  width: 100%;
   max-width: 100dvw;
-  overflow: hidden;
   padding: var(--low-spacing) var(--hg-spacing);
 }
 
 // -------------------------------------- Header --------------------------------------
 .page-header {
-  display: flex;
   align-items: center;
   position: relative;
   z-index: 10;
-  width: 100dvw;
   max-width: 100dvw;
   height: 65px;
   padding: var(--low-spacing);
@@ -47,7 +43,6 @@ body {
 
 #sandwich-button {
   position: absolute;
-  display: flex;
   align-items: center;
   width: 30px;
   height: 20px;
@@ -99,155 +94,147 @@ body {
     opacity: 0;
     pointer-events: none;
   }
+}
 
-  .sidebar-menu {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    gap: var(--hg-spacing);
-    list-style: none;
+.sidebar-menu {
+  justify-content: center;
+  gap: var(--hg-spacing);
+  list-style: none;
+}
 
-    .sidebar-item {
-      list-style: none;
-    }
+.sidebar-item {
+  list-style: none;
+}
 
-    .sidebar-item-button {
-      display: flex;
-      align-items: center;
-      align-self: center;
-      width: 220px;
-      height: 40px;
-      margin: auto;
-      padding: 5px;
-      gap: var(--low-spacing);
-      border: none;
-      border-radius: var(--md-border-radius);
-      background-color: transparent;
-      color: var(--off-white);
-      font-size: var(--menu-text-size);
+.sidebar-item-button {
+  display: flex;
+  align-items: center;
+  align-self: center;
+  width: 220px;
+  height: 40px;
+  margin: auto;
+  padding: 5px;
+  gap: var(--low-spacing);
+  border: none;
+  border-radius: var(--md-border-radius);
+  background-color: transparent;
+  color: var(--off-white);
+  font-size: var(--menu-text-size);
 
-      &:hover {
-        background-color: var(--weak-blue);
-        transform: scale(0.99);
-        transition: ease-in-out 0.3s;
-      }
+  &:hover {
+    background-color: var(--weak-blue);
+    transform: scale(0.99);
+    transition: ease-in-out 0.3s;
+  }
 
-      &.is-selected {
-        background: var(--secondary-blue);
-      }
-    }
+  &.is-selected {
+    background: var(--secondary-blue);
   }
 }
 
 // -------------------------------------- Dashboard --------------------------------------
+
 #dashboard {
   display: grid;
   grid-template-columns: 0.5fr 1fr;
   gap: var(--md-spacing);
   width: 100%;
-  min-height: calc(100vh - 65px - 20px);
+  max-width: 100%;
+  min-height: auto;
   align-items: stretch;
+}
 
-  article:first-of-type {
+#average-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  > .container-tittle .low-opacity-text {
+    position: absolute;
+    right: 30px;
+    margin-top: 5px;
+    font-weight: normal;
+  }
+
+  > .metric-grid {
+    width: 90%;
+    margin-top: auto;
+    bottom: var(--low-spacing);
+  }
+
+  > dd {
+    width: 100%;
+    margin: 30px 0;
+  }
+
+  > hr {
+    width: 80%;
+    margin: 0 auto;
+    opacity: 0.2;
+  }
+}
+
+#enviroment-parameters-card {
+  > .metric-grid {
+    margin: var(--hg-spacing) 0;
+  }
+}
+
+#temperature-graph {
+  margin-top: var(--hg-spacing);
+}
+
+#device-reading-card {
+  grid-column: 2 span;
+
+  > div {
+    justify-content: space-between;
+  }
+
+  .reading-card {
     display: flex;
-    flex-direction: column;
-    align-items: center;
+    flex-direction: row;
+    flex: 1;
+    min-height: 0;
+    gap: var(--md-spacing);
 
-    > .container-tittle .low-opacity-text {
-      position: absolute;
-      right: 30px;
-      margin-top: 5px;
-      font-weight: normal;
+    > div {
+      padding: var(--low-spacing) var(--hg-spacing);
+
+      > dd {
+        margin: 5px 0;
+      }
+
+      > dt {
+        margin: 30px 0 var(--low-spacing) 0;
+      }
     }
 
     .metric-grid {
-      width: 90%;
-      margin-top: auto;
-      bottom: var(--low-spacing);
-    }
+      width: max(80%, 5vw);
+      margin-left: auto;
+      background-color: #ffffff;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 0;
 
-    > dd {
-      width: 100%;
-      margin: 30px 0;
-    }
+      div {
+        padding: var(--md-spacing);
 
-    > hr {
-      width: 80%;
-      margin: 0 auto;
-      opacity: 0.2;
-    }
-  }
-
-  article:nth-child(2) {
-    display: flex;
-    flex-direction: column;
-
-    > .metric-grid {
-      margin: var(--hg-spacing) 0;
-    }
-
-    #temperature-graph {
-      margin-top: auto;
-    }
-  }
-
-  article:last-child {
-    grid-column: 2 span;
-    display: flex;
-    flex-direction: column;
-    min-height: 0;
-
-    > div:first-child {
-      display: flex;
-      justify-content: space-between;
-      flex-direction: row;
-    }
-
-    .reading-card {
-      display: flex;
-      flex-direction: row;
-      flex: 1;
-      min-height: 0;
-      gap: var(--md-spacing);
-
-      > div {
-        padding: var(--low-spacing) var(--hg-spacing);
-
-        > dd {
-          margin: 5px 0;
+        &:nth-child(1),
+        &:nth-child(2),
+        &:nth-child(3) {
+          border-right: 1px solid var(--medium-black);
+          border-bottom: 1px solid var(--medium-black);
         }
 
-        > dt {
-          margin: 30px 0 var(--low-spacing) 0;
+        &:nth-child(4) {
+          border-bottom: 1px solid var(--medium-black);
         }
-      }
 
-      .metric-grid {
-        width: max(80%, 5vw);
-        margin-left: auto;
-        background-color: #ffffff;
-        grid-template-columns: repeat(4, 1fr);
-        gap: 0;
-
-        div {
-          padding: var(--md-spacing);
-
-          &:nth-child(1),
-          &:nth-child(2),
-          &:nth-child(3) {
-            border-right: 1px solid var(--medium-black);
-            border-bottom: 1px solid var(--medium-black);
-          }
-
-          &:nth-child(4) {
-            border-bottom: 1px solid var(--medium-black);
-          }
-
-          &:nth-child(5),
-          &:nth-child(6),
-          &:nth-child(7) {
-            border-right: 1px solid var(--medium-black);
-          }
+        &:nth-child(5),
+        &:nth-child(6),
+        &:nth-child(7) {
+          border-right: 1px solid var(--medium-black);
         }
       }
     }
@@ -395,7 +382,9 @@ body {
 // -------------------------------------- Robot / bot --------------------------------------
 .robot-container {
   grid-column: span 2;
+  gap: 10px;
   width: 100%;
+  max-width: 100%;
   margin-top: var(--low-spacing);
 }
 
@@ -403,7 +392,6 @@ body {
 #robot-config-button {
   width: min(220px, 40vw);
   height: 40px;
-  margin: 0 var(--low-spacing);
   padding: 5px;
   gap: var(--low-spacing);
   border: none;
@@ -437,7 +425,7 @@ body {
 // -------------------------------------- Cards / containers --------------------------------------
 .container {
   position: relative;
-  padding: 25px;
+  padding: var(--hg-spacing);
   border: 1px solid var(--strong-grey);
   border-radius: var(--hg-border-radius);
 }
@@ -449,8 +437,6 @@ body {
 }
 
 .reading-card {
-  display: flex;
-  flex-direction: column;
   padding: var(--md-spacing);
   border: 1px solid var(--strong-grey);
   border-radius: var(--hg-border-radius);
@@ -561,7 +547,7 @@ body {
       grid-column: 1;
     }
 
-    article:first-of-type > dd {
+    #temperature-card > dd {
       margin: 40px 0;
     }
   }
