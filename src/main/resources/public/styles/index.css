@@ -6,15 +6,12 @@
 }
 
 body {
-  display: flex;
-  flex-direction: column;
   min-height: 100vh;
   font-family: var(--font-family);
   font-weight: 100;
 }
 
 .app-shell {
-  flex: 1;
   min-height: 0;
   max-width: 100%;
 }
@@ -193,17 +190,18 @@ body {
   grid-template-columns: repeat(4, 1fr);
   gap: 0;
 }
-#device-reading-card .reading-card .metric-grid div {
+
+.cell {
   padding: var(--md-spacing);
 }
-#device-reading-card .reading-card .metric-grid div:nth-child(1), #device-reading-card .reading-card .metric-grid div:nth-child(2), #device-reading-card .reading-card .metric-grid div:nth-child(3) {
+.cell:nth-child(1), .cell:nth-child(2), .cell:nth-child(3) {
   border-right: 1px solid var(--medium-black);
   border-bottom: 1px solid var(--medium-black);
 }
-#device-reading-card .reading-card .metric-grid div:nth-child(4) {
+.cell:nth-child(4) {
   border-bottom: 1px solid var(--medium-black);
 }
-#device-reading-card .reading-card .metric-grid div:nth-child(5), #device-reading-card .reading-card .metric-grid div:nth-child(6), #device-reading-card .reading-card .metric-grid div:nth-child(7) {
+.cell:nth-child(5), .cell:nth-child(6), .cell:nth-child(7) {
   border-right: 1px solid var(--medium-black);
 }
 
@@ -505,6 +503,16 @@ body {
   .robot-container {
     grid-column: span 1;
     justify-content: center;
+  }
+  .cell:nth-child(2) {
+    border-right: none;
+  }
+  .cell:nth-child(5) {
+    border-bottom: 1px solid var(--medium-black);
+  }
+  .cell:nth-child(6) {
+    border-right: none;
+    border-bottom: 1px solid var(--medium-black);
   }
   #hero-title {
     justify-content: end;
