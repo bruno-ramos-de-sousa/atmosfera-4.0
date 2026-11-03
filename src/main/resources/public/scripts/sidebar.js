@@ -462,6 +462,7 @@ function changeScreen(screenName) {
   if (screens[screenName]) {
     mainContainer.innerHTML = screens[screenName];
 
+    //Evento para carregar os scripts ao mudar de tela
     const renderEvent = new CustomEvent("loadedScreen", {
       detail: { screenName: screenName },
     });
