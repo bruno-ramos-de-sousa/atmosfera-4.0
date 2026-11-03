@@ -69,7 +69,9 @@ const screens = {
               </div>
             </dl>
 
-            <canvas id="temperature-graph"></canvas>
+            <div class="temperature-chart-container">
+              <canvas id="temperature-graph"></canvas>
+            </div>
           </article>
           <article class="container layout-column" id="device-reading-card">
             <div class="layout-row">
@@ -178,10 +180,10 @@ const screens = {
         <script src="scripts/dailyRegistros.js"></script>
         <script src="scripts/robot.js"></script>
 
-        <span id="expand-button"> </span>
+        <span id="expand-button"> <span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span>
         `,
   historico: `
-    <article class="container layout-column">
+    <article class="container layout-column historico-table">
       <div class="section-titles" style="margin-bottom: 20px;">
         <h3 class="container-tittle" style="margin-bottom: 5px;">Histórico de Registro</h3>
         <dt class="low-opacity-text">Consulta dos últimos dados enviados pelos sensores do campus.</dt>
@@ -314,7 +316,9 @@ const screens = {
               </div>
             </dl>
 
-            <canvas id="temperature-graph"></canvas>
+            <div class="temperature-chart-container">
+              <canvas id="temperature-graph"></canvas>
+            </div>
           </article>
           <article class="container layout-column" id="device-reading-card">
             <div class="layout-row">
@@ -448,7 +452,7 @@ const screens = {
           </form>
         </div>
 
-        <span id="expand-button"> </span>
+        <span id="expand-button"> <span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span>
         `,
 };
 
@@ -457,11 +461,32 @@ function changeScreen(screenName) {
 
   if (screens[screenName]) {
     mainContainer.innerHTML = screens[screenName];
-  }
 
-  if (screenName === "robo") {
-    mainContainer.classList.toggle("robotScreen");
+    const renderEvent = new CustomEvent("loadedScreen", {
+      detail: { screenName: screenName },
+    });
+    document.dispatchEvent(renderEvent);
+
+    if (screenName === "home") loadingDataHome();
+    if (screenName === "historico") loadingDataHistorico();
   }
 }
 
+document.addEventListener("DOMContentLoaded", () => {
+  const buttons = document.querySelectorAll(".sidebar-item-button");
 
+  function selectButon(clickedButton) {
+    buttons.forEach((button) => {
+      button.classList.toggle("is-selected", button === clickedButton);
+    });
+  }
+
+  buttons.forEach((button) => {
+    button.addEventListener("click", () => {
+      selectButon(button);
+      changeScreen(button.dataset.tela);
+    });
+  });
+
+  changeScreen("home");
+});
