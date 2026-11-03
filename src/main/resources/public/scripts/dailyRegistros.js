@@ -1,3 +1,45 @@
+let registroSensores = [];
+let listDispositivos = [];
+let currentSensor = 0;
+
+function updateCarousel(registro, listDispositivos) {
+  const disp = listDispositivos.find(d => d.id_dispositivo === registro.id_dispositivo_fk);
+  const nomeLocal = disp ? disp.nome_dispositivo : `Sensor ${registro.id_dispositivo_fk}`;
+
+  setText('gateway-location', nomeLocal);
+  setText('gateway-temperature', `${registro.temperatura.toFixed(1).replace('.', ',')}°C`);
+  setText('gateway-humidity', `${registro.umidade.toFixed(1).replace('.', ',')}%`);
+  setText('gateway-luminosity', `${registro.luminosidade.toFixed(1).replace('.', ',')}%`);
+  setText('gateway-pressure', `${registro.pressao.toFixed(1).replace('.', ',')} hPa`);
+  setText('gateway-altitude', `${registro.altitude.toFixed(1).replace('.', ',')} m`);
+  setText('gateway-wind-speed', `${registro.velocidade_vento.toFixed(1).replace('.', ',')} m/s`);
+  setText('gateway-wind-direction', `${registro.direcao_vento}°`);
+
+  const wifiText = registro.intensidade_wifi != null ? `${registro.intensidade_wifi} dBm` : 'N/A';
+  setText('gateway-wifi-signal', wifiText);
+
+  setText('carousel-indicator', `Área ${currentSensor + 1} de ${registroSensores.length}`);
+}
+
+function carouselEvents(dispositivos) {
+  const btnPrev = document.getElementById("btn-prev");
+  const btnNext = document.getElementById("btn-next");
+
+  if (btnPrev && btnNext) {
+    btnPrev.onclick = () => {
+      if (registroSensores.length === 0) return;
+      currentSensor = (currentSensor - 1 + registroSensores.length) % registroSensores.length;
+      updateCarousel(registroSensores[currentSensor], dispositivos);
+    }
+
+    btnNext.onclick = () => {
+      if (registroSensores.length === 0) return;
+      currentSensor = (currentSensor + 1) % registroSensores.length;
+      updateCarousel(registroSensores[currentSensor], dispositivos);
+    }
+  }
+}
+
 function setText(id, valor) {
   const el = document.getElementById(id);
   if (el) {
@@ -13,38 +55,29 @@ async function loadingDataHome() {
       fetch('/api/dispositivos')
     ]);
 
-    const registros = await resRegistros.json();
-    const atuadores = await resAtuadores.json();
-    const dispositivos = await resDispositivos.json();
+    const listRegistros = await resRegistros.json();
+    const listAtuadores = await resAtuadores.json();
+    listDispositivos = await resDispositivos.json();
 
-    if (Array.isArray(registros) && registros.length > 0) {
-      const u = registros[0];
+    if (Array.isArray(listRegistros) && listRegistros.length > 0) {
+      const u = listRegistros[0];
 
-      setText('average-temperature', `${u.temperatura}°C`);
-      setText('average-humidity', `${u.umidade}%`);
-      setText('avarage-pressure', `${u.pressao} hPa`);
-      setText('luminosity-reading', `${u.luminosidade} Lux`);
-      setText('wind-speed-reading', `${u.velocidade_vento} m/s`);
+      setText('average-temperature', `${u.temperatura.toFixed(1).replace('.', ',')}°C`);
+      setText('average-humidity', `${u.umidade.toFixed(1).replace('.', ',')}%`);
+      setText('avarage-pressure', `${u.pressao.toFixed(1).replace('.', ',')} hPa`);
+      setText('luminosity-reading', `${u.luminosidade.toFixed(1).replace('.', ',')}%`);
+      setText('wind-speed-reading', `${u.velocidade_vento.toFixed(1).replace('.', ',')} m/s`);
       setText('wind-direction-reading', `${u.direcao_vento}°`);
-      setText('altitude-reading', `${u.altitude} m`);
+      setText('altitude-reading', `${u.altitude.toFixed(1).replace('.', ',')} m`);
 
-      setText('gateway-temperature', `${u.temperatura}°C`);
-      setText('gateway-humidity', `${u.umidade}%`);
-      setText('gateway-luminosity', `${u.luminosidade} Lux`);
-      setText('gateway-pressure', `${u.pressao} hPa`);
-      setText('gateway-altitude', `${u.altitude} m`);
-      setText('gateway-wind-speed', `${u.velocidade_vento} m/s`);
-      setText('gateway-wind-direction', `${u.direcao_vento}°`);
-      setText('gateway-wifi-signal', `${u.intensidade_wifi} dBm`);
+      registroSensores = listRegistros.slice(0, 4);
+      updateCarousel(registroSensores[currentSensor], listDispositivos);
+      carouselEvents(listDispositivos);
     }
 
-    if (Array.isArray(atuadores) && atuadores.length > 0) {
-      const status = atuadores[0].status_atual ? 'Ligado' : 'Desligado';
+    if (Array.isArray(listAtuadores) && listAtuadores.length > 0) {
+      const status = listAtuadores[0].status_atual ? 'Ligado' : 'Desligado';
       setText('actuator-status', status);
-    }
-
-    if (Array.isArray(dispositivos) && dispositivos.length > 0) {
-      setText('gateway-location', dispositivos[0].nome_dispositivo);
     }
 
   } catch (error) {

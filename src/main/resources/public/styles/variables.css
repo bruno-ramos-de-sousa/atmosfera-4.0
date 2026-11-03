@@ -1,20 +1,43 @@
 :root {
-    --strong-black: rgb(40, 40, 40);
-    --medium-black: rgba(60, 60, 60, 0.3);
-    
-    --primary-blue: #192CFF;
-    --secondary-blue: #19A5FF;
-    --weak-blue: rgba(25, 165, 255, 0.4);
+  --primary-blue: #192cff;
+  --secondary-blue: #19a5ff;
+  --weak-blue: rgba(25, 165, 255, 0.4);
 
-    --off-white: #FAF9F6;
-    --primary-grey: rgba(164, 164, 164, 0.1);
-    --strong-grey: #D9D9D9;
-    --weak-grey: #F8F8F8;
+  --primary-orange: #e84910;
 
-    --big-tittle-size: 30px;
-    --body-text-size: 24px;
-    --menu-text-size: 22px;
-    --small-body-text-size: 18px;
+  --medium-black: rgba(60, 60, 60, 0.3);
+  --primary-grey: rgba(164, 164, 164, 0.1);
+  --strong-grey: #d9d9d9;
+  --weak-grey: #f8f8f8;
+  --off-white: #faf9f6;
 
-    --font-family: 'inter', sans-serif;
+  --temp-size: 80px;
+  --big-tittle-size: 30px;
+  --body-text-size: 24px;
+  --menu-text-size: 22px;
+  --small-body-text-size: 18px;
+
+  --font-family: "inter", sans-serif;
+
+  --hg-spacing: 20px;
+  --md-spacing: 15px;
+  --low-spacing: 10px;
+
+  --hg-border-radius: 20px;
+  --md-border-radius: 7px;
+  --low-border-radius: 4px;
+}
+
+@media all and (max-width: 728px) {
+  :root {
+    --temp-size: 40px;
+    --big-tittle-size: 15px;
+    --body-text-size: 13px;
+    --menu-text-size: 10px;
+    --small-body-text-size: 8px;
+
+    --hg-spacing: 15px;
+    --md-spacing: 10px;
+    --low-spacing: 5px;
+  }
 }
