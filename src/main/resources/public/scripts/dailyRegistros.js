@@ -2,7 +2,7 @@ let registroSensores = [];
 let listDispositivos = [];
 let currentSensor = 0;
 
-function updateCarrossel(registro, listDispositivos) {
+function updateCarousel(registro, listDispositivos) {
   const disp = listDispositivos.find(d => d.id_dispositivo === registro.id_dispositivo_fk);
   const nomeLocal = disp ? disp.nome_dispositivo : `Sensor ${registro.id_dispositivo_fk}`;
 
@@ -17,9 +17,11 @@ function updateCarrossel(registro, listDispositivos) {
 
   const wifiText = registro.intensidade_wifi != null ? `${registro.intensidade_wifi} dBm` : 'N/A';
   setText('gateway-wifi-signal', wifiText);
+
+  setText('carousel-indicator', `Área ${currentSensor + 1} de ${registroSensores.length}`);
 }
 
-function carrosselEvents(dispositivos) {
+function carouselEvents(dispositivos) {
   const btnPrev = document.getElementById("btn-prev");
   const btnNext = document.getElementById("btn-next");
 
@@ -27,13 +29,13 @@ function carrosselEvents(dispositivos) {
     btnPrev.onclick = () => {
       if (registroSensores.length === 0) return;
       currentSensor = (currentSensor - 1 + registroSensores.length) % registroSensores.length;
-      updateCarrossel(registroSensores[currentSensor], dispositivos);
+      updateCarousel(registroSensores[currentSensor], dispositivos);
     }
 
     btnNext.onclick = () => {
       if (registroSensores.length === 0) return;
       currentSensor = (currentSensor + 1) % registroSensores.length;
-      updateCarrossel(registroSensores[currentSensor], dispositivos);
+      updateCarousel(registroSensores[currentSensor], dispositivos);
     }
   }
 }
@@ -69,8 +71,8 @@ async function loadingDataHome() {
       setText('altitude-reading', `${u.altitude.toFixed(1).replace('.', ',')} m`);
 
       registroSensores = listRegistros.slice(0, 4);
-      updateCarrossel(registroSensores[currentSensor], listDispositivos);
-      carrosselEvents(listDispositivos);
+      updateCarousel(registroSensores[currentSensor], listDispositivos);
+      carouselEvents(listDispositivos);
     }
 
     if (Array.isArray(listAtuadores) && listAtuadores.length > 0) {
