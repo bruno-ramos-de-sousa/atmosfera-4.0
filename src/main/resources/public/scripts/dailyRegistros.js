@@ -1,5 +1,6 @@
 let registroSensores = [];
 let listDispositivos = [];
+let listAtuadores = [];
 let currentSensor = 0;
 
 function updateCarousel(registro, listDispositivos) {
@@ -17,6 +18,13 @@ function updateCarousel(registro, listDispositivos) {
 
   const wifiText = registro.intensidade_wifi != null ? `${registro.intensidade_wifi} dBm` : 'N/A';
   setText('gateway-wifi-signal', wifiText);
+
+  const atuador = listAtuadores.find(a => a.id_dispositivo_fk === registro.id_dispositivo_fk);
+
+  if (atuador) {
+    setText('actuator-name', `Status do Atuador (${atuador.nome_atuador})`);
+    setText('actuator-status', `${atuador.status_atual}`)
+  }
 
   setText('carousel-indicator', `Área ${currentSensor + 1} de ${registroSensores.length}`);
 }
@@ -56,8 +64,9 @@ async function loadingDataHome() {
     ]);
 
     const listRegistros = await resRegistros.json();
-    const listAtuadores = await resAtuadores.json();
+    const atuadoresFetch = await resAtuadores.json();
     listDispositivos = await resDispositivos.json();
+    listAtuadores = atuadoresFetch;
 
     if (Array.isArray(listRegistros) && listRegistros.length > 0) {
       const u = listRegistros[0];
