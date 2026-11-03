@@ -411,7 +411,7 @@ function changeScreen(screenName) {
   }
 
   if (screenName === "robo") {
-    mainContainer.classList.toggle("robot");
+    mainContainer.classList.toggle("robotScreen");
   }
 }
 
