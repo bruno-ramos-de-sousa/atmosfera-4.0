@@ -67,7 +67,7 @@ const screens = {
             <span id="device-type"> <span></span>Gateway</span>
 
             <dd><output class="reading" id="gateway-location">Sensor Refeitorio</output></dd>
-            <dt class="low-opacity-text">Status do Atuador (Led 1):</dt>
+            <dt class="low-opacity-text" id="actuator-name">Status do Atuador (Led 1):</dt>
 
             <dd><output class="reading" id="actuator-status"><span></span>Ligado</output></dd>
           </div>
