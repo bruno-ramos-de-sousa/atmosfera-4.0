@@ -54,8 +54,8 @@ const screens = {
             <h3 class="container-tittle">Monitoramento por Área</h3 class="container-tittle">
             <dt class="low-opacity-text">Navegue pelos sensores individuais do campus.</dt>
           </div>
-          <div id="corrosel-dis">
-            <p class="container">Area 1 de 3</p>
+          <div id="carousel-dis">
+            <p class="container" id="carousel-indicator">Área 1</p>
             <button class="container" id="btn-prev"><span></span><span></span></button>
             <button class="container" id="btn-next"><span></span><span></span></button>
           </div>
