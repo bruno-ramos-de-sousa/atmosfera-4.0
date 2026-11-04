@@ -275,58 +275,41 @@ body {
     width: fit-content;
     height: fit-content;
     padding: var(--low-spacing);
+  }
+}
 
-    &:nth-child(2),
-    &:nth-child(3) {
-      position: relative;
-      width: 30px;
-      height: 30px;
-      cursor: pointer;
-    }
+#button-forward,
+#button-backward {
+  span:first-child,
+  span:last-child {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    display: block;
+    width: 10px;
+    height: 3px;
+    background-color: black;
+    transform-origin: left center;
+  }
+}
 
-    &:nth-child(2) {
-      span:first-child,
-      span:last-child {
-        position: absolute;
-        left: 50%;
-        top: 50%;
-        display: block;
-        width: 10px;
-        height: 3px;
-        background-color: black;
-        transform-origin: left center;
-      }
+#button-backward {
+  span:first-child {
+    transform: translate(-50%, -50%) rotate(-45deg);
+  }
 
-      span:first-child {
-        transform: translate(-50%, -50%) rotate(45deg);
-      }
+  span:last-child {
+    transform: translate(-50%, -50%) rotate(45deg);
+  }
+}
 
-      span:last-child {
-        transform: translate(-50%, -50%) rotate(-45deg);
-      }
-    }
+#button-forward {
+  span:first-child {
+    transform: translate(50%, -50%) rotate(135deg);
+  }
 
-    &:nth-child(3) {
-      span:first-child,
-      span:last-child {
-        position: absolute;
-        left: 50%;
-        top: 50%;
-        display: block;
-        width: 10px;
-        height: 3px;
-        background-color: black;
-        transform-origin: left center;
-      }
-
-      span:first-child {
-        transform: translate(50%, -50%) rotate(135deg);
-      }
-
-      span:last-child {
-        transform: translate(50%, -50%) rotate(-135deg);
-      }
-    }
+  span:last-child {
+    transform: translate(50%, -50%) rotate(-135deg);
   }
 }
 
