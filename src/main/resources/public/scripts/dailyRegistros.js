@@ -30,8 +30,8 @@ function updateCarousel(registro, listDispositivos) {
 }
 
 function carouselEvents(dispositivos) {
-  const btnPrev = document.getElementById("btn-foward");
-  const btnNext = document.getElementById("btn-backward");
+  const btnPrev = document.getElementById("button-backward");
+  const btnNext = document.getElementById("button-forward");
 
   if (btnPrev && btnNext) {
     btnPrev.onclick = () => {

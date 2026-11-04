@@ -36,36 +36,46 @@ const screens = {
           <article class="container layout-column" id="enviroment-parameters-card">
             <h3 class="container-tittle">Outros Parâmetros Ambientais</h3>
             <dl class="metric-grid">
-              <div class="reading-card layout-column">
-                <dt class="low-opacity-text">Luminosidade</dt>
-                <dd>
-                  <output class="reading" id="luminosity-reading">72%</output>
-                </dd>
+              <div class="reading-card layout-row">
+                <div>
+                  <dt class="low-opacity-text">Luminosidade</dt>
+                  <dd>
+                    <output class="reading" id="luminosity-reading">72%</output>
+                  </dd>
+                </div>
+                <img src="assets/luminosity-icon.png" alt="icone de sol">
               </div>
 
-              <div class="reading-card layout-column">
-                <dt class="low-opacity-text">Vel. Vento</dt>
-                <dd>
-                  <output class="reading" id="wind-speed-reading"
-                    >3,3 m/s</output
-                  >
-                </dd>
+              <div class="reading-card layout-row">
+                <div>
+                  <dt class="low-opacity-text">Vel. Vento</dt>
+                  <dd>
+                    <output class="reading" id="wind-speed-reading"
+                      >3,3 m/s</output>
+                  </dd>
+                </div>
+                <img src="assets/wind-speed-icon.png" alt="ícone de vento">
               </div>
 
-              <div class="reading-card layout-column">
-                <dt class="low-opacity-text">Dir. Vento</dt>
-                <dd>
-                  <output class="reading" id="wind-direction-reading"
-                    >Sul (179°)</output
-                  >
-                </dd>
+              <div class="reading-card layout-row">
+                <div>
+                  <dt class="low-opacity-text">Dir. Vento</dt>
+                  <dd>
+                    <output class="reading" id="wind-direction-reading"
+                      >Sul (179°)</output>
+                  </dd>
+                </div>
+                <img src="assets/wind-direction-icon.png" alt="icone de bússola">
               </div>
 
-              <div class="reading-card layout-column">
-                <dt class="low-opacity-text">Altitude</dt>
-                <dd>
-                  <output class="reading" id="altitude-reading">781 m</output>
-                </dd>
+              <div class="reading-card layout-row">
+                <div>
+                  <dt class="low-opacity-text">Altitude</dt>
+                  <dd>
+                    <output class="reading" id="altitude-reading">781 m</output>
+                  </dd>
+                </div>
+                <img src="assets/altitude-icon.png" alt="icone de altitude">
               </div>
             </dl>
 
@@ -94,10 +104,9 @@ const screens = {
 
                 <dd>
                   <output class="reading" id="gateway-location"
-                    >Sensor Refeitorio</output
-                  >
+                    >Sensor Refeitorio</output>
                 </dd>
-                <dt class="low-opacity-text">Status do Atuador (Led 1):</dt>
+                <dt class="low-opacity-text" id="actuator-name">Status do Atuador (Led 1):</dt>
 
                 <dd>
                   <output class="reading" id="actuator-status"
@@ -111,8 +120,7 @@ const screens = {
                   <dt class="low-opacity-text">Temperatura</dt>
                   <dd>
                     <output class="reading" id="gateway-temperature"
-                      >26,8°C</output
-                    >
+                      >26,8°C</output>
                   </dd>
                 </div>
 
@@ -134,8 +142,7 @@ const screens = {
                   <dt class="low-opacity-text">Sinal Wi-Fi</dt>
                   <dd>
                     <output class="reading" id="gateway-wifi-signal"
-                      >52 dBm</output
-                    >
+                      >52 dBm</output>
                   </dd>
                 </div>
 
@@ -143,8 +150,7 @@ const screens = {
                   <dt class="low-opacity-text">Pressão</dt>
                   <dd>
                     <output class="reading" id="gateway-pressure"
-                      >921,9 hPa</output
-                    >
+                      >921,9 hPa</output>
                   </dd>
                 </div>
 
@@ -159,8 +165,7 @@ const screens = {
                   <dt class="low-opacity-text">Velocidade do Vento</dt>
                   <dd>
                     <output class="reading" id="gateway-wind-speed"
-                      >3,6 m/s</output
-                    >
+                      >3,6 m/s</output>
                   </dd>
                 </div>
 
@@ -168,8 +173,7 @@ const screens = {
                   <dt class="low-opacity-text">Direção do Vento</dt>
                   <dd>
                     <output class="reading" id="gateway-wind-direction"
-                      >Sul (178°)</output
-                    >
+                      >Sul (178°)</output>
                   </dd>
                 </div>
               </div>
@@ -251,8 +255,7 @@ const screens = {
           <article class="container" id="average-card">
             <h3 class="container-tittle">
               Média do Campus<small class="low-opacity-text" id="update-time"
-                >Atualizado há 30 segundos</small
-              >
+                >Atualizado há 30 segundos</small>
             </h3>
 
             <dd>
@@ -274,8 +277,7 @@ const screens = {
                 <dt class="low-opacity-text">Pressão Média</dt>
                 <dd>
                   <output class="reading" id="avarage-pressure"
-                    >922,73 hPa</output
-                  >
+                    >922,73 hPa</output>
                 </dd>
               </div>
             </dl>
@@ -294,8 +296,7 @@ const screens = {
                 <dt class="low-opacity-text">Vel. Vento</dt>
                 <dd>
                   <output class="reading" id="wind-speed-reading"
-                    >3,3 m/s</output
-                  >
+                    >3,3 m/s</output>
                 </dd>
               </div>
 
@@ -303,8 +304,7 @@ const screens = {
                 <dt class="low-opacity-text">Dir. Vento</dt>
                 <dd>
                   <output class="reading" id="wind-direction-reading"
-                    >Sul (179°)</output
-                  >
+                    >Sul (179°)</output>
                 </dd>
               </div>
 
@@ -328,7 +328,7 @@ const screens = {
                   Navegue pelos sensores individuais do campus.
                 </dt>
               </div>
-              <div id="corrosel-dis">
+              <div id="carrosel-dis">
                 <div class="container"><p>Area 1 de 3</p></div>
                 <div class="container"><button id="button-backward"><span></span><span></span></button></div>
                 <div class="container"><button id="button-forward"><span></span><span></span></button></div>
@@ -348,8 +348,7 @@ const screens = {
 
                 <dd>
                   <output class="reading" id="actuator-status"
-                    ><span></span>Ligado</output
-                  >
+                    ><span></span>Ligado</output>
                 </dd>
               </div>
 
@@ -358,8 +357,7 @@ const screens = {
                   <dt class="low-opacity-text">Temperatura</dt>
                   <dd>
                     <output class="reading" id="gateway-temperature"
-                      >26,8°C</output
-                    >
+                      >26,8°C</output>
                   </dd>
                 </div>
 
@@ -381,8 +379,7 @@ const screens = {
                   <dt class="low-opacity-text">Sinal Wi-Fi</dt>
                   <dd>
                     <output class="reading" id="gateway-wifi-signal"
-                      >52 dBm</output
-                    >
+                      >52 dBm</output>
                   </dd>
                 </div>
 
@@ -390,8 +387,7 @@ const screens = {
                   <dt class="low-opacity-text">Pressão</dt>
                   <dd>
                     <output class="reading" id="gateway-pressure"
-                      >921,9 hPa</output
-                    >
+                      >921,9 hPa</output>
                   </dd>
                 </div>
 
@@ -406,8 +402,7 @@ const screens = {
                   <dt class="low-opacity-text">Velocidade do Vento</dt>
                   <dd>
                     <output class="reading" id="gateway-wind-speed"
-                      >3,6 m/s</output
-                    >
+                      >3,6 m/s</output>
                   </dd>
                 </div>
 
@@ -415,8 +410,7 @@ const screens = {
                   <dt class="low-opacity-text">Direção do Vento</dt>
                   <dd>
                     <output class="reading" id="gateway-wind-direction"
-                      >Sul (178°)</output
-                    >
+                      >Sul (178°)</output>
                   </dd>
                 </div>
               </div>

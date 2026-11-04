@@ -213,6 +213,15 @@ body {
   gap: 0;
 }
 
+#enviroment-parameters-card .reading-card {
+  justify-content: space-between;
+}
+
+.reading-card img {
+  align-self: center;
+  width: 42px;
+}
+
 .cell {
   padding: var(--md-spacing);
 }
@@ -227,7 +236,7 @@ body {
   border-right: 1px solid var(--medium-black);
 }
 
-#corrosel-dis {
+#carousel-dis {
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -235,7 +244,7 @@ body {
   margin-right: var(--low-spacing);
   flex-wrap: wrap;
 }
-#corrosel-dis .container {
+#carousel-dis .container {
   width: -moz-fit-content;
   width: fit-content;
   height: -moz-fit-content;
@@ -647,11 +656,11 @@ body {
     grid-template-columns: repeat(2, 1fr);
     width: 100%;
   }
-  #corrosel-dis {
+  #carousel-dis {
     justify-content: center;
     margin: var(--md-spacing);
   }
-  #corrosel-dis .container:first-child {
+  #carousel-dis .container:first-child {
     width: 80%;
     text-align: center;
   }
