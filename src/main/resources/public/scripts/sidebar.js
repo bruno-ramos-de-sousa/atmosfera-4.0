@@ -90,7 +90,7 @@ const screens = {
 
             <div class="reading-card layout-row">
               <div>
-                <span id="device-type"> <span></span>Gateway</span>
+                <span id="device-type">Gateway</span>
 
                 <dd>
                   <output class="reading" id="gateway-location"
@@ -425,7 +425,7 @@ const screens = {
         </div>
 
         <div id="modal-container" class="modal">
-          <form id="bot-config-form" class="modal-content">
+          <form id="bot-config-form" class="modal-content" onsubmit"readBotForm()">
             <button type="button" id="close-modal" class="close" aria-label="Fechar">&times;</button>
             <h2>Configurar bot</h2>
             <label for="quantity-generated-bot">Quantidade de registros:</label>
