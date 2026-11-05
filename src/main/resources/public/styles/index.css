@@ -213,7 +213,7 @@ body {
   gap: 0;
 }
 
-#enviroment-parameters-card .reading-card {
+.metric-grid .reading-card {
   justify-content: space-between;
 }
 

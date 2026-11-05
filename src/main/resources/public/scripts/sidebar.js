@@ -16,23 +16,29 @@ const screens = {
             <hr />
 
             <dl class="metric-grid">
-              <div class="reading-card layout-column">
-                <dt class="low-opacity-text">Umidade Média</dt>
-                <dd>
-                  <output class="reading" id="average-humidity">90%</output>
-                </dd>
+              <div class="reading-card layout-row">
+                <div>
+                  <dt class="low-opacity-text">Umidade Média</dt>
+                  <dd>
+                    <output class="reading" id="average-humidity">90%</output>
+                  </dd>
+                </div>
+                <img src="assets/humidity-icon.png" alt="icone de umidade">
               </div>
 
-              <div class="reading-card layout-column">
-                <dt class="low-opacity-text">Pressão Média</dt>
-                <dd>
-                  <output class="reading" id="avarage-pressure"
-                    >922,73 hPa</output
-                  >
-                </dd>
+              <div class="reading-card layout-row">
+                <div>
+                  <dt class="low-opacity-text">Pressão Média</dt>
+                  <dd>
+                    <output class="reading" id="avarage-pressure"
+                      >922,73 hPa</output>
+                  </dd>
+                </div>
+                <img src="assets/pressure-icon.png" alt="icone de pressão atmosférica">
               </div>
             </dl>
           </article>
+
           <article class="container layout-column" id="enviroment-parameters-card">
             <h3 class="container-tittle">Outros Parâmetros Ambientais</h3>
             <dl class="metric-grid">
@@ -110,8 +116,7 @@ const screens = {
 
                 <dd>
                   <output class="reading" id="actuator-status"
-                    ><span></span>Ligado</output
-                  >
+                    ><span></span>Ligado</output>
                 </dd>
               </div>
 
