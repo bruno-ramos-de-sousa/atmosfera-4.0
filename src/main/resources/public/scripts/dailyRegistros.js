@@ -16,7 +16,7 @@ function updateCarousel(registro, listDispositivos) {
   setText('gateway-wind-speed', `${registro.velocidade_vento.toFixed(1).replace('.', ',')} m/s`);
   setText('gateway-wind-direction', `${registro.direcao_vento}°`);
 
-  const wifiText = registro.intensidade_wifi != null ? `${registro.intensidade_wifi} dBm` : 'N/A';
+  const wifiText = registro.intensidade_wifi != null && registro.intensidade_wifi != 0 ? `${registro.intensidade_wifi} dBm` : 'N/A';
   setText('gateway-wifi-signal', wifiText);
 
   const atuador = listAtuadores.find(a => a.id_dispositivo_fk === registro.id_dispositivo_fk);
@@ -53,6 +53,12 @@ function setText(id, valor) {
   if (el) {
     el.textContent = (valor !== undefined && valor !== null) ? valor : '--';
   }
+}
+
+function autoRefresh() {
+  setInterval(function() {
+    loadingDataHome();
+  }, 5000)
 }
 
 async function loadingDataHome() {

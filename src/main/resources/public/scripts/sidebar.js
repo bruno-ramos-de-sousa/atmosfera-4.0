@@ -466,7 +466,10 @@ function changeScreen(screenName) {
     });
     document.dispatchEvent(renderEvent);
 
-    if (screenName === "home") loadingDataHome();
+    if (screenName === "home") {
+      loadingDataHome();
+      autoRefresh();
+    }
     if (screenName === "historico") loadingDataHistorico();
   }
 }
