@@ -8,12 +8,13 @@ document.addEventListener("loadedScreen", (e) => {
     const modal = document.getElementById("modal-container");
     const inputBotRecordQnt = document.getElementById("quantity-generated-bot");
     const inputBotInterval = document.getElementById("input-bot-interval");
+    const configFormBot = document.getElementById("bot-config-form");
 
     // Elementos relacionados ao Card de Medias
     const updateTimer = document.getElementById("update-time");
     const avarageTemperature = document.getElementById("average-temperature");
     const avarageHumidity = document.getElementById("average-humidity");
-    const avaragePressure = document.getElementById("average-pressure");
+    const avaragePressure = document.getElementById("avarage-pressure");
 
     // Elementos relacionados ao Card de Parametros Ambientais
     const luminosity = document.getElementById("luminosity-reading");
@@ -40,7 +41,11 @@ document.addEventListener("loadedScreen", (e) => {
       "gateway-wind-direction",
     );
 
-    let updateTimerValue = sessionStorage.getItem("updateTimerValue");
+    let updateTimerValue =
+      Number(sessionStorage.getItem("updateTimerValue")) || 0;
+    let robotGenerationIntervalId = null;
+    let robotUpdateTimerIntervalId = null;
+    let robotCount = 0;
 
     var avarageCardData = {
       avarageTemperatureValue: sessionStorage.getItem(
@@ -76,31 +81,47 @@ document.addEventListener("loadedScreen", (e) => {
       ),
     };
 
-    let canvasTemperatureValues = sessionStorage.getItem(
+    let canvasTemperatureValues = getVariableFromSession(
       "canvasTemperatureValues",
+      [],
     );
-
+    let canvasTimeValues = getVariableFromSession("canvasTimeValues", []);
     let botRecordQnt = 20;
-    let botInterval = 3;
+    let botInterval = 3000;
 
     const graph = new Chart(canvasTemperature, {
       type: "line",
       data: {
-        labels: [],
+        labels: canvasTimeValues,
         datasets: [
           {
             label: "Temperatura (°C)",
             data: canvasTemperatureValues,
+            borderColor: "rgba(54, 162, 235, 1)",
+            borderWidth: 2,
           },
         ],
       },
       options: {
         responsive: true,
         maintainAspectRatio: false,
-        scales: {
-          y: {
-            min: 0,
-            max: 60,
+        animation: {
+          duration: 1000,
+          easing: "easeInOutQuart",
+          plugins: {
+            legend: {
+              position: top,  
+            },
+            title: {
+              display: true,
+              text: "Ultimas Leituras de Temperatura",
+            },
+          },
+          scales: {
+            y: {
+              min: 10,
+              max: 40,
+            },
           },
         },
       },
@@ -108,17 +129,105 @@ document.addEventListener("loadedScreen", (e) => {
 
     updateData();
 
-    startBtn.addEventListener("click", () => {
-      if (startBtn.classList.contains("active")) {
-        startBtn.innerText = "Ligar";
-        startBtn.style.backgroundColor = "var(--primary-orange)";
-        startBtn.classList.remove("active");
-      } else {
-        startBtn.innerText = "Desligar";
-        startBtn.style.backgroundColor = "var(--medium-black)";
-        startBtn.classList.add("active");
+    function saveVariableInSession(name, value) {
+      sessionStorage.setItem(name, JSON.stringify(value));
+      return value;
+    }
+
+    function getVariableFromSession(name, fallback) {
+      const item = sessionStorage.getItem(name);
+      if (!item) return fallback;
+      try {
+        return JSON.parse(item);
+      } catch {
+        return fallback;
       }
-    });
+    }
+
+    function generateData() {
+      avarageCardData.avarageTemperatureValue = saveVariableInSession(
+        "avarageTemperatureValue",
+        generateRandomNumber(12, 40, 1),
+      );
+      avarageCardData.avarageHumidityValue = saveVariableInSession(
+        "avarageHumidityValue",
+        generateRandomNumber(0, 100),
+      );
+      avarageCardData.avaragePressureValue = saveVariableInSession(
+        "avaragePressureValue",
+        generateRandomNumber(990, 1020, 2),
+      );
+
+      ambientParams.luminosityValue = saveVariableInSession(
+        "luminosityValue",
+        generateRandomNumber(0, 100, 0),
+      );
+      ambientParams.windSpeedValue = saveVariableInSession(
+        "windSpeedValue",
+        generateRandomNumber(0, 20, 1),
+      );
+      ambientParams.windDirectionValue = saveVariableInSession(
+        "windDirectionValue",
+        generateRandomNumber(0, 360, 0),
+      );
+      ambientParams.altitudeValue = saveVariableInSession(
+        "altitudeValue",
+        generateRandomNumber(600, 800, 0),
+      );
+
+      canvasTemperatureValues.push(generateRandomNumber(12, 40, 1));
+      saveVariableInSession("canvasTemperatureValues", canvasTemperatureValues);
+
+      canvasTimeValues.push(new Date().toLocaleTimeString());
+      saveVariableInSession("canvasTimeValues", canvasTimeValues);
+
+      if (canvasTemperatureValues.length > 10 || canvasTimeValues.length > 10) {
+        canvasTemperatureValues.shift();
+        saveVariableInSession(
+          "canvasTemperatureValues",
+          canvasTemperatureValues,
+        );
+        canvasTimeValues.shift();
+        saveVariableInSession("canvasTimeValues", canvasTimeValues);
+      }
+
+      graph.data.labels = canvasTimeValues;
+      graph.data.datasets[0].data = canvasTemperatureValues;
+      graph.update();
+
+      areaParams.gatewayTemperatureValue = saveVariableInSession(
+        "gatewayTemperatureValue",
+        generateRandomNumber(12, 40, 1),
+      );
+      areaParams.gatewayHumidityValue = saveVariableInSession(
+        "gatewayHumidityValue",
+        generateRandomNumber(0, 100, 0),
+      );
+      areaParams.gatewayLuminosityValue = saveVariableInSession(
+        "gatewayLuminosityValue",
+        generateRandomNumber(0, 100, 0),
+      );
+      areaParams.gatewayWifiSignalValue = saveVariableInSession(
+        "gatewayWifiSignal",
+        generateRandomNumber(-80, -30, 0),
+      );
+      areaParams.gatewayPressureValue = saveVariableInSession(
+        "gatewayPressureValue",
+        generateRandomNumber(990, 1020, 1),
+      );
+      areaParams.gatewayAltitudeValue = saveVariableInSession(
+        "gatewayAltitudeValue",
+        generateRandomNumber(600, 800, 0),
+      );
+      areaParams.gatewayWindSpeedValue = saveVariableInSession(
+        "gatewayWindSpeedValue",
+        generateRandomNumber(0, 20, 1),
+      );
+      areaParams.gatewayWindDirectionValue = saveVariableInSession(
+        "gatewayWindDirectionValue",
+        generateRandomNumber(0, 360, 0),
+      );
+    }
 
     configBtn.addEventListener("click", () => {
       modal.classList.toggle("active");
@@ -134,128 +243,102 @@ document.addEventListener("loadedScreen", (e) => {
       }
     });
 
-    function readBotForm() {
+    configFormBot.addEventListener("submit", (e) => {
+      e.preventDefault();
       if (!isNaN(inputBotInterval.value) && !isNaN(inputBotRecordQnt.value)) {
-        botInterval = parseInt(inputBotInterval.value);
+        botInterval = parseInt(inputBotInterval.value * 1000);
         botRecordQnt = parseInt(inputBotRecordQnt.value);
+        console.log(botInterval, botRecordQnt);
       }
-    }
+    });
 
     function generateRandomNumber(min, max, decimalPlaces) {
-      return (Math.random() * (max - min + 1) + min).toFixed(decimalPlaces);
+      return Number((Math.random() * (max - min) + min).toFixed(decimalPlaces));
     }
 
     function updateData() {
-      avarageTemperature.innerText = `${avarageCardData.avarageTemperatureValue.replace(".", ",")}ºC`;
-      avarageHumidity.innerText = `${avarageCardData.avarageHumidityValue}%`;
-      avaragePressure.innerText = `${avarageCardData.avaragePressureValue.replace(".", ",")} hPa`;
+      avarageTemperature.innerText = `${avarageCardData.avarageTemperatureValue || 0}ºC`;
+      avarageHumidity.innerText = `${avarageCardData.avarageHumidityValue || 0}%`;
+      avaragePressure.innerText = `${avarageCardData.avaragePressureValue || 0} hPa`;
 
-      luminosity.innerText = `${ambientParams.luminosityValue}%`;
-      windSpeed.innerText = `${ambientParams.windSpeedValue.replace(".", ",")} m/s`;
-      windDirection.innerText = `(${ambientParams.windDirectionValue}º)`;
-      altitude.innerText = `${ambientParams.altitudeValue}`;
+      luminosity.innerText = `${ambientParams.luminosityValue || 0}%`;
+      windSpeed.innerText = `${ambientParams.windSpeedValue || 0} m/s`;
+      windDirection.innerText = `(${ambientParams.windDirectionValue || 0}º)`;
+      altitude.innerText = `${ambientParams.altitudeValue || 0}`;
 
       deviceType.innerText = `${areaParams.deviceTypeValues[generateRandomNumber(0, areaParams.deviceTypeValues.length - 1, 0)]}`;
       gatewayLocation.innerText = `${areaParams.gatewayLocationValues[generateRandomNumber(0, areaParams.gatewayLocationValues.length - 1, 0)]}`;
-      actuatorName.innerText = `Status do atuador: (${areaParams.actuatorNames[generateRandomNumber[(0, areaParams.actuatorNames.length - 1, 0)]]})`;
-      actuatorStatus.innerText = `${areaParams.actuatorStatus[generateRandomNumber(0, areaParams.actuatorStatusValues.length - 1, 0)]}`;
-      gatewayTemperature.innerText = `${areaParams.gatewayTemperatureValue.replace(".", ",")}ºC`;
-      gatewayHumidity.innerText = `${areaParams.gatewayHumidityValue}%`;
-      gatewayLuminosity.innerText = `${areaParams.gatewayLuminosityValue}%`;
-      gatewayWifiSignal.innerText = `${areaParams.gatewayPressureValue} dBm`;
-      gatewayAltitude.innerText = `${areaParams.gatewayAltitudeValue} m`;
-      gatewayWindSpeed.innerText = `${areaParams.gatewayWindSpeedValue.replace(".", ",")} m/s`;
-      gatewayWindDirection.innerText = `(${areaParams.gatewayWindDirectionValue}º)`;
+      actuatorName.innerText = `Status do atuador: (${areaParams.actuatorNames[generateRandomNumber(0, areaParams.actuatorNames.length - 1, 0)]})`;
+      actuatorStatus.innerHTML = `<span></span>${areaParams.actuatorStatusValues[generateRandomNumber(0, areaParams.actuatorStatusValues.length - 1, 0)]}`;
+      gatewayTemperature.innerText = `${areaParams.gatewayTemperatureValue || 0}ºC`;
+      gatewayHumidity.innerText = `${areaParams.gatewayHumidityValue || 0}%`;
+      gatewayLuminosity.innerText = `${areaParams.gatewayLuminosityValue || 0}%`;
+      gatewayWifiSignal.innerText = `${areaParams.gatewayPressureValue || 0} dBm`;
+      gatewayPressure.innerText = `${areaParams.gatewayPressureValue || 0} hPa`;
+      gatewayAltitude.innerText = `${areaParams.gatewayAltitudeValue || 0} m`;
+      gatewayWindSpeed.innerText = `${areaParams.gatewayWindSpeedValue || 0} m/s`;
+      gatewayWindDirection.innerText = `(${areaParams.gatewayWindDirectionValue || 0}º)`;
+      graph.update();
     }
 
-    function updateTimerValues() {
-      setInterval(() => {
-        if (updateTimerValue < botInterval) {
-          updateTimer.innerText = `Atualizado há ${(updateTimerValue += 1)} segundos`;
+    function stopRobotIntervals() {
+      if (robotGenerationIntervalId) {
+        clearInterval(robotGenerationIntervalId);
+        robotGenerationIntervalId = null;
+      }
+
+      if (robotUpdateTimerIntervalId) {
+        clearInterval(robotUpdateTimerIntervalId);
+        robotUpdateTimerIntervalId = null;
+      }
+
+      updateTimerValue = 0;
+      updateTimer.innerText = `Atualizado há ${updateTimerValue} segundos`;
+    }
+    startBtn.addEventListener("click", () => {
+      if (startBtn.classList.contains("active")) {
+        startBtn.innerText = "Ligar";
+        startBtn.style.backgroundColor = "var(--primary-orange)";
+        startBtn.classList.remove("active");
+        stopRobotIntervals();
+        return;
+      }
+
+      startBtn.innerText = "Desligar";
+      startBtn.style.backgroundColor = "var(--medium-black)";
+      startBtn.classList.add("active");
+
+      stopRobotIntervals();
+
+      robotUpdateTimerIntervalId = setInterval(() => {
+        if (updateTimerValue < Math.max(botInterval / 1000 - 1, 0)) {
+          updateTimerValue += 1;
+          updateTimer.innerText = `Atualizado há ${updateTimerValue} segundos`;
         } else {
           updateTimerValue = 0;
           updateTimer.innerText = `Atualizado há ${updateTimerValue} segundos`;
         }
       }, 1000);
-    }
 
-    function saveVariableInSession(name, value) {
-      sessionStorage.setItem(name, value);
-      return value;
-    }
-
-    function startBot() {
-      let count = 0;
-      updateTimerValues();
-      setInterval(() => {
-        if (botRecordQnt <= count) {
-          avarageCardData.avarageTemperatureValue = saveVariableInSession(
-            "avarageTemperatureValue",
-            generateRandomNumber(12, 40, 1),
-          );
-          avarageCardData.avarageHumidityValue = saveVariableInSession(
-            "avarageHumidityValue",
-            generateRandomNumber(0, 100),
-          );
-          avarageCardData.avaragePressureValue = saveVariableInSession(
-            "avaragePressureValue",
-            generateRandomNumber(990, 1020, 2),
-          );
-
-          ambientParams.luminosityValue = saveVariableInSession(
-            "luminosityValue",
-            generateRandomNumber(0, 100, 0),
-          );
-          ambientParams.windSpeedValue = saveVariableInSession(
-            "windSpeedValue",
-            generateRandomNumber(0, 20, 1),
-          );
-          ambientParams.windDirectionValue = saveVariableInSession(
-            "windDirectionValue",
-            generateRandomNumber(0, 360, 0),
-          );
-          ambientParams.altitudeValue = saveVariableInSession(
-            "altitudeValue",
-            generateRandomNumber(600, 800, 0),
-          );
-
-          areaParams.gatewayTemperatureValue = saveVariableInSession(
-            "gatewayTemperatureValue",
-            generateRandomNumber(12, 40, 1),
-          );
-          areaParams.gatewayHumidityValue = saveVariableInSession(
-            "gatewayHumidityValue",
-            generateRandomNumber(0, 100, 0),
-          );
-          areaParams.gatewayLuminosityValue = saveVariableInSession(
-            "gatewayLuminosityValue",
-            generateRandomNumber(0, 100, 0),
-          );
-          areaParams.gatewayWifiSignalValue = saveVariableInSession(
-            "gatewayWifiSignal",
-            generateRandomNumber(-80, -30, 0),
-          );
-          areaParams.gatewayPressureValue = saveVariableInSession(
-            "gatewayPressureValue",
-            generateRandomNumber(990, 1020, 1),
-          );
-          areaParams.gatewayAltitudeValue = saveVariableInSession(
-            "gatewayAltitudeValue",
-            generateRandomNumber(600, 800, 0),
-          );
-          areaParams.gatewayWindSpeedValue = saveVariableInSession(
-            "gatewayWindSpeedValue",
-            generateRandomNumber(0, 20, 1),
-          );
-          areaParams.gatewayWindDirectionValue = saveVariableInSession(
-            "gatewayWindDirectionValue",
-            generateRandomNumber(0, 360, 0),
-          );
-
-          count++;
-          updateData();
+      robotCount = 0;
+      robotGenerationIntervalId = setInterval(() => {
+        if (
+          robotCount >= botRecordQnt ||
+          !startBtn.classList.contains("active") ||
+          e.detail.screenName !== "robo"
+        ) {
+          stopRobotIntervals();
+          startBtn.innerText = "Ligar";
+          startBtn.style.backgroundColor = "var(--primary-orange)";
+          startBtn.classList.remove("active");
+          return;
         }
+
+        generateData();
+
+        robotCount += 1;
+        updateData();
       }, botInterval);
-    }
+    });
   }
 });
