@@ -251,6 +251,10 @@ body {
   height: fit-content;
   padding: var(--low-spacing);
 }
+#corrosel-dis .container:nth-child(2), #corrosel-dis .container:nth-child(3) {
+  width: 30px;
+  height: 30px;
+}
 
 #button-forward span:first-child,
 #button-forward span:last-child,
@@ -501,7 +505,6 @@ body {
   gap: 10px;
   width: 100%;
   max-width: 100%;
-  margin-top: var(--low-spacing);
 }
 
 #robot-button,

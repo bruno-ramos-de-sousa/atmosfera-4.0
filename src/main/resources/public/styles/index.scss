@@ -275,6 +275,12 @@ body {
     width: fit-content;
     height: fit-content;
     padding: var(--low-spacing);
+
+    &:nth-child(2),
+    &:nth-child(3) {
+      width: 30px;
+      height: 30px;
+    }
   }
 }
 
@@ -555,7 +561,6 @@ body {
   gap: 10px;
   width: 100%;
   max-width: 100%;
-  margin-top: var(--low-spacing);
 }
 
 #robot-button,
