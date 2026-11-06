@@ -23,7 +23,7 @@ const screens = {
                     <output class="reading" id="average-humidity">90%</output>
                   </dd>
                 </div>
-                <img src="assets/humidity-icon.png" alt="icone de umidade">
+                <img class="metric-icon" src="assets/humidity-icon.png" alt="icone de umidade">
               </div>
 
               <div class="reading-card layout-row">
@@ -34,7 +34,7 @@ const screens = {
                       >922,73 hPa</output>
                   </dd>
                 </div>
-                <img src="assets/pressure-icon.png" alt="icone de pressão atmosférica">
+                <img class="metric-icon" src="assets/pressure-icon.png" alt="icone de pressão atmosférica">
               </div>
             </dl>
           </article>
@@ -49,7 +49,7 @@ const screens = {
                     <output class="reading" id="luminosity-reading">72%</output>
                   </dd>
                 </div>
-                <img src="assets/luminosity-icon.png" alt="icone de sol">
+                <img class="metric-icon" src="assets/luminosity-icon.png" alt="icone de sol">
               </div>
 
               <div class="reading-card layout-row">
@@ -60,7 +60,7 @@ const screens = {
                       >3,3 m/s</output>
                   </dd>
                 </div>
-                <img src="assets/wind-speed-icon.png" alt="ícone de vento">
+                <img class="metric-icon" src="assets/wind-speed-icon.png" alt="ícone de vento">
               </div>
 
               <div class="reading-card layout-row">
@@ -71,7 +71,7 @@ const screens = {
                       >Sul (179°)</output>
                   </dd>
                 </div>
-                <img src="assets/wind-direction-icon.png" alt="icone de bússola">
+                <img class="metric-icon" src="assets/wind-direction-icon.png" alt="icone de bússola">
               </div>
 
               <div class="reading-card layout-row">
@@ -81,7 +81,7 @@ const screens = {
                     <output class="reading" id="altitude-reading">781 m</output>
                   </dd>
                 </div>
-                <img src="assets/altitude-icon.png" alt="icone de altitude">
+                <img class="metric-icon" src="assets/altitude-icon.png" alt="icone de altitude">
               </div>
             </dl>
 

@@ -217,7 +217,7 @@ body {
   justify-content: space-between;
 }
 
-.reading-card img {
+.metric-icon {
   align-self: center;
   width: 42px;
 }
@@ -251,7 +251,7 @@ body {
   height: fit-content;
   padding: var(--low-spacing);
 }
-#corrosel-dis .container:nth-child(2), #corrosel-dis .container:nth-child(3) {
+#carousel-dis .container:nth-child(2), #carousel-dis .container:nth-child(3) {
   width: 30px;
   height: 30px;
 }
@@ -659,6 +659,9 @@ body {
     grid-template-columns: repeat(2, 1fr);
     width: 100%;
   }
+  .metric-icon {
+    width: 21px;
+  }
   #carousel-dis {
     justify-content: center;
     margin: var(--md-spacing);
@@ -683,5 +686,62 @@ body {
   }
   #hero-title {
     justify-content: end;
+  }
+  #expand-button {
+    right: 11px;
+    width: 28px;
+    height: 28px;
+  }
+  #expand-button span {
+    width: 8px;
+    height: 2px;
+  }
+  #expand-button span:nth-child(1) {
+    left: 0;
+    top: 0;
+  }
+  #expand-button span:nth-child(2) {
+    left: 0;
+    top: 0;
+  }
+  #expand-button span:nth-child(3) {
+    left: 1px;
+    top: 2px;
+  }
+  #expand-button span:nth-child(4) {
+    left: calc(100% - 13px);
+    top: 0;
+  }
+  #expand-button span:nth-child(5) {
+    left: calc(100% - 12px);
+    top: 8px;
+  }
+  #expand-button span:nth-child(6) {
+    left: calc(100% - 15px);
+    top: 2px;
+  }
+  #expand-button span:nth-child(7) {
+    left: -1px;
+    top: calc(100% - 3px);
+  }
+  #expand-button span:nth-child(8) {
+    left: -2px;
+    top: calc(100% - 11px);
+  }
+  #expand-button span:nth-child(9) {
+    left: 1px;
+    top: calc(100% - 5px);
+  }
+  #expand-button span:nth-child(10) {
+    left: calc(100% - 12px);
+    top: calc(100% - 3px);
+  }
+  #expand-button span:nth-child(11) {
+    left: calc(100% - 14px);
+    top: calc(100% - 4px);
+  }
+  #expand-button span:nth-child(12) {
+    left: calc(100% - 15px);
+    top: calc(100% - 5px);
   }
 }/*# sourceMappingURL=index.css.map */

@@ -73,9 +73,11 @@ body {
     &:nth-child(1) {
       top: 0;
     }
+
     &:nth-child(2) {
       top: 50%;
     }
+
     &:nth-child(3) {
       top: 100%;
     }
@@ -162,25 +164,25 @@ body {
   flex-direction: column;
   align-items: center;
 
-  > .container-tittle .low-opacity-text {
+  >.container-tittle .low-opacity-text {
     position: absolute;
     right: 30px;
     margin-top: 5px;
     font-weight: normal;
   }
 
-  > .metric-grid {
+  >.metric-grid {
     width: 90%;
     margin-top: auto;
     bottom: var(--low-spacing);
   }
 
-  > dd {
+  >dd {
     width: 100%;
     margin: 30px 0;
   }
 
-  > hr {
+  >hr {
     width: 80%;
     margin: 0 auto;
     opacity: 0.2;
@@ -188,7 +190,7 @@ body {
 }
 
 #enviroment-parameters-card {
-  > .metric-grid {
+  >.metric-grid {
     margin: var(--low-spacing) 0;
   }
 }
@@ -209,7 +211,7 @@ body {
 #device-reading-card {
   grid-column: 2 span;
 
-  > div {
+  >div {
     justify-content: space-between;
   }
 
@@ -220,14 +222,14 @@ body {
     min-height: 0;
     gap: var(--md-spacing);
 
-    > div {
+    >div {
       padding: var(--low-spacing) var(--hg-spacing);
 
-      > dd {
+      >dd {
         margin: 5px 0;
       }
 
-      > dt {
+      >dt {
         margin: 30px 0 var(--low-spacing) 0;
       }
     }
@@ -240,6 +242,17 @@ body {
       gap: 0;
     }
   }
+}
+
+.metric-grid {
+  .reading-card {
+    justify-content: space-between;
+  }
+}
+
+.metric-icon {
+  align-self: center;
+  width: 42px;
 }
 
 .cell {
@@ -263,7 +276,7 @@ body {
   }
 }
 
-#corrosel-dis {
+#carousel-dis {
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -286,6 +299,7 @@ body {
 
 #button-forward,
 #button-backward {
+
   span:first-child,
   span:last-child {
     position: absolute;
@@ -341,7 +355,7 @@ body {
   font-size: var(--temp-size);
   font-weight: 700;
 
-  + span {
+  +span {
     font-size: var(--small-body-text-size);
   }
 }
@@ -371,7 +385,7 @@ body {
   background-color: #15ff00;
   font-size: var(--small-body-text-size);
 
-  > span {
+  >span {
     display: block;
     width: 10px;
     height: 10px;
@@ -692,6 +706,8 @@ body {
   display: flex;
 }
 
+
+
 // -------------------------------------- Responsivo --------------------------------------
 @media all and (max-width: 728px) {
   #app-shell {
@@ -714,7 +730,7 @@ body {
       grid-column: 1;
     }
 
-    #temperature-card > dd {
+    #temperature-card>dd {
       margin: 40px 0;
     }
   }
@@ -730,7 +746,11 @@ body {
     }
   }
 
-  #corrosel-dis {
+  .metric-icon {
+    width: 21px;
+  }
+
+  #carousel-dis {
     justify-content: center;
     margin: var(--md-spacing);
 
@@ -762,5 +782,76 @@ body {
 
   #hero-title {
     justify-content: end;
+  }
+
+  #expand-button {
+    right: 11px;
+    width: 28px;
+    height: 28px;
+
+    span {
+      width: 8px;
+      height: 2px;
+
+      &:nth-child(1) {
+        left: 0;
+        top: 0;
+      }
+
+      &:nth-child(2) {
+        left: 0;
+        top: 0;
+      }
+
+      &:nth-child(3) {
+        left: 1px;
+        top: 2px;
+      }
+
+      &:nth-child(4) {
+        left: calc(100% - 13px);
+        top: 0;
+      }
+
+      &:nth-child(5) {
+        left: calc(100% - 12px);
+        top: 8px;
+      }
+
+      &:nth-child(6) {
+        left: calc(100% - 15px);
+        top: 2px;
+      }
+
+      &:nth-child(7) {
+        left: -1px;
+        top: calc(100% - 3px);
+      }
+
+      &:nth-child(8) {
+        left: -2px;
+        top: calc(100% - 11px);
+      }
+
+      &:nth-child(9) {
+        left: 1px;
+        top: calc(100% - 5px);
+      }
+
+      &:nth-child(10) {
+        left: calc(100% - 12px);
+        top: calc(100% - 3px);
+      }
+
+      &:nth-child(11) {
+        left: calc(100% - 14px);
+        top: calc(100% - 4px);
+      }
+
+      &:nth-child(12) {
+        left: calc(100% - 15px);
+        top: calc(100% - 5px);
+      }
+    }
   }
 }
