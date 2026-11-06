@@ -68,7 +68,7 @@ const screens = {
                   <dt class="low-opacity-text">Dir. Vento</dt>
                   <dd>
                     <output class="reading" id="wind-direction-reading"
-                      >Sul (179°)</output>
+                      >179°</output>
                   </dd>
                 </div>
                 <img class="metric-icon" src="assets/wind-direction-icon.png" alt="icone de bússola">
@@ -98,7 +98,7 @@ const screens = {
                 </dt>
               </div>
               <div id="carousel-dis">
-                <div class="container" id="carousel-indicator"><p>Area 1</p></div>
+                <div class="container" id="carousel-indicator"><p>Área 1 de 4</p></div>
                 <div class="container" id="button-previous"><button id="button-backward"><span></span><span></span></button></div>
                 <div class="container" id="button-next"><button id="button-forward"><span></span><span></span></button></div>
               </div>
@@ -110,7 +110,7 @@ const screens = {
 
                 <dd>
                   <output class="reading" id="gateway-location"
-                    >Sensor Refeitorio</output>
+                    >Sensor Refeitório</output>
                 </dd>
                 <dt class="low-opacity-text" id="actuator-name">Status do Atuador (Led 1):</dt>
 
@@ -178,7 +178,7 @@ const screens = {
                   <dt class="low-opacity-text">Direção do Vento</dt>
                   <dd>
                     <output class="reading" id="gateway-wind-direction"
-                      >Sul (178°)</output>
+                      >178°</output>
                   </dd>
                 </div>
               </div>
