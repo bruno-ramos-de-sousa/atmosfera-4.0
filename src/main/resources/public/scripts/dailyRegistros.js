@@ -1,5 +1,6 @@
 let registroSensores = [];
 let listDispositivos = [];
+let listAtuadores = [];
 let currentSensor = 0;
 
 function updateCarousel(registro, listDispositivos) {
@@ -15,15 +16,52 @@ function updateCarousel(registro, listDispositivos) {
   setText('gateway-wind-speed', `${registro.velocidade_vento.toFixed(1).replace('.', ',')} m/s`);
   setText('gateway-wind-direction', `${registro.direcao_vento}°`);
 
-  const wifiText = registro.intensidade_wifi != null ? `${registro.intensidade_wifi} dBm` : 'N/A';
+  const wifiText = registro.intensidade_wifi != null && registro.intensidade_wifi != 0 ? `${registro.intensidade_wifi} dBm` : 'N/A';
   setText('gateway-wifi-signal', wifiText);
+
+  const atuador = listAtuadores.find(a => a.id_dispositivo_fk === registro.id_dispositivo_fk);
+  const actuatorStatus = document.getElementById("actuator-status");
+  const actuatorName = document.getElementById("actuator-name");
+
+  if (atuador) {
+    const currentStatus = Boolean(atuador.status_atual);
+    const textStatus = currentStatus ? "Ligado" : "Desligado";
+
+    if (actuatorName) {
+      actuatorName.textContent = `Status do Atuador (${atuador.nome_atuador}):`;
+    }
+
+    if (actuatorStatus) {
+      actuatorStatus.innerHTML = `<span></span>${textStatus}`;
+
+      const colorStatusBg = currentStatus ? "#76c276" : "#efacaa";
+      const colorStatus = currentStatus ? "#006400" : "#d93025";
+
+      actuatorStatus.style.backgroundColor = colorStatusBg;
+      actuatorStatus.style.color = colorStatus;
+
+      const spanDot = actuatorStatus.querySelector("span");
+      if (spanDot) {
+        spanDot.style.backgroundColor = colorStatus;
+      }
+    }
+  } else {
+    if (actuatorName) actuatorName.textContent = "Status do Atuador:";
+    if (actuatorStatus) {
+      actuatorStatus.innerHTML = `<span></span>N/A`;
+      actuatorStatus.style.backgroundColor = "#f1f3f4";
+      actuatorStatus.style.color = "#777777";
+      const spanDot = actuatorStatus.querySelector("span");
+      if (spanDot) spanDot.style.backgroundColor = "#777777";
+    }
+  }
 
   setText('carousel-indicator', `Área ${currentSensor + 1} de ${registroSensores.length}`);
 }
 
 function carouselEvents(dispositivos) {
-  const btnPrev = document.getElementById("btn-prev");
-  const btnNext = document.getElementById("btn-next");
+  const btnPrev = document.getElementById("button-backward");
+  const btnNext = document.getElementById("button-forward");
 
   if (btnPrev && btnNext) {
     btnPrev.onclick = () => {
@@ -47,6 +85,12 @@ function setText(id, valor) {
   }
 }
 
+function autoRefresh() {
+  setInterval(function () {
+    loadingDataHome();
+  }, 5000)
+}
+
 async function loadingDataHome() {
   try {
     const [resRegistros, resAtuadores, resDispositivos] = await Promise.all([
@@ -56,8 +100,9 @@ async function loadingDataHome() {
     ]);
 
     const listRegistros = await resRegistros.json();
-    const listAtuadores = await resAtuadores.json();
+    const atuadoresFetch = await resAtuadores.json();
     listDispositivos = await resDispositivos.json();
+    listAtuadores = atuadoresFetch;
 
     if (Array.isArray(listRegistros) && listRegistros.length > 0) {
       const u = listRegistros[0];
@@ -73,11 +118,6 @@ async function loadingDataHome() {
       registroSensores = listRegistros.slice(0, 4);
       updateCarousel(registroSensores[currentSensor], listDispositivos);
       carouselEvents(listDispositivos);
-    }
-
-    if (Array.isArray(listAtuadores) && listAtuadores.length > 0) {
-      const status = listAtuadores[0].status_atual ? 'Ligado' : 'Desligado';
-      setText('actuator-status', status);
     }
 
   } catch (error) {

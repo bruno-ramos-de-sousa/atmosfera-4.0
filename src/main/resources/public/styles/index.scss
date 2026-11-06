@@ -278,55 +278,44 @@ body {
 
     &:nth-child(2),
     &:nth-child(3) {
-      position: relative;
       width: 30px;
       height: 30px;
-      cursor: pointer;
     }
+  }
+}
 
-    &:nth-child(2) {
-      span:first-child,
-      span:last-child {
-        position: absolute;
-        left: 50%;
-        top: 50%;
-        display: block;
-        width: 10px;
-        height: 3px;
-        background-color: black;
-        transform-origin: left center;
-      }
+#button-forward,
+#button-backward {
+  span:first-child,
+  span:last-child {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    display: block;
+    width: 10px;
+    height: 3px;
+    background-color: black;
+    transform-origin: left center;
+  }
+}
 
-      span:first-child {
-        transform: translate(-50%, -50%) rotate(45deg);
-      }
+#button-backward {
+  span:first-child {
+    transform: translate(-50%, -50%) rotate(-45deg);
+  }
 
-      span:last-child {
-        transform: translate(-50%, -50%) rotate(-45deg);
-      }
-    }
+  span:last-child {
+    transform: translate(-50%, -50%) rotate(45deg);
+  }
+}
 
-    &:nth-child(3) {
-      span:first-child,
-      span:last-child {
-        position: absolute;
-        left: 50%;
-        top: 50%;
-        display: block;
-        width: 10px;
-        height: 3px;
-        background-color: black;
-        transform-origin: left center;
-      }
+#button-forward {
+  span:first-child {
+    transform: translate(50%, -50%) rotate(135deg);
+  }
 
-      span:first-child {
-        transform: translate(50%, -50%) rotate(135deg);
-      }
-
-      span:last-child {
-        transform: translate(50%, -50%) rotate(-135deg);
-      }
-    }
+  span:last-child {
+    transform: translate(50%, -50%) rotate(-135deg);
   }
 }
 
@@ -572,7 +561,6 @@ body {
   gap: 10px;
   width: 100%;
   max-width: 100%;
-  margin-top: var(--low-spacing);
 }
 
 #robot-button,
