@@ -1,6 +1,7 @@
 async function loadingDataHistorico() {
     try {
-        const response = await fetch('/api/registros/historico');
+        const response = await fetch('/api/registros');
+        const dateSearch = await response.json(`/api/registros/${data_hora}`);
         const dados = await response.json();
         const tbody = document.getElementById('historico-tbody');
 
