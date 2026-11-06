@@ -99,8 +99,8 @@ const screens = {
               </div>
               <div id="carousel-dis">
                 <div class="container" id="carousel-indicator"><p>Area 1</p></div>
-                <div class="container"><button id="button-backward"><span></span><span></span></button></div>
-                <div class="container"><button id="button-forward"><span></span><span></span></button></div>
+                <div class="container" id="button-previous"><button id="button-backward"><span></span><span></span></button></div>
+                <div class="container" id="button-next"><button id="button-forward"><span></span><span></span></button></div>
               </div>
             </div>
 

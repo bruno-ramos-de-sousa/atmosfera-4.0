@@ -293,6 +293,7 @@ body {
     &:nth-child(3) {
       width: 30px;
       height: 30px;
+      cursor: pointer;
     }
   }
 }
@@ -310,6 +311,7 @@ body {
     height: 3px;
     background-color: black;
     transform-origin: left center;
+    cursor: pointer;
   }
 }
 
