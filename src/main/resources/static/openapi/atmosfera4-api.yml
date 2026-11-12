@@ -1,0 +1,210 @@
+openapi: 3.1.0
+info:
+  title: Atmosfera 4.0 API
+  version: 1.0.0
+  description: Solução de referência dos contextos Registros, atuadores e dispositivos.
+paths:
+  /api/registros:
+    get:
+      operationId: listRegistros
+      summary: Lista todos os registros.
+      tags:
+        - Registros
+      responses:
+        '200':
+          description: Registros encontrados
+          content:
+            application/json:
+              schema:
+                type: array
+                items: {$ref: '#/components/schemas/RegistrosResponse'}
+                example:
+                  - id_registro: 0
+                    id_dispositivo_fk: 1
+                    time_stamp: "1793969630"
+                    data_hora: "2026-11-12 08:14:18"
+                    temperatura: 24.5
+                    umidade: 65.0
+                    pressao: 1013.2
+                    altitude: 760.4
+                    luminosidade: 850
+                    velocidade_vento: 10.2
+                    direcao_vento: 180
+                    intensidade_wifi: -70
+                  - id_registro: 1
+                    id_dispositivo_fk: 1
+                    time_stamp: "1793969630"
+                    data_hora: "2026-11-12 08:14:18"
+                    temperatura: 24.5
+                    umidade: 65.0
+                    pressao: 1013.2
+                    altitude: 760.4
+                    luminosidade: 850
+                    velocidade_vento: 10.2
+                    direcao_vento: 180
+                    intensidade_wifi: -70
+        '400': { $ref: '#/components/responses/BadRequest' }
+        '404': { $ref: '#/components/responses/NotFound' }
+  /api/registros/diarios:
+    get:
+      operationId: listDailyRegistros
+      summary: Consulta todos os registros nas ultimas 24h
+      tags:
+        - Registros
+      responses:
+        '200':
+          description: Registros encontrados
+          content:
+            application/json:
+              type: array
+              items: { $ref: '#/components/schemas/RegistrosResponse'}
+            examples:
+              - id_dispositivo: 1
+                nome_dispositivo: "Gateway Master"
+                localizacao: "32.3232 42.321312"
+                tipo_dispositivo: "Gateway"
+                gateway_pai_fk: null
+              - id_dispositivo: 2
+                nome_dispositivo: "Sensor Patio"
+                localizacao: "32.3232 42.321312"
+                tipo_dispositivo: "Endpoint"
+                gateway_pai_fk: 1
+        '400': { $ref: '#/components/responses/BadRequest' }
+        '404': { $ref: '#/components/responses/NotFound' }
+  /api/registros/{data_hora}:
+    get:
+      operationId: searchRegistros
+      summary: Consulta todos os registros do dia informado
+      tags:
+        - Registros
+      parameters:
+        - $ref: '#/components/parameters/data_hora'
+      responses:
+        '200':
+          description: Registros encontrados
+          content:
+            application/json:
+              type: array
+              items: { $ref: '#/components/schemas/AtuadoresResponse' }
+              examples:
+                - id_atuador: 1
+                  id_dispositivo_fk: 1
+                  nome_atuador: "LED 1"
+                  status_atual: true
+                  ultimo_comando: null
+        '400': { $ref: '#/components/responses/BadRequest' }
+        '404': { $ref: '#/components/responses/NotFound' }
+  /api/dispositivos:
+    get:
+      operationId: searchDispositivos
+      summary: Consulta todos os dispositivos
+      tags:
+        - Dispositivos
+      responses:
+        '200':
+          description: Dispositivos encontrados
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/DispositivosResponse' }
+        '400': { $ref: '#/components/responses/BadRequest' }
+        '404': { $ref: '#/components/responses/NotFound' }
+  /api/atuadores:
+    get:
+      operationId: searchAtuadores
+      summary: Consulta todos os atuadores
+      tags:
+        - Atuadores
+      responses:
+        '200':
+          description: Atuadores encontrados
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/AtuadoresResponse' }
+        '400': { $ref: '#/components/responses/BadRequest' }
+        '404': { $ref: '#/components/responses/NotFound' }
+
+components:
+  parameters:
+    data_hora:
+      name: data_hora
+      in: path
+      required: true
+      schema: { type: string, format: date-time }
+  responses:
+    BadRequest:
+      description: Requisição inválida
+      content:
+        application/problem+json:
+          schema: { $ref: '#/components/schemas/ProblemDetail' }
+    NotFound:
+      description: Recurso não encontrado
+      content:
+        application/problem+json:
+          schema: { $ref: '#/components/schemas/ProblemDetail' }
+  schemas:
+    RegistrosResponse:
+      type: object
+      required: [ id_registro, id_dispositivo_fk, time_stamp, data_hora, temperatura, umidade, pressao, altitude, luminosidade ]
+      properties:
+        id_registro: { type: integer }
+        id_dispositivo_fk: { type: integer }
+        time_stamp: { type: string, format: time }
+        data_hora: { type: string, format: date-time }
+        temperatura: { type: number, format: float }
+        umidade: { type: number, format: float }
+        pressao: { type: number, format: float }
+        altitude: { type: number, format: float }
+        luminosidade: { type: number, format: float }
+        velocidade_vento:
+          type: number
+          format: float
+          nullable: true
+        direcao_vento:
+          type: number
+          format: integer
+          nullable: true
+        intensidade_wifi:
+          type: number
+          format: integer
+          nullable: true
+    DispositivosResponse:
+      type: object
+      required: [ id_dispositivo, nome_dispositivo, localizacao, tipo_dispositivo ]
+      properties:
+        id_dispositivo: { type: integer }
+        nome_dispositivo: { type: string }
+        localizacao: { type: string }
+        tipo_dispositivo: { type: string }
+        gateway_pai_fk:
+          type: integer
+          nullable: true
+    AtuadoresResponse:
+      type: object
+      required: [ id_atuador, id_dispositivo_fk, nome_atuador, status_atual ]
+      properties:
+        id_atuador: { type: integer }
+        id_dispositivo_fk: { type: integer }
+        nome_atuador: { type: string }
+        status_atual: { type: boolean }
+        ultimo_comando:
+          type: string
+          nullable: true
+          format: date-time
+    FieldError:
+      type: object
+      required: [ field, message ]
+      properties:
+        field: { type: string }
+        message: { type: string }
+    ProblemDetail:
+      type: object
+      required: [ status, title, detail ]
+      properties:
+        type: { type: string, format: uri }
+        title: { type: string }
+        status: { type: integer, format: int32 }
+        detail: { type: string }
+        instance: { type: string, format: uri }
+        errors:
+          type: array
+          items: { $ref: '#/components/schemas/FieldError' }
