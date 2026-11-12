@@ -9,7 +9,7 @@ const screens = {
             </h3>
 
             <dd>
-              <output class="reading" id="average-temperature">26,1°C</output>
+              <output class="reading" id="average-temperature">--°C</output>
               <span class="low-opacity-text">Tempo Limpo</span>
             </dd>
 
@@ -471,7 +471,16 @@ function changeScreen(screenName) {
   const mainContainer = document.querySelector(".content-panel");
 
   if (screens[screenName]) {
+    const robotBtn = document.getElementById("robot-button");
+    if (robotBtn && robotBtn.classList.contains("active")) {
+      robotBtn.click();
+    }
+
     mainContainer.innerHTML = screens[screenName];
+
+    if (screenName === 'home' || screenName === 'robo') {
+      temperatureStyle();
+    }
 
     const renderEvent = new CustomEvent("loadedScreen", {
       detail: { screenName: screenName },

@@ -258,6 +258,7 @@ document.addEventListener("loadedScreen", (e) => {
 
     function updateData() {
       avarageTemperature.innerText = `${avarageCardData.avarageTemperatureValue || 0}ºC`;
+      temperatureStyle(avarageCardData.avarageTemperatureValue);
       avarageHumidity.innerText = `${avarageCardData.avarageHumidityValue || 0}%`;
       avaragePressure.innerText = `${avarageCardData.avaragePressureValue || 0} hPa`;
 

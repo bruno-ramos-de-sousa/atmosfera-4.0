@@ -79,6 +79,31 @@ function carouselEvents(dispositivos) {
   }
 }
 
+function temperatureStyle(data) {
+  const temperatureEl = document.getElementById('average-temperature');
+
+  let temperatureValue;
+
+  if (data !== undefined && data !== null) {
+    temperatureValue = (typeof data === 'object') ? Number(data.temperatura) : Number(data);
+  } else {
+    temperatureValue = parseFloat(temperatureEl.textContent.replace(',', '.'));
+  }
+
+  if (isNaN(temperatureValue)) {
+    temperatureEl.style.color = '';
+    return;
+  }
+
+  if (temperatureValue >= 26) {
+    temperatureEl.style.color = 'var(--secondary-orange)';
+  } else if (temperatureValue >= 18) {
+    temperatureEl.style.color = '#08d808';
+  } else {
+    temperatureEl.style.color = 'var(--secondary-blue)';
+  }
+}
+
 function setText(id, valor) {
   const el = document.getElementById(id);
   if (el) {
@@ -88,7 +113,7 @@ function setText(id, valor) {
 
 function autoRefresh() {
   stopAutoRefresh();
-  setInterval(function () {
+  autoRefreshInterval = setInterval(function () {
     loadingDataHome();
   }, 5000)
 }
@@ -121,6 +146,7 @@ async function loadingDataHome() {
       const u = listRegistros[0];
 
       setText('average-temperature', `${u.temperatura.toFixed(1).replace('.', ',')}°C`);
+      temperatureStyle(u.temperatura);
       setText('average-humidity', `${u.umidade.toFixed(1).replace('.', ',')}%`);
       setText('avarage-pressure', `${u.pressao.toFixed(1).replace('.', ',')} hPa`);
       setText('luminosity-reading', `${u.luminosidade.toFixed(1).replace('.', ',')}%`);
