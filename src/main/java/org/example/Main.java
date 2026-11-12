@@ -9,6 +9,7 @@ import java.net.InetSocketAddress;
 import java.nio.charset.StandardCharsets;
 import java.sql.SQLException;
 import java.time.LocalDateTime;
+import java.util.Date;
 import java.util.List;
 
 public class Main {
@@ -90,7 +91,7 @@ public class Main {
                     listRegistros(exchange);
                     return;
                 }
-                listSearchRegistros(exchange, path[3].replace("%20", " "));
+                listSearchRegistros(exchange, LocalDateTime.parse(path[3]));
             } else {
                 exchange.getRequestHeaders().set("Allow", "GET, OPTIONS");
                 response(exchange, 405, "{\"erro\":\"Método não permitido\"}");
@@ -151,8 +152,8 @@ public class Main {
         response(exchange, 200, json.toString());
     }
 
-    private static void listSearchRegistros(HttpExchange exchange, String dateTime) throws IOException, SQLException{
-        List<Registro> registros = registroDAO.listSearchRegistros(dateTime);
+    private static void listSearchRegistros(HttpExchange exchange, LocalDateTime date) throws IOException, SQLException{
+        List<Registro> registros = registroDAO.listSearchRegistros(date);
         StringBuilder json = new StringBuilder("[");
 
         for (int i = 0; i < registros.size(); i++) {
