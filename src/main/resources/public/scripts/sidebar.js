@@ -290,34 +290,46 @@ const screens = {
           <article class="container layout-column" id="enviroment-parameters-card">
             <h3 class="container-tittle">Outros Parâmetros Ambientais</h3>
             <dl class="metric-grid">
-              <div class="reading-card layout-column">
-                <dt class="low-opacity-text">Luminosidade</dt>
-                <dd>
-                  <output class="reading" id="luminosity-reading">72%</output>
-                </dd>
+              <div class="reading-card layout-row">
+                <div>
+                  <dt class="low-opacity-text">Luminosidade</dt>
+                  <dd>
+                    <output class="reading" id="luminosity-reading">72%</output>
+                  </dd>
+                </div>
+                <img class="metric-icon" src="assets/luminosity-icon.png" alt="icone de sol">
               </div>
 
-              <div class="reading-card layout-column">
-                <dt class="low-opacity-text">Vel. Vento</dt>
-                <dd>
-                  <output class="reading" id="wind-speed-reading"
-                    >3,3 m/s</output>
-                </dd>
+              <div class="reading-card layout-row">
+                <div>
+                  <dt class="low-opacity-text">Vel. Vento</dt>
+                  <dd>
+                    <output class="reading" id="wind-speed-reading"
+                      >3,3 m/s</output>
+                  </dd>
+                </div>
+                <img class="metric-icon" src="assets/wind-speed-icon.png" alt="ícone de vento">
               </div>
 
-              <div class="reading-card layout-column">
-                <dt class="low-opacity-text">Dir. Vento</dt>
-                <dd>
-                  <output class="reading" id="wind-direction-reading"
-                    >Sul (179°)</output>
-                </dd>
+              <div class="reading-card layout-row">
+                <div>
+                  <dt class="low-opacity-text">Dir. Vento</dt>
+                  <dd>
+                    <output class="reading" id="wind-direction-reading"
+                      >179°</output>
+                  </dd>
+                </div>
+                <img class="metric-icon" src="assets/wind-direction-icon.png" alt="icone de bússola">
               </div>
 
-              <div class="reading-card layout-column">
-                <dt class="low-opacity-text">Altitude</dt>
-                <dd>
-                  <output class="reading" id="altitude-reading">781 m</output>
-                </dd>
+              <div class="reading-card layout-row">
+                <div>
+                  <dt class="low-opacity-text">Altitude</dt>
+                  <dd>
+                    <output class="reading" id="altitude-reading">781 m</output>
+                  </dd>
+                </div>
+                <img class="metric-icon" src="assets/altitude-icon.png" alt="icone de altitude">
               </div>
             </dl>
 
@@ -333,10 +345,10 @@ const screens = {
                   Navegue pelos sensores individuais do campus.
                 </dt>
               </div>
-              <div id="carrosel-dis">
-                <div class="container"><p>Area 1 de 3</p></div>
-                <div class="container"><button id="button-backward"><span></span><span></span></button></div>
-                <div class="container"><button id="button-forward"><span></span><span></span></button></div>
+              <div id="carousel-dis">
+                <div class="container" id="carousel-indicator"><p>Área 1 de 4</p></div>
+                <div class="container" id="button-previous"><button id="button-backward"><span></span><span></span></button></div>
+                <div class="container" id="button-next"><button id="button-forward"><span></span><span></span></button></div>
               </div>
             </div>
 
@@ -415,7 +427,7 @@ const screens = {
                   <dt class="low-opacity-text">Direção do Vento</dt>
                   <dd>
                     <output class="reading" id="gateway-wind-direction"
-                      >Sul (178°)</output>
+                      >178°</output>
                   </dd>
                 </div>
               </div>
@@ -469,6 +481,8 @@ function changeScreen(screenName) {
     if (screenName === "home") {
       loadingDataHome();
       autoRefresh();
+    } else {
+      stopAutoRefresh();
     }
     if (screenName === "historico") loadingDataHistorico();
   }

@@ -263,7 +263,7 @@ document.addEventListener("loadedScreen", (e) => {
 
       luminosity.innerText = `${ambientParams.luminosityValue || 0}%`;
       windSpeed.innerText = `${ambientParams.windSpeedValue || 0} m/s`;
-      windDirection.innerText = `(${ambientParams.windDirectionValue || 0}º)`;
+      windDirection.innerText = `${ambientParams.windDirectionValue || 0}º`;
       altitude.innerText = `${ambientParams.altitudeValue || 0}`;
 
       deviceType.innerText = `${areaParams.deviceTypeValues[generateRandomNumber(0, areaParams.deviceTypeValues.length - 1, 0)]}`;
@@ -277,7 +277,7 @@ document.addEventListener("loadedScreen", (e) => {
       gatewayPressure.innerText = `${areaParams.gatewayPressureValue || 0} hPa`;
       gatewayAltitude.innerText = `${areaParams.gatewayAltitudeValue || 0} m`;
       gatewayWindSpeed.innerText = `${areaParams.gatewayWindSpeedValue || 0} m/s`;
-      gatewayWindDirection.innerText = `(${areaParams.gatewayWindDirectionValue || 0}º)`;
+      gatewayWindDirection.innerText = `${areaParams.gatewayWindDirectionValue || 0}º`;
       graph.update();
     }
 

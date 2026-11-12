@@ -2,6 +2,7 @@ let registroSensores = [];
 let listDispositivos = [];
 let listAtuadores = [];
 let currentSensor = 0;
+let autoRefreshInterval = null;
 
 function updateCarousel(registro, listDispositivos) {
   const disp = listDispositivos.find(d => d.id_dispositivo === registro.id_dispositivo_fk);
@@ -86,12 +87,24 @@ function setText(id, valor) {
 }
 
 function autoRefresh() {
+  stopAutoRefresh();
   setInterval(function () {
     loadingDataHome();
   }, 5000)
 }
 
+function stopAutoRefresh() {
+  if (autoRefreshInterval) {
+    clearInterval(autoRefreshInterval);
+    autoRefreshInterval = null;
+  }
+}
+
 async function loadingDataHome() {
+  if (document.getElementById('robot-button')) {
+    return;
+  }
+
   try {
     const [resRegistros, resAtuadores, resDispositivos] = await Promise.all([
       fetch('/api/registros/diarios'),
