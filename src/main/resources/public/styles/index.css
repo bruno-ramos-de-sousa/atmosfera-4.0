@@ -465,6 +465,21 @@ body {
   border-bottom: 1px solid var(--primary-grey);
 }
 
+#search-bar {
+  margin: auto;
+  height: 42px;
+  padding: 0 var(--low-spacing);
+  width: 30%;
+  font-size: var(--small-body-text-size);
+  margin-bottom: var(--low-spacing);
+  background: var(--strong-grey);
+  border-radius: var(--hg-border-radius);
+  border: none;
+}
+#search-bar:hover {
+  font-size: var(--small-body-text-size);
+}
+
 .low-temp {
   color: var(--secondary-blue);
   font-weight: 600;

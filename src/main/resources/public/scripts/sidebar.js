@@ -198,6 +198,7 @@ const screens = {
         <dt class="low-opacity-text">Consulta dos últimos dados enviados pelos sensores do campus.</dt>
       </div>
       
+      <input placeholder="Pesquisar..." id="search-bar">
       <div class="table-responsive" style="overflow-x: auto;">
         <table class="historico-table">
           <thead>
@@ -251,7 +252,7 @@ const screens = {
             <button id="robot-button">Ligar</button>
             <button id="robot-config-button">
               <img
-                src="assets/settings-icon.svg"
+                src="assets/settings-icon.png"
                 alt="Engrenagem"
                 class="icon"
               />Configurar Bot
