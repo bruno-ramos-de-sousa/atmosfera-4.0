@@ -2,6 +2,7 @@ let registroSensores = [];
 let listDispositivos = [];
 let listAtuadores = [];
 let currentSensor = 0;
+let autoRefreshInterval = null;
 
 function updateCarousel(registro, listDispositivos) {
   const disp = listDispositivos.find(d => d.id_dispositivo === registro.id_dispositivo_fk);
@@ -60,8 +61,8 @@ function updateCarousel(registro, listDispositivos) {
 }
 
 function carouselEvents(dispositivos) {
-  const btnPrev = document.getElementById("button-backward");
-  const btnNext = document.getElementById("button-forward");
+  const btnPrev = document.getElementById("button-previous");
+  const btnNext = document.getElementById("button-next");
 
   if (btnPrev && btnNext) {
     btnPrev.onclick = () => {
@@ -78,6 +79,31 @@ function carouselEvents(dispositivos) {
   }
 }
 
+function temperatureStyle(data) {
+  const temperatureEl = document.getElementById('average-temperature');
+
+  let temperatureValue;
+
+  if (data !== undefined && data !== null) {
+    temperatureValue = (typeof data === 'object') ? Number(data.temperatura) : Number(data);
+  } else {
+    temperatureValue = parseFloat(temperatureEl.textContent.replace(',', '.'));
+  }
+
+  if (isNaN(temperatureValue)) {
+    temperatureEl.style.color = '';
+    return;
+  }
+
+  if (temperatureValue >= 26) {
+    temperatureEl.style.color = 'var(--secondary-orange)';
+  } else if (temperatureValue >= 18) {
+    temperatureEl.style.color = '#08d808';
+  } else {
+    temperatureEl.style.color = 'var(--secondary-blue)';
+  }
+}
+
 function setText(id, valor) {
   const el = document.getElementById(id);
   if (el) {
@@ -86,12 +112,24 @@ function setText(id, valor) {
 }
 
 function autoRefresh() {
-  setInterval(function () {
+  stopAutoRefresh();
+  autoRefreshInterval = setInterval(function () {
     loadingDataHome();
   }, 5000)
 }
 
+function stopAutoRefresh() {
+  if (autoRefreshInterval) {
+    clearInterval(autoRefreshInterval);
+    autoRefreshInterval = null;
+  }
+}
+
 async function loadingDataHome() {
+  if (document.getElementById('robot-button')) {
+    return;
+  }
+
   try {
     const [resRegistros, resAtuadores, resDispositivos] = await Promise.all([
       fetch('/api/registros/diarios'),
@@ -108,6 +146,7 @@ async function loadingDataHome() {
       const u = listRegistros[0];
 
       setText('average-temperature', `${u.temperatura.toFixed(1).replace('.', ',')}°C`);
+      temperatureStyle(u.temperatura);
       setText('average-humidity', `${u.umidade.toFixed(1).replace('.', ',')}%`);
       setText('avarage-pressure', `${u.pressao.toFixed(1).replace('.', ',')} hPa`);
       setText('luminosity-reading', `${u.luminosidade.toFixed(1).replace('.', ',')}%`);
