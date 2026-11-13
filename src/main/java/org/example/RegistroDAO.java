@@ -5,6 +5,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 public class RegistroDAO {
@@ -30,7 +31,7 @@ public class RegistroDAO {
 
     public List<Registro> listRegistros() throws SQLException {
         String sql = "SELECT id_registro, id_dispositivo_fk, time_stamp, data_hora, temperatura, umidade, pressao, altitude, luminosidade, velocidade_vento, direcao_vento, intensidade_wifi FROM registros ORDER BY id_registro";
-        List<Registro> listaRegistro = new ArrayList<>();
+        List<Registro> registroList = new ArrayList<>();
 
         try (java.sql.Connection connection = Connection.openDataBase();
              PreparedStatement command = connection.prepareStatement(sql);
@@ -51,15 +52,15 @@ public class RegistroDAO {
                         result.getInt("direcao_vento"),
                         result.getInt("intensidade_wifi")
                 );
-                listaRegistro.add(registros);
+                registroList.add(registros);
             }
         }
-        return listaRegistro;
+        return registroList;
     }
 
     public List<Registro> listDailyRegistros() throws SQLException {
         String sql = "SELECT id_registro, id_dispositivo_fk, time_stamp, data_hora, temperatura, umidade, pressao, altitude, luminosidade, velocidade_vento, direcao_vento, intensidade_wifi FROM registros WHERE DATE(data_hora) = CURDATE() ORDER BY id_registro";
-        List<Registro> listaRegistro = new ArrayList<>();
+        List<Registro> registroList = new ArrayList<>();
 
         try (java.sql.Connection connection = Connection.openDataBase();
              PreparedStatement command = connection.prepareStatement(sql);
@@ -80,9 +81,40 @@ public class RegistroDAO {
                         result.getInt("direcao_vento"),
                         result.getInt("intensidade_wifi")
                 );
-                listaRegistro.add(registros);
+                registroList.add(registros);
             }
         }
-        return listaRegistro;
+        return registroList;
+    }
+
+    public List<Registro> listSearchRegistros(LocalDateTime timeStamp) throws SQLException {
+        String sql = "SELECT id_registro, id_dispositivo_fk, time_stamp, data_hora, temperatura, umidade, pressao, altitude, luminosidade, velocidade_vento, direcao_vento, intensidade_wifi FROM registros WHERE data_hora >= ? - INTERVAL 24 HOUR AND data_hora < ? + INTERVAL 24 HOUR";
+        List<Registro> registroList = new ArrayList<>();
+
+        try (java.sql.Connection connection = Connection.openDataBase();
+             PreparedStatement command = connection.prepareStatement(sql)) {
+            command.setObject(1, timeStamp);
+            command.setObject(2, timeStamp);
+            ResultSet result = command.executeQuery();
+
+            while (result.next()) {
+                Registro registros = new Registro(
+                        result.getLong("id_registro"),
+                        result.getInt("id_dispositivo_fk"),
+                        result.getString("time_stamp"),
+                        (LocalDateTime) result.getObject("data_hora"),
+                        result.getFloat("temperatura"),
+                        result.getFloat("umidade"),
+                        result.getFloat("pressao"),
+                        result.getFloat("altitude"),
+                        result.getFloat("luminosidade"),
+                        result.getFloat("velocidade_vento"),
+                        result.getInt("direcao_vento"),
+                        result.getInt("intensidade_wifi")
+                );
+                registroList.add(registros);
+            }
+        }
+        return registroList;
     }
 }
