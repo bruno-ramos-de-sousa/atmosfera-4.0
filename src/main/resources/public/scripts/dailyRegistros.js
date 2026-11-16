@@ -7,6 +7,8 @@ let autoRefreshInterval = null;
 function updateCarousel(registro, listDispositivos) {
   const disp = listDispositivos.find(d => d.id_dispositivo === registro.id_dispositivo_fk);
   const nomeLocal = disp ? disp.nome_dispositivo : `Sensor ${registro.id_dispositivo_fk}`;
+  const typeDevice = disp ? disp.tipo_dispositivo : `${registro.tipo_dispositivo}`;
+  setText('device-type', typeDevice);
 
   setText('gateway-location', nomeLocal);
   setText('gateway-temperature', `${registro.temperatura.toFixed(1).replace('.', ',')}°C`);

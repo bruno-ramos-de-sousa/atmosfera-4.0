@@ -106,7 +106,7 @@ const screens = {
 
             <div class="reading-card layout-row">
               <div>
-                <span id="device-type">Gateway</span>
+                <span id="device-type">N/A</span>
 
                 <dd>
                   <output class="reading" id="gateway-location"
@@ -354,7 +354,7 @@ const screens = {
 
             <div class="reading-card layout-row">
               <div>
-                <span id="device-type"> <span></span>Gateway</span>
+                <span id="device-type">N/A</span>
 
                 <dd>
                   <output class="reading" id="gateway-location"
