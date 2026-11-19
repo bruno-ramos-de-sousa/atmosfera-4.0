@@ -5,7 +5,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 public class RegistroDAO {
@@ -87,8 +86,8 @@ public class RegistroDAO {
         return registroList;
     }
 
-    public List<Registro> listSearchRegistros(LocalDateTime timeStamp) throws SQLException {
-        String sql = "SELECT id_registro, id_dispositivo_fk, time_stamp, data_hora, temperatura, umidade, pressao, altitude, luminosidade, velocidade_vento, direcao_vento, intensidade_wifi FROM registros WHERE data_hora >= ? - INTERVAL 24 HOUR AND data_hora < ? + INTERVAL 24 HOUR";
+    public List<Registro> listSearchRegistros(long timeStamp) throws SQLException {
+        String sql = "SELECT id_registro, id_dispositivo_fk, time_stamp, data_hora, temperatura, umidade, pressao, altitude, luminosidade, velocidade_vento, direcao_vento, intensidade_wifi FROM registros WHERE CAST(time_stamp AS UNSIGNED) >= ? - 86400 AND CAST(time_stamp AS UNSIGNED) < ? + 86400";
         List<Registro> registroList = new ArrayList<>();
 
         try (java.sql.Connection connection = Connection.openDataBase();

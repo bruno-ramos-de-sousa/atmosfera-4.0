@@ -533,8 +533,7 @@ body {
   }
 }
 
-#search-bar {
-  margin: auto;
+.search-bar {
   height: 42px;
   padding: 0 var(--low-spacing);
   width: 30%;
@@ -543,9 +542,23 @@ body {
   background: var(--strong-grey);
   border-radius: var(--hg-border-radius);
   border: none;
+  margin-right: 5px;
+}
+
+.search-button {
+  height: 42px;
+  width: 42px;
+  border-radius: 50%;
+  border: 1px solid var(--primary-grey);
+  cursor: pointer;
+  justify-self: center;
   &:hover {
-    font-size: var(--small-body-text-size);
+    background-color: var(--strong-grey);
   }
+}
+
+.search-icon {
+  width: 22px;
 }
 
 .low-temp {

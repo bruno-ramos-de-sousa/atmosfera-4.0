@@ -1,10 +1,18 @@
 document.addEventListener("loadedScreen", (e) => {
   if (e.detail.screenName === "historico") {
     const searchBar = document.getElementById("search-bar");
+    const searchButton = document.getElementById("search-button");
 
     async function loadingDataHistorico() {
       try {
-        const date = searchBar.value.trim() + "T00:00:00";
+        const searchBarValue = searchBar.value;
+        const cleanValue = searchBarValue.trim();
+
+        const formattedDate = cleanValue
+          ? cleanValue.split("/").reverse().join("-").padStart(10, "0")
+          : "";
+
+        const date = cleanValue === "" ? "" : `${formattedDate}T00:00:00`;
 
         const dateSearch = await fetch(
           `/api/registros/${encodeURIComponent(date)}`,
@@ -56,17 +64,12 @@ document.addEventListener("loadedScreen", (e) => {
       }
     }
 
-    searchBar.addEventListener("blur", () => {
-      loadingDataHistorico();
-      let date = searchBar.value.split("-");
-      if (date) {
-        searchBar.type = "text";
-        searchBar.value = date.length > 1 ? `${date[2]}/${date[1]}/${date[0]}` : "";
-      }
+    searchBar.addEventListener("input", () => {
+      let v = searchBar.value.replace(/\D/g, "").slice(0, 8);
+      if (v.length > 4) v = v.replace(/^(\d{2})(\d{2})(\d{0,4})/, "$1/$2/$3");
+      else if (v.length > 2) v = v.replace(/^(\d{2})(\d{0,2})/, "$1/$2");
+      searchBar.value = v;
     });
-
-    searchBar.addEventListener("focus", () => {
-      searchBar.type = "date";
-    });
+    searchButton.addEventListener("click", loadingDataHistorico);
   }
 });

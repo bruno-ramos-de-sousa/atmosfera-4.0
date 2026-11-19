@@ -198,7 +198,10 @@ const screens = {
         <dt class="low-opacity-text">Consulta dos últimos dados enviados pelos sensores do campus.</dt>
       </div>
       
-      <input placeholder="Pesquisar..." id="search-bar">
+      <div class="layout-row" style="justify-content: center;">
+        <input placeholder="Pesquisar... (ex.: 06/11/2026)" class="search-bar" id="search-bar" maxlength="10">
+        <button class="search-button" id="search-button"><img src="./assets/search-icon.png" class="search-icon"></button>
+      </div>
       <div class="table-responsive" style="overflow-x: auto;">
         <table class="historico-table">
           <thead>

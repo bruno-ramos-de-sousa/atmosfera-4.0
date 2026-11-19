@@ -8,7 +8,9 @@ import java.io.InputStream;
 import java.net.InetSocketAddress;
 import java.nio.charset.StandardCharsets;
 import java.sql.SQLException;
+import java.sql.Timestamp;
 import java.time.LocalDateTime;
+import java.time.ZoneId;
 import java.util.Date;
 import java.util.List;
 
@@ -16,11 +18,11 @@ public class Main {
     private static final RegistroDAO registroDAO = new RegistroDAO();
     private static final DispositivoDAO dispositivoDAO = new DispositivoDAO();
     private static final AtuadorDAO atuadorDAO = new AtuadorDAO();
+
     public static void main(String[] args) throws IOException, SQLException {
         testConnection();
 
-        HttpServer server = HttpServer.create(
-                new InetSocketAddress("0.0.0.0", 8080), 0);
+        HttpServer server = HttpServer.create(new InetSocketAddress("0.0.0.0", 8080), 0);
 
         server.createContext("/", Main::loadPage);
         server.createContext("/api/registros", Main::listenRegistros);
@@ -30,6 +32,8 @@ public class Main {
         server.createContext("/api/atuadores", Main::listenAtuadores);
 
         server.start();
+
+        System.out.println("Servidor inciado http://localhost:8080");
     }
 
     private static void setAccess(HttpExchange exchange) {
@@ -78,7 +82,7 @@ public class Main {
         }
     }
 
-    private static void listenSearchRegistros(HttpExchange exchange) throws IOException{
+    private static void listenSearchRegistros(HttpExchange exchange) throws IOException {
         setAccess(exchange);
         String[] path = exchange.getRequestURI().getPath().split("/");
 
@@ -87,7 +91,7 @@ public class Main {
                 exchange.sendResponseHeaders(204, -1);
                 exchange.close();
             } else if (exchange.getRequestMethod().equals("GET")) {
-                if(path.length <= 3) {
+                if (path.length <= 3) {
                     listRegistros(exchange);
                     return;
                 }
@@ -152,8 +156,8 @@ public class Main {
         response(exchange, 200, json.toString());
     }
 
-    private static void listSearchRegistros(HttpExchange exchange, LocalDateTime date) throws IOException, SQLException{
-        List<Registro> registros = registroDAO.listSearchRegistros(date);
+    private static void listSearchRegistros(HttpExchange exchange, LocalDateTime date) throws IOException, SQLException {
+        List<Registro> registros = registroDAO.listSearchRegistros(date.atZone(ZoneId.of("America/Sao_Paulo")).toEpochSecond());
         StringBuilder json = new StringBuilder("[");
 
         for (int i = 0; i < registros.size(); i++) {
@@ -207,7 +211,7 @@ public class Main {
     }
 
     private static void loadPage(HttpExchange exchange) throws IOException {
-        if(!exchange.getRequestMethod().equals("GET")) {
+        if (!exchange.getRequestMethod().equals("GET")) {
             response(exchange, 405, "Metodo não permitido", "text/plain");
             return;
         }
@@ -255,7 +259,7 @@ public class Main {
         exchange.close();
     }
 
-    private static void response(HttpExchange exchange, int status) throws IOException{
+    private static void response(HttpExchange exchange, int status) throws IOException {
         response(exchange, status);
     }
 }
