@@ -204,7 +204,7 @@ const screens = {
       </div>
       <div class="table-responsive" style="overflow-x: auto;">
         <table class="historico-table">
-          <thead>
+          <thead class="table-head">
             <tr>
               <th>DISPOSITIVO</th>
               <th>DATA E HORA</th>

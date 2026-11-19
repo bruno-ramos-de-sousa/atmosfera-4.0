@@ -500,9 +500,11 @@ body {
   border-collapse: collapse;
   text-align: center;
   white-space: nowrap;
-
+  max-height: 80vh;
   th {
-    background-color: var(--primary-grey);
+    position: sticky;
+    top: 0;
+    background-color: var(--weak-grey);
     color: var(--medium-black);
     font-size: 12px;
     font-weight: 600;
