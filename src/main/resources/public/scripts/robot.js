@@ -12,9 +12,9 @@ document.addEventListener("loadedScreen", (e) => {
 
     // Elementos relacionados ao Card de Medias
     const updateTimer = document.getElementById("update-time");
-    const avarageTemperature = document.getElementById("average-temperature");
-    const avarageHumidity = document.getElementById("average-humidity");
-    const avaragePressure = document.getElementById("avarage-pressure");
+    const averageTemperature = document.getElementById("average-temperature");
+    const averageHumidity = document.getElementById("average-humidity");
+    const averagePressure = document.getElementById("average-pressure");
 
     // Elementos relacionados ao Card de Parametros Ambientais
     const luminosity = document.getElementById("luminosity-reading");
@@ -47,12 +47,12 @@ document.addEventListener("loadedScreen", (e) => {
     let robotUpdateTimerIntervalId = null;
     let robotCount = 0;
 
-    var avarageCardData = {
-      avarageTemperatureValue: sessionStorage.getItem(
-        "avarageTemperatureValue",
+    var averageCardData = {
+      averageTemperatureValue: sessionStorage.getItem(
+        "averageTemperatureValue",
       ),
-      avarageHumidityValue: sessionStorage.getItem("avarageHumidityValue"),
-      avaragePressureValue: sessionStorage.getItem("avaragePressureValue"),
+      averageHumidityValue: sessionStorage.getItem("averageHumidityValue"),
+      averagePressureValue: sessionStorage.getItem("averagePressureValue"),
     };
 
     var ambientParams = {
@@ -145,16 +145,16 @@ document.addEventListener("loadedScreen", (e) => {
     }
 
     function generateData() {
-      avarageCardData.avarageTemperatureValue = saveVariableInSession(
-        "avarageTemperatureValue",
+      averageCardData.averageTemperatureValue = saveVariableInSession(
+        "averageTemperatureValue",
         generateRandomNumber(12, 40, 1),
       );
-      avarageCardData.avarageHumidityValue = saveVariableInSession(
-        "avarageHumidityValue",
+      averageCardData.averageHumidityValue = saveVariableInSession(
+        "averageHumidityValue",
         generateRandomNumber(0, 100),
       );
-      avarageCardData.avaragePressureValue = saveVariableInSession(
-        "avaragePressureValue",
+      averageCardData.averagePressureValue = saveVariableInSession(
+        "averagePressureValue",
         generateRandomNumber(990, 1020, 2),
       );
 
@@ -257,10 +257,10 @@ document.addEventListener("loadedScreen", (e) => {
     }
 
     function updateData() {
-      avarageTemperature.innerText = `${avarageCardData.avarageTemperatureValue || 0}ºC`;
-      temperatureStyle(avarageCardData.avarageTemperatureValue);
-      avarageHumidity.innerText = `${avarageCardData.avarageHumidityValue || 0}%`;
-      avaragePressure.innerText = `${avarageCardData.avaragePressureValue || 0} hPa`;
+      averageTemperature.innerText = `${averageCardData.averageTemperatureValue || 0}ºC`;
+      temperatureStyle(averageCardData.averageTemperatureValue);
+      averageHumidity.innerText = `${averageCardData.averageHumidityValue || 0}%`;
+      averagePressure.innerText = `${averageCardData.averagePressureValue || 0} hPa`;
 
       luminosity.innerText = `${ambientParams.luminosityValue || 0}%`;
       windSpeed.innerText = `${ambientParams.windSpeedValue || 0} m/s`;

@@ -30,7 +30,7 @@ const screens = {
                 <div>
                   <dt class="low-opacity-text">Pressão Média</dt>
                   <dd>
-                    <output class="reading" id="avarage-pressure"
+                    <output class="reading" id="average-pressure"
                       >-- hPa</output>
                   </dd>
                 </div>
@@ -281,7 +281,7 @@ const screens = {
               <div class="reading-card layout-column">
                 <dt class="low-opacity-text">Pressão Média</dt>
                 <dd>
-                  <output class="reading" id="avarage-pressure"
+                  <output class="reading" id="average-pressure"
                     >922,73 hPa</output>
                 </dd>
               </div>
