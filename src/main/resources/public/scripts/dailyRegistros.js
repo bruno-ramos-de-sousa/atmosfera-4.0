@@ -7,7 +7,7 @@ let autoRefreshInterval = null;
 function updateCarousel(registro, listDispositivos) {
   const disp = listDispositivos.find(d => d.id_dispositivo === registro.id_dispositivo_fk);
   const nomeLocal = disp ? disp.nome_dispositivo : `Sensor ${registro.id_dispositivo_fk}`;
-  const typeDevice = disp ? disp.tipo_dispositivo : `${registro.tipo_dispositivo}`;
+  const typeDevice = disp ? disp.tipo_dispositivo : registro.tipo_dispositivo;
   setText('device-type', typeDevice);
 
   setText('gateway-location', nomeLocal);
@@ -127,6 +127,13 @@ function stopAutoRefresh() {
   }
 }
 
+function calculateAverage(list, field) {
+  const values = list.map(item => Number(item[field]));
+
+  const sum = values.reduce((accumulated, value) => accumulated + value, 0);
+  return sum / values.length;
+}
+
 async function loadingDataHome() {
   if (document.getElementById('robot-button')) {
     return;
@@ -145,18 +152,26 @@ async function loadingDataHome() {
     listAtuadores = atuadoresFetch;
 
     if (Array.isArray(listRegistros) && listRegistros.length > 0) {
-      const u = listRegistros[0];
-
-      setText('average-temperature', `${u.temperatura.toFixed(1).replace('.', ',')}°C`);
-      temperatureStyle(u.temperatura);
-      setText('average-humidity', `${u.umidade.toFixed(1).replace('.', ',')}%`);
-      setText('avarage-pressure', `${u.pressao.toFixed(1).replace('.', ',')} hPa`);
-      setText('luminosity-reading', `${u.luminosidade.toFixed(1).replace('.', ',')}%`);
-      setText('wind-speed-reading', `${u.velocidade_vento.toFixed(1).replace('.', ',')} m/s`);
-      setText('wind-direction-reading', `${u.direcao_vento}°`);
-      setText('altitude-reading', `${u.altitude.toFixed(1).replace('.', ',')} m`);
-
       registroSensores = listRegistros.slice(0, 4);
+
+      const averageTemperature = calculateAverage(registroSensores, 'temperatura');
+      const averageHumidity = calculateAverage(registroSensores, 'umidade');
+      const averagePressure = calculateAverage(registroSensores, 'pressao');
+      const averageLuminosity = calculateAverage(registroSensores, 'luminosidade');
+      const averageWindSpeed = calculateAverage(registroSensores, 'velocidade_vento');
+      const averageWindDirection = calculateAverage(registroSensores, 'direcao_vento');
+      const averageAltitude = calculateAverage(registroSensores, 'altitude');
+
+      setText('average-temperature', `${averageTemperature.toFixed(1).replace('.', ',')}°C`);
+      temperatureStyle(averageTemperature);
+      setText('average-humidity', `${averageHumidity.toFixed(1).replace('.', ',')}%`);
+      setText('average-pressure', `${averagePressure.toFixed(1).replace('.', ',')} hPa`);
+
+      setText('average-luminosity', `${averageLuminosity.toFixed(1).replace('.', ',')}%`);
+      setText('average-wind-speed', `${averageWindSpeed.toFixed(1).replace('.', ',')} m/s`);
+      setText('average-wind-direction', `${Math.roundaverageWindDirection}°`);
+      setText('average-altitude', `${averageAltitude.toFixed(1).replace('.', ',')} m`);
+
       updateCarousel(registroSensores[currentSensor], listDispositivos);
       carouselEvents(listDispositivos);
     }

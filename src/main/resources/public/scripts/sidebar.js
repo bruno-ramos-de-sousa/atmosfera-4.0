@@ -46,7 +46,7 @@ const screens = {
                 <div>
                   <dt class="low-opacity-text">Luminosidade</dt>
                   <dd>
-                    <output class="reading" id="luminosity-reading">--%</output>
+                    <output class="reading" id="average-luminosity">--%</output>
                   </dd>
                 </div>
                 <img class="metric-icon" src="assets/luminosity-icon.png" alt="icone de sol">
@@ -56,7 +56,7 @@ const screens = {
                 <div>
                   <dt class="low-opacity-text">Vel. Vento</dt>
                   <dd>
-                    <output class="reading" id="wind-speed-reading"
+                    <output class="reading" id="average-wind-speed"
                       >-- m/s</output>
                   </dd>
                 </div>
@@ -67,7 +67,7 @@ const screens = {
                 <div>
                   <dt class="low-opacity-text">Dir. Vento</dt>
                   <dd>
-                    <output class="reading" id="wind-direction-reading"
+                    <output class="reading" id="average-wind-direction"
                       >--°</output>
                   </dd>
                 </div>
@@ -78,7 +78,7 @@ const screens = {
                 <div>
                   <dt class="low-opacity-text">Altitude</dt>
                   <dd>
-                    <output class="reading" id="altitude-reading">-- m</output>
+                    <output class="reading" id="average-altitude">-- m</output>
                   </dd>
                 </div>
                 <img class="metric-icon" src="assets/altitude-icon.png" alt="icone de altitude">
