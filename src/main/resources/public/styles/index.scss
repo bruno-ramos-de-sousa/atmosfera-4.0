@@ -500,9 +500,11 @@ body {
   border-collapse: collapse;
   text-align: center;
   white-space: nowrap;
-
+  max-height: 80vh;
   th {
-    background-color: var(--primary-grey);
+    position: sticky;
+    top: 0;
+    background-color: var(--weak-grey);
     color: var(--medium-black);
     font-size: 12px;
     font-weight: 600;
@@ -531,6 +533,34 @@ body {
     color: var(--strong-black);
     border-bottom: 1px solid var(--primary-grey);
   }
+}
+
+.search-bar {
+  height: 42px;
+  padding: 0 var(--low-spacing);
+  width: 30%;
+  font-size: var(--small-body-text-size);
+  margin-bottom: var(--low-spacing);
+  background: var(--strong-grey);
+  border-radius: var(--hg-border-radius);
+  border: none;
+  margin-right: 5px;
+}
+
+.search-button {
+  height: 42px;
+  width: 42px;
+  border-radius: 50%;
+  border: 1px solid var(--primary-grey);
+  cursor: pointer;
+  justify-self: center;
+  &:hover {
+    background-color: var(--strong-grey);
+  }
+}
+
+.search-icon {
+  width: 22px;
 }
 
 .low-temp {
