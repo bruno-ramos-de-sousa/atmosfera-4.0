@@ -8,19 +8,19 @@ function updateCarousel(registro, listDispositivos) {
   const disp = listDispositivos.find(d => d.id_dispositivo === registro.id_dispositivo_fk);
   const nomeLocal = disp ? disp.nome_dispositivo : `Sensor ${registro.id_dispositivo_fk}`;
   const typeDevice = disp ? disp.tipo_dispositivo : registro.tipo_dispositivo;
-  setText('device-type', typeDevice);
 
-  setText('gateway-location', nomeLocal);
-  setText('gateway-temperature', `${registro.temperatura.toFixed(1).replace('.', ',')}°C`);
-  setText('gateway-humidity', `${registro.umidade.toFixed(1).replace('.', ',')}%`);
-  setText('gateway-luminosity', `${registro.luminosidade.toFixed(1).replace('.', ',')}%`);
-  setText('gateway-pressure', `${registro.pressao.toFixed(1).replace('.', ',')} hPa`);
-  setText('gateway-altitude', `${registro.altitude.toFixed(1).replace('.', ',')} m`);
-  setText('gateway-wind-speed', `${registro.velocidade_vento.toFixed(1).replace('.', ',')} m/s`);
-  setText('gateway-wind-direction', `${registro.direcao_vento}°`);
+  document.getElementById('device-type').textContent = typeDevice;
+  document.getElementById('gateway-location').textContent = nomeLocal;
+  document.getElementById('gateway-temperature').textContent = `${registro.temperatura.toFixed(1).replace('.', ',')}°C`;
+  document.getElementById('gateway-humidity').textContent = `${registro.umidade.toFixed(1).replace('.', ',')}%`;
+  document.getElementById('gateway-luminosity').textContent = `${registro.luminosidade.toFixed(1).replace('.', ',')}%`;
+  document.getElementById('gateway-pressure').textContent = `${registro.pressao.toFixed(1).replace('.', ',')} hPa`;
+  document.getElementById('gateway-altitude').textContent = `${registro.altitude.toFixed(1).replace('.', ',')} m`;
+  document.getElementById('gateway-wind-speed').textContent = `${registro.velocidade_vento.toFixed(1).replace('.', ',')} m/s`;
+  document.getElementById('gateway-wind-direction').textContent = `${registro.direcao_vento}°`;
 
   const wifiText = registro.intensidade_wifi != null && registro.intensidade_wifi != 0 ? `${registro.intensidade_wifi} dBm` : 'N/A';
-  setText('gateway-wifi-signal', wifiText);
+  document.getElementById('gateway-wifi-signal').textContent = wifiText;
 
   const atuador = listAtuadores.find(a => a.id_dispositivo_fk === registro.id_dispositivo_fk);
   const actuatorStatus = document.getElementById("actuator-status");
@@ -59,7 +59,7 @@ function updateCarousel(registro, listDispositivos) {
     }
   }
 
-  setText('carousel-indicator', `Área ${currentSensor + 1} de ${registroSensores.length}`);
+  document.getElementById('carousel-indicator').textContent = `Área ${currentSensor + 1} de ${registroSensores.length}`;
 }
 
 function carouselEvents(dispositivos) {
@@ -106,18 +106,11 @@ function temperatureStyle(data) {
   }
 }
 
-function setText(id, valor) {
-  const el = document.getElementById(id);
-  if (el) {
-    el.textContent = (valor !== undefined && valor !== null) ? valor : '--';
-  }
-}
-
 function autoRefresh() {
   stopAutoRefresh();
   autoRefreshInterval = setInterval(function () {
     loadingDataHome();
-  }, 5000)
+  }, 5000);
 }
 
 function stopAutoRefresh() {
@@ -162,15 +155,15 @@ async function loadingDataHome() {
       const averageWindDirection = calculateAverage(registroSensores, 'direcao_vento');
       const averageAltitude = calculateAverage(registroSensores, 'altitude');
 
-      setText('average-temperature', `${averageTemperature.toFixed(1).replace('.', ',')}°C`);
+      document.getElementById('average-temperature').textContent = `${averageTemperature.toFixed(1).replace('.', ',')}°C`;
       temperatureStyle(averageTemperature);
-      setText('average-humidity', `${averageHumidity.toFixed(1).replace('.', ',')}%`);
-      setText('average-pressure', `${averagePressure.toFixed(1).replace('.', ',')} hPa`);
+      document.getElementById('average-humidity').textContent = `${averageHumidity.toFixed(1).replace('.', ',')}%`;
+      document.getElementById('average-pressure').textContent = `${averagePressure.toFixed(1).replace('.', ',')} hPa`;
 
-      setText('average-luminosity', `${averageLuminosity.toFixed(1).replace('.', ',')}%`);
-      setText('average-wind-speed', `${averageWindSpeed.toFixed(1).replace('.', ',')} m/s`);
-      setText('average-wind-direction', `${Math.round(averageWindDirection)}°`);
-      setText('average-altitude', `${averageAltitude.toFixed(1).replace('.', ',')} m`);
+      document.getElementById('average-luminosity').textContent = `${averageLuminosity.toFixed(1).replace('.', ',')}%`;
+      document.getElementById('average-wind-speed').textContent = `${averageWindSpeed.toFixed(1).replace('.', ',')} m/s`;
+      document.getElementById('average-wind-direction').textContent = `${Math.round(averageWindDirection)}°`;
+      document.getElementById('average-altitude').textContent = `${averageAltitude.toFixed(1).replace('.', ',')} m`;
 
       updateCarousel(registroSensores[currentSensor], listDispositivos);
       carouselEvents(listDispositivos);
