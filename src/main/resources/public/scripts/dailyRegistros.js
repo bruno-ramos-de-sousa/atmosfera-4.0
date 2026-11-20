@@ -6,7 +6,7 @@ let autoRefreshInterval = null;
 
 function updateCarousel(registro, listDispositivos) {
   const disp = listDispositivos.find(d => d.id_dispositivo === registro.id_dispositivo_fk);
-  const nomeLocal = disp ? disp.nome_dispositivo : `Sensor ${registro.id_dispositivo_fk}`;
+  const nomeLocal = disp ? disp.nome_dispositivo : registro.id_dispositivo_fk;
   const typeDevice = disp ? disp.tipo_dispositivo : registro.tipo_dispositivo;
 
   document.getElementById('device-type').textContent = typeDevice;
@@ -30,33 +30,13 @@ function updateCarousel(registro, listDispositivos) {
     const currentStatus = Boolean(atuador.status_atual);
     const textStatus = currentStatus ? "Ligado" : "Desligado";
 
-    if (actuatorName) {
-      actuatorName.textContent = `Status do Atuador (${atuador.nome_atuador}):`;
-    }
-
-    if (actuatorStatus) {
-      actuatorStatus.innerHTML = `<span></span>${textStatus}`;
-
-      const colorStatusBg = currentStatus ? "#76c276" : "#efacaa";
-      const colorStatus = currentStatus ? "#006400" : "#d93025";
-
-      actuatorStatus.style.backgroundColor = colorStatusBg;
-      actuatorStatus.style.color = colorStatus;
-
-      const spanDot = actuatorStatus.querySelector("span");
-      if (spanDot) {
-        spanDot.style.backgroundColor = colorStatus;
-      }
-    }
+    actuatorName.textContent = `Status do Atuador (${atuador.nome_atuador}):`;
+    actuatorStatus.innerHTML = `<span></span>${textStatus}`;
+    actuatorStyle(currentStatus);
   } else {
-    if (actuatorName) actuatorName.textContent = "Status do Atuador:";
-    if (actuatorStatus) {
-      actuatorStatus.innerHTML = `<span></span>N/A`;
-      actuatorStatus.style.backgroundColor = "#f1f3f4";
-      actuatorStatus.style.color = "#777777";
-      const spanDot = actuatorStatus.querySelector("span");
-      if (spanDot) spanDot.style.backgroundColor = "#777777";
-    }
+    actuatorName.textContent = "Status do Atuador:";
+    actuatorStatus.innerHTML = `<span></span>N/A`;
+    actuatorStyle(null);
   }
 
   document.getElementById('carousel-indicator').textContent = `Área ${currentSensor + 1} de ${registroSensores.length}`;
@@ -105,6 +85,36 @@ function temperatureStyle(data) {
     temperatureEl.style.color = 'var(--secondary-blue)';
   }
 }
+
+function actuatorStyle(status) {
+  const actuatorStatusEl = document.getElementById("actuator-status");
+  if (!actuatorStatusEl) return;
+
+  const spanDot = actuatorStatusEl.querySelector("span");
+  let currentStatus;
+
+  if (status !== undefined && status !== null) {
+    currentStatus = (typeof status === "boolean") ? status : (status.trim() === "Ligado");
+  } else {
+    const text = actuatorStatusEl.textContent.trim();
+    if (text === "Ligado") currentStatus = true;
+    else if (text === "Desligado") currentStatus = false;
+  }
+
+  if (currentStatus === true) {
+    actuatorStatusEl.style.backgroundColor = "#76c276";
+    actuatorStatusEl.style.color = "#006400";
+    if (spanDot) spanDot.style.backgroundColor = "#006400";
+  } else if (currentStatus === false) {
+    actuatorStatusEl.style.backgroundColor = "#efacaa";
+    actuatorStatusEl.style.color = "#d93025";
+    if (spanDot) spanDot.style.backgroundColor = "#d93025";
+  } else {
+    actuatorStatusEl.style.backgroundColor = "";
+    actuatorStatusEl.style.color = "";
+    if (spanDot) spanDot.style.backgroundColor = "";
+  }
+} 
 
 function autoRefresh() {
   stopAutoRefresh();

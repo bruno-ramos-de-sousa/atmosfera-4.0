@@ -110,7 +110,7 @@ document.addEventListener("loadedScreen", (e) => {
           easing: "easeInOutQuart",
           plugins: {
             legend: {
-              position: top,  
+              position: top,
             },
             title: {
               display: true,
@@ -208,7 +208,7 @@ document.addEventListener("loadedScreen", (e) => {
         generateRandomNumber(0, 100, 0),
       );
       areaParams.gatewayWifiSignalValue = saveVariableInSession(
-        "gatewayWifiSignal",
+        "gatewayWifiSignalValue",
         generateRandomNumber(-80, -30, 0),
       );
       areaParams.gatewayPressureValue = saveVariableInSession(
@@ -257,27 +257,29 @@ document.addEventListener("loadedScreen", (e) => {
     }
 
     function updateData() {
-      averageTemperature.innerText = `${averageCardData.averageTemperatureValue || 0}ºC`;
+      averageTemperature.innerText = `${Number(averageCardData.averageTemperatureValue || 0).toFixed(1).replace('.', ',')}ºC`;
       temperatureStyle(averageCardData.averageTemperatureValue);
-      averageHumidity.innerText = `${averageCardData.averageHumidityValue || 0}%`;
-      averagePressure.innerText = `${averageCardData.averagePressureValue || 0} hPa`;
+      averageHumidity.innerText = `${Number(averageCardData.averageHumidityValue || 0).toFixed(1).replace('.', ',')}%`;
+      averagePressure.innerText = `${Number(averageCardData.averagePressureValue || 0).toFixed(1).replace('.', ',')} hPa`;
 
-      luminosity.innerText = `${ambientParams.luminosityValue || 0}%`;
-      windSpeed.innerText = `${ambientParams.windSpeedValue || 0} m/s`;
+      luminosity.innerText = `${Number(ambientParams.luminosityValue || 0).toFixed(1).replace('.', ',')}%`;
+      windSpeed.innerText = `${Number(ambientParams.windSpeedValue || 0).toFixed(1).replace('.', ',')} m/s`;
       windDirection.innerText = `${ambientParams.windDirectionValue || 0}º`;
-      altitude.innerText = `${ambientParams.altitudeValue || 0}`;
+      altitude.innerText = `${Number(ambientParams.altitudeValue || 0).toFixed(1).replace('.', ',')} m`;
 
       deviceType.innerText = `${areaParams.deviceTypeValues[generateRandomNumber(0, areaParams.deviceTypeValues.length - 1, 0)]}`;
       gatewayLocation.innerText = `${areaParams.gatewayLocationValues[generateRandomNumber(0, areaParams.gatewayLocationValues.length - 1, 0)]}`;
       actuatorName.innerText = `Status do atuador: (${areaParams.actuatorNames[generateRandomNumber(0, areaParams.actuatorNames.length - 1, 0)]})`;
       actuatorStatus.innerHTML = `<span></span>${areaParams.actuatorStatusValues[generateRandomNumber(0, areaParams.actuatorStatusValues.length - 1, 0)]}`;
-      gatewayTemperature.innerText = `${areaParams.gatewayTemperatureValue || 0}ºC`;
-      gatewayHumidity.innerText = `${areaParams.gatewayHumidityValue || 0}%`;
-      gatewayLuminosity.innerText = `${areaParams.gatewayLuminosityValue || 0}%`;
-      gatewayWifiSignal.innerText = `${areaParams.gatewayPressureValue || 0} dBm`;
-      gatewayPressure.innerText = `${areaParams.gatewayPressureValue || 0} hPa`;
-      gatewayAltitude.innerText = `${areaParams.gatewayAltitudeValue || 0} m`;
-      gatewayWindSpeed.innerText = `${areaParams.gatewayWindSpeedValue || 0} m/s`;
+      actuatorStyle();
+
+      gatewayTemperature.innerText = `${Number(areaParams.gatewayTemperatureValue || 0).toFixed(1).replace('.', ',')}ºC`;
+      gatewayHumidity.innerText = `${Number(areaParams.gatewayHumidityValue || 0).toFixed(1).replace('.', ',')}%`;
+      gatewayLuminosity.innerText = `${Number(areaParams.gatewayLuminosityValue || 0).toFixed(1).replace('.', ',')}%`;
+      gatewayWifiSignal.innerText = `${areaParams.gatewayWifiSignalValue || 0} dBm`;
+      gatewayPressure.innerText = `${Number(areaParams.gatewayPressureValue || 0).toFixed(1).replace('.', ',')} hPa`;
+      gatewayAltitude.innerText = `${Number(areaParams.gatewayAltitudeValue || 0).toFixed(1).replace('.', ',')} m`;
+      gatewayWindSpeed.innerText = `${Number(areaParams.gatewayWindSpeedValue || 0).toFixed(1).replace('.', ',')} m/s`;
       gatewayWindDirection.innerText = `${areaParams.gatewayWindDirectionValue || 0}º`;
       graph.update();
     }

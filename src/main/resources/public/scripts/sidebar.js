@@ -98,7 +98,7 @@ const screens = {
                 </dt>
               </div>
               <div id="carousel-dis">
-                <div class="container" id="carousel-indicator"><p>Área 1 de 4</p></div>
+                <div class="container" id="carousel-indicator"><p>Área -- de --</p></div>
                 <div class="container" id="button-previous"><button id="button-backward"><span></span><span></span></button></div>
                 <div class="container" id="button-next"><button id="button-forward"><span></span><span></span></button></div>
               </div>
@@ -112,7 +112,7 @@ const screens = {
                   <output class="reading" id="gateway-location"
                     >N/A</output>
                 </dd>
-                <dt class="low-opacity-text" id="actuator-name">Status do Atuador (--):</dt>
+                <dt class="low-opacity-text" id="actuator-name">Status do Atuador:</dt>
 
                 <dd>
                   <output class="reading" id="actuator-status"
@@ -147,7 +147,7 @@ const screens = {
                   <dt class="low-opacity-text">Sinal Wi-Fi</dt>
                   <dd>
                     <output class="reading" id="gateway-wifi-signal"
-                      >-- dBm</output>
+                      >N/A</output>
                   </dd>
                 </div>
 
@@ -484,6 +484,7 @@ function changeScreen(screenName) {
 
     if (screenName === 'home' || screenName === 'robo') {
       temperatureStyle();
+      actuatorStyle();
     }
 
     const renderEvent = new CustomEvent("loadedScreen", {

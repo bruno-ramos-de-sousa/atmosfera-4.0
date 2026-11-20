@@ -384,15 +384,15 @@ body {
   gap: 3px;
   padding: 2px 5px;
   border-radius: var(--md-border-radius);
-  background-color: #76c276;
-  color: #006400;
+  background-color: var(--primary-grey);
+  color: var(--medium-black);
   font-size: var(--small-body-text-size);
 
-  >span {
+  >span { 
     display: block;
     width: 10px;
     height: 10px;
-    background-color: #006400;
+    background-color: var(--medium-black);
     border-radius: 50%;
   }
 }
