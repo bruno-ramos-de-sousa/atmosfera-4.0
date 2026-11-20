@@ -169,7 +169,7 @@ async function loadingDataHome() {
 
       setText('average-luminosity', `${averageLuminosity.toFixed(1).replace('.', ',')}%`);
       setText('average-wind-speed', `${averageWindSpeed.toFixed(1).replace('.', ',')} m/s`);
-      setText('average-wind-direction', `${Math.roundaverageWindDirection}°`);
+      setText('average-wind-direction', `${Math.round(averageWindDirection)}°`);
       setText('average-altitude', `${averageAltitude.toFixed(1).replace('.', ',')} m`);
 
       updateCarousel(registroSensores[currentSensor], listDispositivos);
