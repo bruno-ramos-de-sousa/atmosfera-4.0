@@ -3,6 +3,8 @@ let listDispositivos = [];
 let listAtuadores = [];
 let currentSensor = 0;
 let autoRefreshInterval = null;
+let updateTimerInterval = null;
+let timeSinceUpdate = 0;
 
 function updateCarousel(registro, listDispositivos) {
   const disp = listDispositivos.find(d => d.id_dispositivo === registro.id_dispositivo_fk);
@@ -114,7 +116,49 @@ function actuatorStyle(status) {
     actuatorStatusEl.style.color = "";
     if (spanDot) spanDot.style.backgroundColor = "";
   }
-} 
+}
+
+function formatTime(totalSeconds) {
+  if (totalSeconds < 60) {
+    const unit = totalSeconds === 1 ? 'segundo' : 'segundos';
+    return `Atualizado há ${totalSeconds} ${unit}`;
+  }
+
+  if (totalSeconds < 3600) {
+    const minutes = Math.floor(totalSeconds / 60);
+    const unit = minutes === 1 ? 'minuto' : 'minutos';
+    return `Atualizado há ${minutes} ${unit}`;
+  }
+
+  const hours = Math.floor(totalSeconds / 3600);
+  const unit = hours === 1 ? 'hora' : 'horas';
+  return `Atualizado há ${hours} ${unit}`;
+}
+
+function resetUpdateTimer() {
+  stopUpdateTimer();
+  timeSinceUpdate = 0;
+
+  const updateTimeEl = document.getElementById('update-time');
+  if (updateTimeEl) {
+    updateTimeEl.textContent = formatTime(timeSinceUpdate);
+  }
+
+  updateTimerInterval = setInterval(() => {
+    timeSinceUpdate += 1;
+    const el = document.getElementById('update-time');
+    if (el) {
+      el.textContent = formatTime(timeSinceUpdate);
+    }
+  }, 1000);
+}
+
+function stopUpdateTimer() {
+  if (updateTimerInterval) {
+    clearInterval(updateTimerInterval);
+    updateTimerInterval = null;
+  }
+}
 
 function autoRefresh() {
   stopAutoRefresh();
@@ -128,6 +172,7 @@ function stopAutoRefresh() {
     clearInterval(autoRefreshInterval);
     autoRefreshInterval = null;
   }
+  stopUpdateTimer();
 }
 
 function calculateAverage(list, field) {
@@ -177,6 +222,7 @@ async function loadingDataHome() {
 
       updateCarousel(registroSensores[currentSensor], listDispositivos);
       carouselEvents(listDispositivos);
+      resetUpdateTimer();
     }
 
   } catch (error) {
