@@ -362,13 +362,6 @@ body {
   }
 }
 
-#temperature-graph {
-  width: 100%;
-  height: max(250px, 6vh);
-  margin-top: var(--md-spacing);
-  background-color: var(--primary-grey);
-}
-
 #device-type {
   width: fit-content;
   padding: 5px var(--low-spacing);
