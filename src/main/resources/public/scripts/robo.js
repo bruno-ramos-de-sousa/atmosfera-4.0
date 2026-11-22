@@ -97,8 +97,9 @@ document.addEventListener("loadedScreen", (e) => {
           {
             label: "Temperatura (°C)",
             data: canvasTemperatureValues,
-            borderColor: "rgba(54, 162, 235, 1)",
+            borderColor: "#19a5ff",
             borderWidth: 2,
+            pointRadius: 4
           },
         ],
       },
