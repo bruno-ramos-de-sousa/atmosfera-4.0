@@ -14,10 +14,13 @@ document.addEventListener("loadedScreen", (e) => {
 
         const date = cleanValue === "" ? "" : `${formattedDate}T00:00:00`;
 
-        const dateSearch = await fetch(
-          `/api/registros/${encodeURIComponent(date)}`,
-        );
+        const [dateSearch, responseDispositivos] = await Promise.all([
+          fetch(`/api/registros/${encodeURIComponent(date)}`),
+          fetch('/api/dispositivos')
+        ]);
+      
         const dados = await dateSearch.json();
+        const dispositivos = await responseDispositivos.json();
         const tbody = document.getElementById("historico-tbody");
 
         tbody.innerHTML = "";
@@ -44,15 +47,18 @@ document.addEventListener("loadedScreen", (e) => {
           const dateObj = new Date(timestampMs);
           const formattedDate = `${dateObj.toLocaleDateString("pt-BR")} - ${dateObj.toLocaleTimeString("pt-BR")}`;
 
+          const disp = dispositivos.find(d => d.id_dispositivo === item.id_dispositivo_fk);
+          const nomeLocal = disp ? disp.nome_dispositivo : item.id_dispositivo_fk;
+
           const tr = document.createElement("tr");
           tr.innerHTML = `
-        <td>${item.nome_dispositivo}</td>
+        <td>${nomeLocal}</td>
         <td>${formattedDate}</td>
         <td class="${tempClass}">${item.temperatura.toFixed(1).replace(".", ",")}°C</td>
-        <td>${item.umidade}%</td>
-        <td>${item.pressao} hPa</td>
-        <td>${item.altitude} m</td>
-        <td>${item.luminosidade}%</td>
+        <td>${item.umidade.toFixed(1).replace(".", ",")}%</td>
+        <td>${item.pressao.toFixed(1).replace(".", ",")} hPa</td>
+        <td>${item.altitude.toFixed(1).replace(".", ",")} m</td>
+        <td>${item.luminosidade.toFixed(1).replace(".", ",")}%</td>
         <td>${item.velocidade_vento.toFixed(1).replace(".", ",")} m/s</td>
         <td>${item.direcao_vento}°</td>
         <td><span class="badge ${wifiClass}">${wifiText}</span></td>
@@ -71,5 +77,6 @@ document.addEventListener("loadedScreen", (e) => {
       searchBar.value = v;
     });
     searchButton.addEventListener("click", loadingDataHistorico);
+    loadingDataHistorico();
   }
 });
