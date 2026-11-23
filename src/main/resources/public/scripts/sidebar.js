@@ -228,25 +228,31 @@ const screens = {
   mapa: `
     `,
   sobre: `
-    <article class="container layout-column">
-      <div>
-        <h3 class="container-tittle" style="margin-bottom: 5px;">Sobre o Projeto</h3>
-        <dt class="low-opacity-text>Informações sobre o projeto Atmosfera 4.0.</dt>
+    <article class="container layout-column" id="about-card">
+      <div class="about-header">
+        <h3 class="container-tittle">Sobre o Projeto</h3>
+        <p class="low-opacity-text">Informações sobre o projeto Atmosfera 4.0.</p>
       </div>
-      <div class="reading-card">
-        <dd>
+
+      <div class="reading-card about-content">
+        <p>
           O Atmosfera 4.0 é um projeto idealizado pelo professor Lucas Felfoldi na Escola SENAI “Anchieta”. A iniciativa tem como objetivo
           criar uma estação meteorológica comunitária, através da montagem, instalação, programação e monitoramento de sensores
           ambientais distribuídos pela escola. O propósito central é aplicar conhecimentos técnicos na prática, ao mesmo tempo em que
           desenvolve o sentimento de pertencimento dos alunos na unidade.
+        </p>
 
+        <p>
           O projeto é construído de forma multidisciplinar, integrando turmas dos cursos técnicos em Desenvolvimento de Sistemas,
           Eletrônica e Mecatrônica. Os estudantes atuam divididos em quatro frentes:
-          Equipe DEV: Programação de Banco de Dados, Back-End e Front-End.
-          Equipe REDES: Arquitetura da rede.
-          Equipe IOT: Programação dos dispositivos de Internet das Coisas.
-          Equipe MANUTENÇÃO: Instalação e manutenção física dos dispositivos.
-        </dd>
+        </p>
+
+        <ul class="about-list">
+          <li>Equipe DEV: Programação de Banco de Dados, Back-End e Front-End.</li>
+          <li>Equipe REDES: Arquitetura da rede.</li>
+          <li>Equipe IOT: Programação dos dispositivos de Internet das Coisas.</li>
+          <li>Equipe MANUTENÇÃO: Instalação e manutenção física dos dispositivos.</li>
+        </ul>
       </div>
     </article>
     `,

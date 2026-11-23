@@ -381,7 +381,7 @@ body {
   color: var(--medium-black);
   font-size: var(--small-body-text-size);
 
-  >span { 
+  >span {
     display: block;
     width: 10px;
     height: 10px;
@@ -494,6 +494,7 @@ body {
   text-align: center;
   white-space: nowrap;
   max-height: 80vh;
+
   th {
     position: sticky;
     top: 0;
@@ -547,6 +548,7 @@ body {
   border: 1px solid var(--primary-grey);
   cursor: pointer;
   justify-self: center;
+
   &:hover {
     background-color: var(--strong-grey);
   }
@@ -661,6 +663,37 @@ body {
 .icon {
   width: 22px;
   height: 22px;
+}
+
+// -------------------------------------- Sobre --------------------------------------
+
+#about-card {
+  gap: var(--hg-spacing);
+
+  .about-header {
+    .container-tittle {
+      margin-bottom: 5px;
+    }
+  }
+
+  .about-content {
+    padding: var(--hg-spacing);
+    font-size: var(--small-body-text-size);
+    line-height: 1.5;
+
+    p+p {
+      margin-top: var(--hg-spacing);
+    }
+  }
+
+  .about-list {
+    margin-top: 4px;
+    padding-left: 24px;
+
+    li+li {
+      margin-top: 2px;
+    }
+  }
 }
 
 // -------------------------------------- Modal --------------------------------------

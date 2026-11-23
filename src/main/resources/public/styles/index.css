@@ -593,6 +593,28 @@ body {
   height: 22px;
 }
 
+#about-card {
+  gap: var(--hg-spacing);
+}
+#about-card .about-header .container-tittle {
+  margin-bottom: 5px;
+}
+#about-card .about-content {
+  padding: var(--hg-spacing);
+  font-size: var(--small-body-text-size);
+  line-height: 1.5;
+}
+#about-card .about-content p + p {
+  margin-top: var(--hg-spacing);
+}
+#about-card .about-list {
+  margin-top: 4px;
+  padding-left: 24px;
+}
+#about-card .about-list li + li {
+  margin-top: 2px;
+}
+
 .modal {
   position: fixed;
   top: 0;
