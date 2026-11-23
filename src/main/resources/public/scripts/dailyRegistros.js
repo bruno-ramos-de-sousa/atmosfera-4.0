@@ -5,6 +5,8 @@ let currentSensor = 0;
 let autoRefreshInterval = null;
 let updateTimerInterval = null;
 let timeSinceUpdate = 0;
+let temperatureChart = null;
+const CHART_INTERVAL_MINUTES = 30;
 
 function updateCarousel(registro, listDispositivos) {
   const disp = listDispositivos.find(d => d.id_dispositivo === registro.id_dispositivo_fk);
@@ -182,6 +184,93 @@ function calculateAverage(list, field) {
   return sum / values.length;
 }
 
+function updateTemperatureChart(listRegistros, currentAverageTemp) {
+  const canvas = document.getElementById('temperature-graph');
+  if (!canvas || typeof Chart === 'undefined') return;
+
+  const intervalMs = CHART_INTERVAL_MINUTES * 60 * 1000;
+  const groupedByInterval = {};
+
+  listRegistros.forEach(item => {
+    const timestamp = Number(item.time_stamp);
+    const recordDate = !isNaN(timestamp)
+      ? new Date(timestamp < 1e12 ? timestamp * 1000 : timestamp)
+      : new Date(item.time_stamp);
+
+    if (isNaN(recordDate.getTime())) return;
+
+    const intervalTime = Math.floor(recordDate.getTime() / intervalMs) * intervalMs;
+
+    if (!groupedByInterval[intervalTime]) {
+      groupedByInterval[intervalTime] = [];
+    }
+    groupedByInterval[intervalTime].push(Number(item.temperatura));
+  });
+
+  const sortedIntervals = Object.keys(groupedByInterval).map(Number).sort((a, b) => a - b).slice(-10);
+
+  const xValues = sortedIntervals.map(time => {
+    const intervalDate = new Date(time);
+    return intervalDate.toLocaleTimeString('pt-BR', { hour: '2-digit', minute: '2-digit' });
+  });
+
+  const yValues = sortedIntervals.map(time => {
+    const temperatures = groupedByInterval[time];
+    const average = temperatures.reduce((accumulated, value) => accumulated + value, 0) / temperatures.length;
+    return Number(average.toFixed(1));
+  });
+
+  if (yValues.length > 0 && typeof currentAverageTemp === 'number' && !isNaN(currentAverageTemp)) {
+    yValues[yValues.length - 1] = Number(currentAverageTemp.toFixed(1));
+  }
+
+  if (temperatureChart && temperatureChart.canvas === canvas) {
+    temperatureChart.data.labels = xValues;
+    temperatureChart.data.datasets[0].data = yValues;
+    temperatureChart.update('none');
+    return;
+  }
+
+  if (temperatureChart) {
+    temperatureChart.destroy();
+  }
+
+  temperatureChart = new Chart(canvas, {
+    type: 'line',
+    data: {
+      labels: xValues,
+      datasets: [
+        {
+          label: 'Temperatura Média (°C)',
+          data: yValues,
+          borderColor: '#19a5ff',
+          borderWidth: 2,
+          pointRadius: 4
+        }
+      ]
+    },
+    options: {
+      responsive: true,
+      maintainAspectRatio: false,
+      plugins: {
+        legend: {
+          display: false
+        },
+        title: {
+          display: true,
+          text: 'Média de Temperatura nas Últimas Horas (°C)'
+        }
+      },
+      scales: {
+        y: {
+          min: 10,
+          max: 40
+        }
+      }
+    }
+  });
+}
+
 async function loadingDataHome() {
   if (document.getElementById('robot-button')) {
     return;
@@ -200,7 +289,8 @@ async function loadingDataHome() {
     listAtuadores = atuadoresFetch;
 
     if (Array.isArray(listRegistros) && listRegistros.length > 0) {
-      registroSensores = listRegistros.slice(0, 4);
+      const sortedRegistros = [...listRegistros].sort((a, b) => Number(b.time_stamp) - Number(a.time_stamp));
+      registroSensores = sortedRegistros.slice(0, 4);
 
       const averageTemperature = calculateAverage(registroSensores, 'temperatura');
       const averageHumidity = calculateAverage(registroSensores, 'umidade');
@@ -220,6 +310,7 @@ async function loadingDataHome() {
       document.getElementById('average-wind-direction').textContent = `${Math.round(averageWindDirection)}°`;
       document.getElementById('average-altitude').textContent = `${averageAltitude.toFixed(1).replace('.', ',')} m`;
 
+      updateTemperatureChart(listRegistros, averageTemperature);
       updateCarousel(registroSensores[currentSensor], listDispositivos);
       carouselEvents(listDispositivos);
       resetUpdateTimer();
